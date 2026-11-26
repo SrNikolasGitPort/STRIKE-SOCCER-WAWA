@@ -1,0 +1,28 @@
+{
+  "id": "isagi",
+  "name": "Yoichi Isagi",
+  "rarity": "raro",
+  "position": "atacante",
+  "style": "Atacante de leitura de jogo (Meta-Visão)",
+  "stats": {
+    "chute": 70,
+    "velocidade": 62,
+    "aceleracao": 64,
+    "drible": 60,
+    "passe": 66,
+    "defesa": 48,
+    "fisico": 58,
+    "visao": 82
+  },
+  "visual": {
+    "uniform_color": "#2F80ED",
+    "shorts_color": "#0B1226",
+    "skin_color": "#F1C9A5",
+    "hair_color": "#14161F",
+    "hair_style": "curto",
+    "aura_color": "#5CC8FF"
+  },
+  "nel_id": "isagi_nel",
+  "skills": [],
+  "notes": "M1: personagem placeholder jogável. Skills reais entram no M3 (ver docs/SKILLS_RESEARCH.md)."
+}

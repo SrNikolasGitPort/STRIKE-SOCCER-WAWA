@@ -1,0 +1,100 @@
+{
+  "match": {
+    "duration_s": 300.0,
+    "goal_celebration_s": 3.0,
+    "goal_slowmo_scale": 0.35,
+    "goal_slowmo_s": 1.2,
+    "kickoff_player_x": -6.0
+  },
+  "field": {
+    "length": 60.0,
+    "width": 36.0,
+    "goal_width": 8.0,
+    "goal_height": 2.6,
+    "goal_depth": 2.4,
+    "post_thickness": 0.14,
+    "wall_height": 14.0,
+    "wall_thickness": 1.0,
+    "line_thickness": 0.14,
+    "center_circle_radius": 5.0,
+    "penalty_area_length": 8.0,
+    "penalty_area_width": 18.0,
+    "stripe_count": 12
+  },
+  "ball": {
+    "radius": 0.34,
+    "mass": 0.45,
+    "bounce": 0.55,
+    "friction": 0.6,
+    "linear_damp": 0.28,
+    "angular_damp": 1.2,
+    "magnus_k": 0.012,
+    "max_speed": 38.0,
+    "reset_height": 0.5
+  },
+  "player": {
+    "run_speed": 6.4,
+    "sprint_speed": 9.4,
+    "accel": 38.0,
+    "decel": 30.0,
+    "turn_speed": 14.0,
+    "stamina_max": 100.0,
+    "stamina_drain": 22.0,
+    "stamina_regen": 14.0,
+    "stamina_regen_delay": 0.6,
+    "stamina_min_to_sprint": 12.0,
+    "body_radius": 0.55,
+    "body_height": 1.75,
+    "speed_stat_factor": 0.3,
+    "dribble_range": 1.35,
+    "dribble_pull": 7.0,
+    "dribble_front_offset": 0.95,
+    "dribble_blend": 0.3,
+    "dribble_cooldown_s": 0.25,
+    "bump_restitution": 0.35,
+    "bump_player_speed_share": 0.5
+  },
+  "kick": {
+    "range": 1.7,
+    "min_power": 8.0,
+    "max_power": 31.0,
+    "charge_time_s": 0.85,
+    "shot_loft": 0.12,
+    "pass_speed": 15.0,
+    "pass_loft": 0.04,
+    "lob_speed": 12.0,
+    "lob_loft": 0.7,
+    "curve_spin": 18.0,
+    "aim_assist_angle_deg": 38.0,
+    "aim_assist_strength": 0.55,
+    "cooldown_s": 0.35,
+    "power_stat_factor": 0.25
+  },
+  "camera": {
+    "distance": 15.0,
+    "height": 10.0,
+    "look_ahead": 5.0,
+    "follow_speed": 4.5,
+    "fov": 62.0,
+    "ball_weight": 0.35,
+    "min_zoom_out": 0.0,
+    "max_zoom_out": 6.0,
+    "zoom_speed": 2.0
+  },
+  "quality": {
+    "low_scale_3d": 0.67,
+    "medium_scale_3d": 0.85,
+    "high_scale_3d": 1.0,
+    "auto_mobile_level": 1,
+    "auto_desktop_level": 2
+  },
+  "touch": {
+    "joystick_radius": 110.0,
+    "joystick_zone_fraction": 0.45,
+    "button_big_radius": 78.0,
+    "button_small_radius": 56.0,
+    "margin": 36.0,
+    "deadzone": 0.12,
+    "opacity": 0.55
+  }
+}

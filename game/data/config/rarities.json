@@ -1,0 +1,22 @@
+{
+  "_comment": "Raridades definitivas (ver docs/DECISIONS.md). Editavel sem mexer em codigo. Hiori e provisorio (Epico).",
+  "rarities": [
+    { "id": "raro", "name_pt": "Raro", "name_en": "Rare", "color_name": "azul", "color": "#2F80ED", "order": 1, "stat_range": [60, 72] },
+    { "id": "epico", "name_pt": "Épico", "name_en": "Epic", "color_name": "roxo", "color": "#9B51E0", "order": 2, "stat_range": [66, 78] },
+    { "id": "lendario", "name_pt": "Lendário", "name_en": "Legendary", "color_name": "amarelo", "color": "#F2C94C", "order": 3, "stat_range": [72, 84] },
+    { "id": "mitico", "name_pt": "Mítico", "name_en": "Mythic", "color_name": "vermelho", "color": "#EB5757", "order": 4, "stat_range": [78, 90] },
+    { "id": "world_class", "name_pt": "World Class", "name_en": "World Class", "color_name": "branco", "color": "#FFFFFF", "order": 5, "prismatic": true, "stat_range": [86, 99] }
+  ],
+  "assignments": {
+    "raro": ["isagi", "igaguri", "chigiri"],
+    "epico": ["zantetsu", "otoya", "bachira", "hiori"],
+    "lendario": ["aiku", "kunigami", "karasu", "reo", "nagi"],
+    "mitico": ["yukimiya", "charles", "barou", "shidou", "rin"],
+    "world_class": ["sae", "don_lorenzo", "kaiser"]
+  },
+  "forced_world_class": {
+    "rule": "Toda versao NEL e o Igaguri GOAT sao World Class independente do personagem base.",
+    "nel": ["isagi_nel", "bachira_nel", "chigiri_nel", "barou_nel", "shidou_nel", "rin_nel", "nagi_nel", "reo_nel", "aiku_nel"],
+    "other": ["igaguri_goat"]
+  }
+}
