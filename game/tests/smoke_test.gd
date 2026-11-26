@@ -99,10 +99,13 @@ func _run() -> void:
 	_check(pass_speed > 8.0, "passe deu velocidade à bola (%.1f m/s)" % pass_speed)
 
 	print("[6] Gol no lado +X (ponto do time 0)")
+	# O chute do passo [4] pode ter entrado no gol; por isso o placar é comparado de forma relativa.
+	var score_a: int = _match.score[0]
+	var score_b: int = _match.score[1]
 	_ball().reset_to(Vector3(half_l - 4.0, 0.4, 0.0))
 	_ball().kick(Vector3.RIGHT, 18.0)
 	await _frames(40)
-	_check(_match.score[0] == 1 and _match.score[1] == 0, "placar 1 x 0 (%d x %d)" % [_match.score[0], _match.score[1]])
+	_check(_match.score[0] == score_a + 1 and _match.score[1] == score_b, "gol em +X marcou 1 ponto para o time 0 (%d x %d)" % [_match.score[0], _match.score[1]])
 	_check(Engine.time_scale < 1.0, "câmera lenta do gol ativa")
 	await _frames(350)
 	_check(Engine.time_scale == 1.0, "câmera lenta terminou")
@@ -110,10 +113,12 @@ func _run() -> void:
 	_check(absf(_ball().global_position.x) < 1.0, "bola voltou ao centro")
 
 	print("[7] Gol no lado -X (ponto do time 1)")
+	score_a = _match.score[0]
+	score_b = _match.score[1]
 	_ball().reset_to(Vector3(-half_l + 4.0, 0.4, 0.0))
 	_ball().kick(Vector3.LEFT, 18.0)
 	await _frames(40)
-	_check(_match.score[0] == 1 and _match.score[1] == 1, "placar 1 x 1 (%d x %d)" % [_match.score[0], _match.score[1]])
+	_check(_match.score[1] == score_b + 1 and _match.score[0] == score_a, "gol em -X marcou 1 ponto para o time 1 (%d x %d)" % [_match.score[0], _match.score[1]])
 	await _frames(300)
 
 	print("[8] Paredes da arena")
