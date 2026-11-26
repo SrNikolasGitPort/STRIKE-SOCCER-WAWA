@@ -1,0 +1,40 @@
+name: Release
+
+# Cria a GitHub Release automaticamente ao enviar uma tag no formato v*.
+# Exemplo:  git tag v0.1.0 && git push origin v0.1.0
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      release: true
+    secrets: inherit
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: strike-soccer-wawa-builds
+          path: dist
+
+      - name: Publicar Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.zip
+            dist/android/*.apk
+          generate_release_notes: true
+          body: |
+            Build automática do **Strike Soccer WAWA** (fan game, sem fins lucrativos).
+            - Windows: baixe o .zip e execute o .exe
+            - Android: baixe o .apk e instale (permita "fontes desconhecidas")
+            Veja o CHANGELOG.md para as novidades.

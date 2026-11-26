@@ -1,0 +1,30 @@
+name: Lint e validação de dados
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validar dados (raridades, personagens, Config, caminhos res://)
+        run: python3 -I tools/validate_data.py
+
+      - name: Instalar gdtoolkit
+        run: pip install "gdtoolkit==4.*"
+
+      - name: Checar sintaxe do GDScript (bloqueia o build se falhar)
+        run: gdparse $(find game/scripts -name "*.gd")
+
+      - name: Lint de estilo do GDScript (apenas aviso)
+        run: gdlint game/scripts || true
