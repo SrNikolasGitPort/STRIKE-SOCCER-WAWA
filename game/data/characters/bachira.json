@@ -1,0 +1,50 @@
+{
+  "id": "bachira",
+  "name": "Bachira",
+  "full_name": "Meguru Bachira",
+  "rarity": "epico",
+  "position": "Ponta",
+  "bio": "Dribles imprevisíveis guiados por um 'monstro' imaginário. Só passa para quem o empolga.",
+  "stats": {
+    "chute": 70,
+    "velocidade": 86,
+    "aceleracao": 88,
+    "drible": 96,
+    "passe": 84,
+    "defesa": 40,
+    "fisico": 52,
+    "visao": 80
+  },
+  "number": 8,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "wild",
+    "hair_color": "#2B2B3A",
+    "hair_accent": "",
+    "eye_color": "#F2A33A",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#FFB347",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "bachira_elastic",
+    "bachira_lift",
+    "bachira_backspin"
+  ],
+  "awakening": [
+    "bachira_monstrance",
+    "bachira_triple",
+    "bachira_egotistical"
+  ],
+  "evolution": "bachira_nel",
+  "average": 74.5
+}

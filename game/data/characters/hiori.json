@@ -1,0 +1,50 @@
+{
+  "id": "hiori",
+  "name": "Hiori",
+  "full_name": "Yo Hiori",
+  "rarity": "epico",
+  "position": "Meia",
+  "bio": "Armador calmo e observador, de passes precisos. (Raridade provisória: aguardando confirmação.)",
+  "stats": {
+    "chute": 60,
+    "velocidade": 66,
+    "aceleracao": 64,
+    "drible": 76,
+    "passe": 92,
+    "defesa": 62,
+    "fisico": 60,
+    "visao": 92
+  },
+  "number": 23,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "short",
+    "hair_color": "#6FD6E8",
+    "hair_accent": "",
+    "eye_color": "#BDEFF7",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#6FD6E8",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "hiori_first_touch",
+    "hiori_rabona",
+    "hiori_scissors"
+  ],
+  "awakening": [
+    "hiori_metavision",
+    "hiori_protagonism",
+    "hiori_two_stage"
+  ],
+  "evolution": null,
+  "average": 71.5
+}

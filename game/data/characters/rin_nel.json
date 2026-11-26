@@ -1,0 +1,52 @@
+{
+  "id": "rin_nel",
+  "name": "Itoshi Rin Nel",
+  "full_name": "Rin Itoshi",
+  "rarity": "world_class",
+  "position": "Atacante",
+  "stats": {
+    "chute": 99,
+    "velocidade": 99,
+    "aceleracao": 99,
+    "drible": 99,
+    "passe": 99,
+    "defesa": 84,
+    "fisico": 99,
+    "visao": 99
+  },
+  "number": 10,
+  "base_id": "rin",
+  "original": false,
+  "visual": {
+    "hair": "short",
+    "hair_color": "#1F5F6B",
+    "hair_accent": "",
+    "eye_color": "#2AB7A9",
+    "eye_color2": "",
+    "skin": "#F1C9A5",
+    "aura": "#FFFFFF",
+    "glasses": false,
+    "kit": {
+      "main": "#0A2240",
+      "sec": "#E03C4B",
+      "shorts": "#0A2240",
+      "pattern": "sash",
+      "team": "Paris X Gen"
+    },
+    "nel": true
+  },
+  "evolution": null,
+  "bio": "Versão Neo Egoist League de Itoshi Rin. World Class.",
+  "skills": [
+    "rin_trivela",
+    "rin_elastico",
+    "rin_oppressive"
+  ],
+  "awakening": [
+    "rin_nel_scissor",
+    "rin_nel_opposite",
+    "rin_nel_puppet"
+  ],
+  "evolved_normals": true,
+  "average": 97.1
+}

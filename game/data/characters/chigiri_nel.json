@@ -1,0 +1,52 @@
+{
+  "id": "chigiri_nel",
+  "name": "Chigiri Nel",
+  "full_name": "Hyoma Chigiri",
+  "rarity": "world_class",
+  "position": "Ponta",
+  "stats": {
+    "chute": 88,
+    "velocidade": 99,
+    "aceleracao": 99,
+    "drible": 99,
+    "passe": 84,
+    "defesa": 62,
+    "fisico": 74,
+    "visao": 88
+  },
+  "number": 10,
+  "base_id": "chigiri",
+  "original": false,
+  "visual": {
+    "hair": "long",
+    "hair_color": "#E0607A",
+    "hair_accent": "",
+    "eye_color": "#C94B6A",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#FFFFFF",
+    "glasses": false,
+    "kit": {
+      "main": "#6CABDD",
+      "sec": "#FFFFFF",
+      "shorts": "#FFFFFF",
+      "pattern": "plain",
+      "team": "Manshine City"
+    },
+    "nel": true
+  },
+  "evolution": null,
+  "bio": "Versão Neo Egoist League de Chigiri. World Class.",
+  "skills": [
+    "chigiri_long_sprint",
+    "chigiri_no_break",
+    "chigiri_pressure"
+  ],
+  "awakening": [
+    "chigiri_nel_immense",
+    "chigiri_nel_crimson",
+    "chigiri_nel_burst"
+  ],
+  "evolved_normals": true,
+  "average": 86.6
+}

@@ -1,0 +1,52 @@
+{
+  "id": "bachira_nel",
+  "name": "Bachira Nel",
+  "full_name": "Meguru Bachira",
+  "rarity": "world_class",
+  "position": "Ponta",
+  "stats": {
+    "chute": 92,
+    "velocidade": 99,
+    "aceleracao": 99,
+    "drible": 99,
+    "passe": 99,
+    "defesa": 62,
+    "fisico": 74,
+    "visao": 99
+  },
+  "number": 8,
+  "base_id": "bachira",
+  "original": false,
+  "visual": {
+    "hair": "wild",
+    "hair_color": "#2B2B3A",
+    "hair_accent": "",
+    "eye_color": "#F2A33A",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#FFFFFF",
+    "glasses": false,
+    "kit": {
+      "main": "#A50044",
+      "sec": "#004D98",
+      "shorts": "#004D98",
+      "pattern": "stripes",
+      "team": "FC Barcha"
+    },
+    "nel": true
+  },
+  "evolution": null,
+  "bio": "Versão Neo Egoist League de Bachira. World Class.",
+  "skills": [
+    "bachira_elastic",
+    "bachira_lift",
+    "bachira_backspin"
+  ],
+  "awakening": [
+    "bachira_nel_monster",
+    "bachira_nel_roulette",
+    "bachira_nel_cross"
+  ],
+  "evolved_normals": true,
+  "average": 90.4
+}

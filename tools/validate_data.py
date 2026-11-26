@@ -97,7 +97,7 @@ def check_rarities(loaded: dict[Path, object]) -> dict[str, str]:
 def check_characters(loaded: dict[Path, object], assignments: dict[str, str]) -> None:
     count = 0
     for path, data in loaded.items():
-        if path.parent.name != "characters" or not isinstance(data, dict):
+        if path.parent.name != "characters" or not isinstance(data, dict) or path.stem == "index":
             continue
         count += 1
         cid = data.get("id")
@@ -114,10 +114,19 @@ def check_characters(loaded: dict[Path, object], assignments: dict[str, str]) ->
         for key, value in stats.items():
             if not isinstance(value, (int, float)) or not 0 <= value <= 100:
                 err(f"{rel}: stat '{key}' fora de 0-100")
-        for key in ("uniform_color", "shorts_color", "skin_color", "hair_color", "aura_color"):
-            val = data.get("visual", {}).get(key, "")
+        vis = data.get("visual", {})
+        for key in ("hair_color", "eye_color", "skin", "aura"):
+            val = vis.get(key, "")
             if not re.fullmatch(r"#[0-9A-Fa-f]{6}", val):
                 err(f"{rel}: visual.{key} inválido ({val!r})")
+        kit = vis.get("kit", {})
+        for key in ("main", "sec", "shorts"):
+            if not re.fullmatch(r"#[0-9A-Fa-f]{6}", kit.get(key, "")):
+                err(f"{rel}: visual.kit.{key} inválido")
+        if not (GAME / "assets" / "textures" / "faces" / f"face_{cid}.png").exists():
+            err(f"{rel}: falta textura de rosto face_{cid}.png")
+        if not (GAME / "assets" / "textures" / "portraits" / f"{cid}.png").exists():
+            err(f"{rel}: falta retrato {cid}.png")
     print(f"[3] {count} ficha(s) de personagem válidas")
 
 

@@ -1,0 +1,49 @@
+{
+  "id": "kaiser",
+  "name": "Kaiser",
+  "full_name": "Michael Kaiser",
+  "rarity": "world_class",
+  "position": "Atacante",
+  "bio": "O 'Imperador' do Bastard München. O chute de primeira mais rápido do mundo.",
+  "stats": {
+    "chute": 99,
+    "velocidade": 88,
+    "aceleracao": 88,
+    "drible": 90,
+    "passe": 84,
+    "defesa": 60,
+    "fisico": 86,
+    "visao": 96
+  },
+  "number": 9,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "short",
+    "hair_color": "#F4D35E",
+    "hair_accent": "",
+    "eye_color": "#2D9BF0",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#4DA3FF",
+    "glasses": false,
+    "kit": {
+      "main": "#B3202A",
+      "sec": "#D4AF37",
+      "shorts": "#111111",
+      "pattern": "stripes",
+      "team": "Bastard München"
+    }
+  },
+  "skills": [
+    "kaiser_impact",
+    "kaiser_offball",
+    "kaiser_pressure"
+  ],
+  "awakening": [
+    "kaiser_impact_evo",
+    "kaiser_metavision"
+  ],
+  "evolution": null,
+  "average": 86.4
+}

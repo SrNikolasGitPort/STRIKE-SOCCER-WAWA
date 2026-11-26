@@ -1,0 +1,49 @@
+{
+  "id": "reo",
+  "name": "Reo",
+  "full_name": "Reo Mikage",
+  "rarity": "lendario",
+  "position": "Meia",
+  "bio": "Herdeiro carismático que copia as habilidades dos especialistas (Chameleon).",
+  "stats": {
+    "chute": 80,
+    "velocidade": 80,
+    "aceleracao": 80,
+    "drible": 84,
+    "passe": 90,
+    "defesa": 78,
+    "fisico": 84,
+    "visao": 86
+  },
+  "number": 10,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "ponytail",
+    "hair_color": "#8E72D8",
+    "hair_accent": "",
+    "eye_color": "#8E72D8",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#B79CFF",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "reo_precise_pass",
+    "reo_copy_shot",
+    "reo_copy_run"
+  ],
+  "awakening": [
+    "reo_chameleon",
+    "reo_organizer"
+  ],
+  "evolution": "reo_nel",
+  "average": 82.8
+}

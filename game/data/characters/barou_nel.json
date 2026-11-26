@@ -1,0 +1,52 @@
+{
+  "id": "barou_nel",
+  "name": "Barou Nel",
+  "full_name": "Shoei Barou",
+  "rarity": "world_class",
+  "position": "Atacante",
+  "stats": {
+    "chute": 99,
+    "velocidade": 99,
+    "aceleracao": 98,
+    "drible": 99,
+    "passe": 80,
+    "defesa": 86,
+    "fisico": 99,
+    "visao": 99
+  },
+  "number": 13,
+  "base_id": "barou",
+  "original": false,
+  "visual": {
+    "hair": "wild",
+    "hair_color": "#1C1C22",
+    "hair_accent": "#C23030",
+    "eye_color": "#D3A030",
+    "eye_color2": "",
+    "skin": "#EBC09A",
+    "aura": "#FFFFFF",
+    "glasses": false,
+    "kit": {
+      "main": "#1E3A8A",
+      "sec": "#F2C94C",
+      "shorts": "#0F1B44",
+      "pattern": "hoops",
+      "team": "Ubers"
+    },
+    "nel": true
+  },
+  "evolution": null,
+  "bio": "Versão Neo Egoist League de Barou. World Class.",
+  "skills": [
+    "barou_middle_shot",
+    "barou_charging",
+    "barou_chop"
+  ],
+  "awakening": [
+    "barou_nel_stealth",
+    "barou_nel_predator",
+    "barou_nel_double"
+  ],
+  "evolved_normals": true,
+  "average": 94.9
+}

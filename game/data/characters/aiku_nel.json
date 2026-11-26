@@ -1,0 +1,52 @@
+{
+  "id": "aiku_nel",
+  "name": "Aiku Nel",
+  "full_name": "Oliver Aiku",
+  "rarity": "world_class",
+  "position": "Zagueiro",
+  "stats": {
+    "chute": 88,
+    "velocidade": 98,
+    "aceleracao": 94,
+    "drible": 82,
+    "passe": 98,
+    "defesa": 99,
+    "fisico": 99,
+    "visao": 99
+  },
+  "number": 5,
+  "base_id": "aiku",
+  "original": true,
+  "visual": {
+    "hair": "spiky",
+    "hair_color": "#6B4B3A",
+    "hair_accent": "#3FAE6B",
+    "eye_color": "#3FAE6B",
+    "eye_color2": "#8E5BD6",
+    "skin": "#EBC09A",
+    "aura": "#FFFFFF",
+    "glasses": false,
+    "kit": {
+      "main": "#16161D",
+      "sec": "#D4AF37",
+      "shorts": "#16161D",
+      "pattern": "stripes",
+      "team": "Original do jogo"
+    },
+    "nel": true
+  },
+  "evolution": null,
+  "bio": "Versão Nel ORIGINAL do jogo (Aiku não tem time na Neo Egoist League no mangá). World Class.",
+  "skills": [
+    "aiku_total_defense",
+    "aiku_libero",
+    "aiku_anticipation"
+  ],
+  "awakening": [
+    "aiku_nel_flow",
+    "aiku_nel_libero",
+    "aiku_nel_fortress"
+  ],
+  "evolved_normals": true,
+  "average": 94.6
+}

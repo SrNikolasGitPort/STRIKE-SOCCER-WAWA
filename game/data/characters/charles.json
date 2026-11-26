@@ -1,0 +1,49 @@
+{
+  "id": "charles",
+  "name": "Charles",
+  "full_name": "Charles Chevalier",
+  "rarity": "mitico",
+  "position": "Meia",
+  "bio": "O 'coração' do Paris X Gen. Passes de risco e visão máxima.",
+  "stats": {
+    "chute": 64,
+    "velocidade": 82,
+    "aceleracao": 80,
+    "drible": 84,
+    "passe": 98,
+    "defesa": 56,
+    "fisico": 66,
+    "visao": 96
+  },
+  "number": 8,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "bob",
+    "hair_color": "#C9D6F0",
+    "hair_accent": "",
+    "eye_color": "#6FB4E8",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#7FB8FF",
+    "glasses": false,
+    "kit": {
+      "main": "#0A2240",
+      "sec": "#E03C4B",
+      "shorts": "#0A2240",
+      "pattern": "sash",
+      "team": "Paris X Gen"
+    }
+  },
+  "skills": [
+    "charles_risky_pass",
+    "charles_sky_arch",
+    "charles_rabona"
+  ],
+  "awakening": [
+    "charles_metavision",
+    "charles_heart_pass"
+  ],
+  "evolution": null,
+  "average": 78.2
+}

@@ -1,0 +1,52 @@
+{
+  "id": "shidou_nel",
+  "name": "Shidou Nel",
+  "full_name": "Ryusei Shidou",
+  "rarity": "world_class",
+  "position": "Atacante",
+  "stats": {
+    "chute": 99,
+    "velocidade": 99,
+    "aceleracao": 99,
+    "drible": 99,
+    "passe": 74,
+    "defesa": 74,
+    "fisico": 99,
+    "visao": 99
+  },
+  "number": 9,
+  "base_id": "shidou",
+  "original": false,
+  "visual": {
+    "hair": "pompadour",
+    "hair_color": "#E0402A",
+    "hair_accent": "",
+    "eye_color": "#E8C14A",
+    "eye_color2": "",
+    "skin": "#F1C9A5",
+    "aura": "#FFFFFF",
+    "glasses": false,
+    "kit": {
+      "main": "#0A2240",
+      "sec": "#E03C4B",
+      "shorts": "#0A2240",
+      "pattern": "sash",
+      "team": "Paris X Gen"
+    },
+    "nel": true
+  },
+  "evolution": null,
+  "bio": "Versão Neo Egoist League de Shidou. World Class.",
+  "skills": [
+    "shidou_drive",
+    "shidou_aggressive",
+    "shidou_bicycle"
+  ],
+  "awakening": [
+    "shidou_nel_dragon",
+    "shidou_nel_bigbang",
+    "shidou_nel_frenzy"
+  ],
+  "evolved_normals": true,
+  "average": 92.8
+}

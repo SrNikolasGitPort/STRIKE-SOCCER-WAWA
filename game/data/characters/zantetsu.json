@@ -1,0 +1,49 @@
+{
+  "id": "zantetsu",
+  "name": "Zantetsu",
+  "full_name": "Zantetsu Tsurugi",
+  "rarity": "epico",
+  "position": "Ponta",
+  "bio": "Calmo e de poucas palavras. Aceleração explosiva nos primeiros metros e chute de esquerda.",
+  "stats": {
+    "chute": 74,
+    "velocidade": 84,
+    "aceleracao": 92,
+    "drible": 68,
+    "passe": 66,
+    "defesa": 56,
+    "fisico": 70,
+    "visao": 64
+  },
+  "number": 21,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "short",
+    "hair_color": "#3A2A20",
+    "hair_accent": "",
+    "eye_color": "#6B4B2A",
+    "eye_color2": "",
+    "skin": "#EBC09A",
+    "aura": "#9BB0FF",
+    "glasses": true,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "zantetsu_accel",
+    "zantetsu_cutin",
+    "zantetsu_cross"
+  ],
+  "awakening": [
+    "zantetsu_blade",
+    "zantetsu_iron"
+  ],
+  "evolution": null,
+  "average": 71.8
+}

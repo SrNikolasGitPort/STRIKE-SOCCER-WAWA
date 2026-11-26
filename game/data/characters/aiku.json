@@ -1,0 +1,50 @@
+{
+  "id": "aiku",
+  "name": "Aiku",
+  "full_name": "Oliver Aiku",
+  "rarity": "lendario",
+  "position": "Zagueiro",
+  "bio": "Capitão da Japan U-20 e líbero de leitura total. Ex-atacante que decidiu ser o melhor zagueiro.",
+  "stats": {
+    "chute": 66,
+    "velocidade": 76,
+    "aceleracao": 72,
+    "drible": 60,
+    "passe": 76,
+    "defesa": 92,
+    "fisico": 88,
+    "visao": 92
+  },
+  "number": 5,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "spiky",
+    "hair_color": "#6B4B3A",
+    "hair_accent": "#3FAE6B",
+    "eye_color": "#3FAE6B",
+    "eye_color2": "#8E5BD6",
+    "skin": "#EBC09A",
+    "aura": "#3FAE6B",
+    "glasses": false,
+    "kit": {
+      "main": "#FFFFFF",
+      "sec": "#C8102E",
+      "shorts": "#FFFFFF",
+      "pattern": "plain",
+      "team": "Japan U-20"
+    }
+  },
+  "skills": [
+    "aiku_total_defense",
+    "aiku_libero",
+    "aiku_anticipation"
+  ],
+  "awakening": [
+    "aiku_flow",
+    "aiku_offensive_libero",
+    "aiku_fortress"
+  ],
+  "evolution": "aiku_nel",
+  "average": 77.8
+}

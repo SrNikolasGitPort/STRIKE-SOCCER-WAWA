@@ -1,0 +1,50 @@
+{
+  "id": "rin",
+  "name": "Itoshi Rin",
+  "full_name": "Rin Itoshi",
+  "rarity": "mitico",
+  "position": "Atacante",
+  "bio": "Frio e obcecado. Joga como um marionetista, lendo e manipulando os rivais.",
+  "stats": {
+    "chute": 94,
+    "velocidade": 86,
+    "aceleracao": 84,
+    "drible": 90,
+    "passe": 88,
+    "defesa": 62,
+    "fisico": 82,
+    "visao": 90
+  },
+  "number": 10,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "short",
+    "hair_color": "#1F5F6B",
+    "hair_accent": "",
+    "eye_color": "#2AB7A9",
+    "eye_color2": "",
+    "skin": "#F1C9A5",
+    "aura": "#2AE0C9",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "rin_trivela",
+    "rin_elastico",
+    "rin_oppressive"
+  ],
+  "awakening": [
+    "rin_puppet",
+    "rin_cog_burst",
+    "rin_sync"
+  ],
+  "evolution": "rin_nel",
+  "average": 84.5
+}

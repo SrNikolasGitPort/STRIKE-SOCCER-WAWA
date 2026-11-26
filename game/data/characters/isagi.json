@@ -1,28 +1,49 @@
 {
   "id": "isagi",
-  "name": "Yoichi Isagi",
+  "name": "Isagi",
+  "full_name": "Yoichi Isagi",
   "rarity": "raro",
-  "position": "atacante",
-  "style": "Atacante de leitura de jogo (Meta-Visão)",
+  "position": "Atacante",
+  "bio": "Atacante que lê o jogo (Meta-Visão) e evolui copiando os rivais. Quer ser o melhor do mundo.",
   "stats": {
-    "chute": 70,
-    "velocidade": 62,
-    "aceleracao": 64,
-    "drible": 60,
+    "chute": 72,
+    "velocidade": 64,
+    "aceleracao": 66,
+    "drible": 62,
     "passe": 66,
     "defesa": 48,
-    "fisico": 58,
-    "visao": 82
+    "fisico": 60,
+    "visao": 84
   },
+  "number": 11,
+  "base_id": null,
+  "original": false,
   "visual": {
-    "uniform_color": "#2F80ED",
-    "shorts_color": "#0B1226",
-    "skin_color": "#F1C9A5",
-    "hair_color": "#14161F",
-    "hair_style": "curto",
-    "aura_color": "#5CC8FF"
+    "hair": "short",
+    "hair_color": "#1A1B24",
+    "hair_accent": "",
+    "eye_color": "#3B7BD6",
+    "eye_color2": "",
+    "skin": "#F1C9A5",
+    "aura": "#5CC8FF",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
   },
-  "nel_id": "isagi_nel",
-  "skills": [],
-  "notes": "M1: personagem placeholder jogável. Skills reais entram no M3 (ver docs/SKILLS_RESEARCH.md)."
+  "skills": [
+    "isagi_direct_shot",
+    "isagi_backheel",
+    "isagi_offball"
+  ],
+  "awakening": [
+    "isagi_spatial",
+    "isagi_flow"
+  ],
+  "evolution": "isagi_nel",
+  "average": 65.2
 }

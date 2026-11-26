@@ -1,0 +1,49 @@
+{
+  "id": "chigiri",
+  "name": "Chigiri",
+  "full_name": "Hyoma Chigiri",
+  "rarity": "raro",
+  "position": "Ponta",
+  "bio": "O mais veloz do Blue Lock. Superou uma lesão no joelho para voltar a correr.",
+  "stats": {
+    "chute": 66,
+    "velocidade": 94,
+    "aceleracao": 92,
+    "drible": 78,
+    "passe": 62,
+    "defesa": 40,
+    "fisico": 52,
+    "visao": 66
+  },
+  "number": 10,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "long",
+    "hair_color": "#E0607A",
+    "hair_accent": "",
+    "eye_color": "#C94B6A",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#FF7A9A",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "chigiri_long_sprint",
+    "chigiri_no_break",
+    "chigiri_pressure"
+  ],
+  "awakening": [
+    "chigiri_immense",
+    "chigiri_sprint_through"
+  ],
+  "evolution": "chigiri_nel",
+  "average": 68.8
+}

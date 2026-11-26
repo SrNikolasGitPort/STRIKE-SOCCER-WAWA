@@ -1,0 +1,49 @@
+{
+  "id": "barou",
+  "name": "Barou",
+  "full_name": "Shoei Barou",
+  "rarity": "mitico",
+  "position": "Atacante",
+  "bio": "O 'Rei' arrogante que devora o jogo. Físico dominante e finalização fria.",
+  "stats": {
+    "chute": 94,
+    "velocidade": 78,
+    "aceleracao": 76,
+    "drible": 86,
+    "passe": 58,
+    "defesa": 64,
+    "fisico": 96,
+    "visao": 80
+  },
+  "number": 13,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "wild",
+    "hair_color": "#1C1C22",
+    "hair_accent": "#C23030",
+    "eye_color": "#D3A030",
+    "eye_color2": "",
+    "skin": "#EBC09A",
+    "aura": "#FF3B3B",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "barou_middle_shot",
+    "barou_charging",
+    "barou_chop"
+  ],
+  "awakening": [
+    "barou_villain_flow",
+    "barou_lightning"
+  ],
+  "evolution": "barou_nel",
+  "average": 79.0
+}

@@ -1,0 +1,52 @@
+{
+  "id": "nagi_nel",
+  "name": "Nagi Nel",
+  "full_name": "Seishiro Nagi",
+  "rarity": "world_class",
+  "position": "Meia",
+  "stats": {
+    "chute": 99,
+    "velocidade": 92,
+    "aceleracao": 88,
+    "drible": 99,
+    "passe": 94,
+    "defesa": 72,
+    "fisico": 88,
+    "visao": 99
+  },
+  "number": 7,
+  "base_id": "nagi",
+  "original": false,
+  "visual": {
+    "hair": "bob",
+    "hair_color": "#E9EAF2",
+    "hair_accent": "",
+    "eye_color": "#8E8EC8",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#FFFFFF",
+    "glasses": false,
+    "kit": {
+      "main": "#6CABDD",
+      "sec": "#FFFFFF",
+      "shorts": "#FFFFFF",
+      "pattern": "plain",
+      "team": "Manshine City"
+    },
+    "nel": true
+  },
+  "evolution": null,
+  "bio": "Versão Neo Egoist League de Nagi. World Class.",
+  "skills": [
+    "nagi_trap_shot",
+    "nagi_creative_trap",
+    "nagi_black_hole"
+  ],
+  "awakening": [
+    "nagi_nel_two_stage",
+    "nagi_nel_revolver",
+    "nagi_nel_flow"
+  ],
+  "evolved_normals": true,
+  "average": 91.4
+}

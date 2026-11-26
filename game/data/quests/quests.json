@@ -1,0 +1,212 @@
+[
+ {
+  "id": "q_isagi_1",
+  "char": "isagi",
+  "unlock": "isagi_nel_metavision",
+  "event": "skill_goal:isagi_direct_shot",
+  "target": 5
+ },
+ {
+  "id": "q_isagi_2",
+  "char": "isagi",
+  "unlock": "isagi_nel_metaburst",
+  "event": "awaken_goal",
+  "target": 3
+ },
+ {
+  "id": "q_isagi_3",
+  "char": "isagi",
+  "unlock": "isagi_nel_twogun",
+  "event": "win",
+  "target": 5
+ },
+ {
+  "id": "q_igaguri_1",
+  "char": "igaguri",
+  "unlock": "goat_karma_dive",
+  "event": "steal",
+  "target": 10
+ },
+ {
+  "id": "q_igaguri_2",
+  "char": "igaguri",
+  "unlock": "goat_transcendental",
+  "event": "skill_use:igaguri_dive",
+  "target": 8
+ },
+ {
+  "id": "q_igaguri_3",
+  "char": "igaguri",
+  "unlock": "goat_sermon",
+  "event": "win",
+  "target": 3
+ },
+ {
+  "id": "q_chigiri_1",
+  "char": "chigiri",
+  "unlock": "chigiri_nel_immense",
+  "event": "skill_goal:chigiri_no_break",
+  "target": 4
+ },
+ {
+  "id": "q_chigiri_2",
+  "char": "chigiri",
+  "unlock": "chigiri_nel_crimson",
+  "event": "assist",
+  "target": 4
+ },
+ {
+  "id": "q_chigiri_3",
+  "char": "chigiri",
+  "unlock": "chigiri_nel_burst",
+  "event": "win",
+  "target": 5
+ },
+ {
+  "id": "q_bachira_1",
+  "char": "bachira",
+  "unlock": "bachira_nel_monster",
+  "event": "skill_goal:bachira_lift",
+  "target": 3
+ },
+ {
+  "id": "q_bachira_2",
+  "char": "bachira",
+  "unlock": "bachira_nel_roulette",
+  "event": "assist",
+  "target": 5
+ },
+ {
+  "id": "q_bachira_3",
+  "char": "bachira",
+  "unlock": "bachira_nel_cross",
+  "event": "awaken",
+  "target": 4
+ },
+ {
+  "id": "q_aiku_1",
+  "char": "aiku",
+  "unlock": "aiku_nel_flow",
+  "event": "steal",
+  "target": 12
+ },
+ {
+  "id": "q_aiku_2",
+  "char": "aiku",
+  "unlock": "aiku_nel_libero",
+  "event": "skill_use:aiku_libero",
+  "target": 8
+ },
+ {
+  "id": "q_aiku_3",
+  "char": "aiku",
+  "unlock": "aiku_nel_fortress",
+  "event": "win",
+  "target": 5
+ },
+ {
+  "id": "q_reo_1",
+  "char": "reo",
+  "unlock": "reo_nel_chameleon",
+  "event": "assist",
+  "target": 6
+ },
+ {
+  "id": "q_reo_2",
+  "char": "reo",
+  "unlock": "reo_nel_organizer",
+  "event": "skill_use:reo_precise_pass",
+  "target": 12
+ },
+ {
+  "id": "q_reo_3",
+  "char": "reo",
+  "unlock": "reo_nel_perfect_copy",
+  "event": "win",
+  "target": 5
+ },
+ {
+  "id": "q_nagi_1",
+  "char": "nagi",
+  "unlock": "nagi_nel_two_stage",
+  "event": "skill_goal:nagi_trap_shot",
+  "target": 5
+ },
+ {
+  "id": "q_nagi_2",
+  "char": "nagi",
+  "unlock": "nagi_nel_revolver",
+  "event": "goal",
+  "target": 8
+ },
+ {
+  "id": "q_nagi_3",
+  "char": "nagi",
+  "unlock": "nagi_nel_flow",
+  "event": "awaken",
+  "target": 4
+ },
+ {
+  "id": "q_barou_1",
+  "char": "barou",
+  "unlock": "barou_nel_stealth",
+  "event": "skill_goal:barou_middle_shot",
+  "target": 5
+ },
+ {
+  "id": "q_barou_2",
+  "char": "barou",
+  "unlock": "barou_nel_predator",
+  "event": "goal",
+  "target": 10
+ },
+ {
+  "id": "q_barou_3",
+  "char": "barou",
+  "unlock": "barou_nel_double",
+  "event": "win",
+  "target": 5
+ },
+ {
+  "id": "q_shidou_1",
+  "char": "shidou",
+  "unlock": "shidou_nel_dragon",
+  "event": "skill_goal:shidou_bicycle",
+  "target": 3
+ },
+ {
+  "id": "q_shidou_2",
+  "char": "shidou",
+  "unlock": "shidou_nel_bigbang",
+  "event": "goal",
+  "target": 12
+ },
+ {
+  "id": "q_shidou_3",
+  "char": "shidou",
+  "unlock": "shidou_nel_frenzy",
+  "event": "awaken_goal",
+  "target": 3
+ },
+ {
+  "id": "q_rin_1",
+  "char": "rin",
+  "unlock": "rin_nel_scissor",
+  "event": "skill_goal:rin_trivela",
+  "target": 5
+ },
+ {
+  "id": "q_rin_2",
+  "char": "rin",
+  "unlock": "rin_nel_opposite",
+  "event": "assist",
+  "target": 5
+ },
+ {
+  "id": "q_rin_3",
+  "char": "rin",
+  "unlock": "rin_nel_puppet",
+  "event": "win",
+  "target": 6
+ }
+]

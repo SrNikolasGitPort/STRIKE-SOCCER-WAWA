@@ -1,0 +1,49 @@
+{
+  "id": "otoya",
+  "name": "Otoya",
+  "full_name": "Eita Otoya",
+  "rarity": "epico",
+  "position": "Ponta",
+  "bio": "Descontraído e provocador. Infiltra por pontos cegos com velocidade e sem fazer barulho.",
+  "stats": {
+    "chute": 68,
+    "velocidade": 86,
+    "aceleracao": 84,
+    "drible": 76,
+    "passe": 66,
+    "defesa": 48,
+    "fisico": 60,
+    "visao": 74
+  },
+  "number": 17,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "spiky",
+    "hair_color": "#E8EEF0",
+    "hair_accent": "#2E5E4E",
+    "eye_color": "#2A2A33",
+    "eye_color2": "",
+    "skin": "#F1C9A5",
+    "aura": "#7CFFB0",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "otoya_infiltration",
+    "otoya_offball",
+    "otoya_taunt"
+  ],
+  "awakening": [
+    "otoya_ninja",
+    "otoya_blindspot"
+  ],
+  "evolution": null,
+  "average": 70.2
+}

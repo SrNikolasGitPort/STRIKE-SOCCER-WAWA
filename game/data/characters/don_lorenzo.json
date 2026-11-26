@@ -1,0 +1,49 @@
+{
+  "id": "don_lorenzo",
+  "name": "Don Lorenzo",
+  "full_name": "Don Lorenzo",
+  "rarity": "world_class",
+  "position": "Zagueiro",
+  "bio": "Líbero do Ubers que come o craque rival. Alcance longo e leitura preditiva.",
+  "stats": {
+    "chute": 64,
+    "velocidade": 88,
+    "aceleracao": 86,
+    "drible": 78,
+    "passe": 88,
+    "defesa": 99,
+    "fisico": 94,
+    "visao": 99
+  },
+  "number": 3,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "short",
+    "hair_color": "#2A2A2A",
+    "hair_accent": "",
+    "eye_color": "#B8963C",
+    "eye_color2": "",
+    "skin": "#E0B48C",
+    "aura": "#F2C94C",
+    "glasses": false,
+    "kit": {
+      "main": "#1E3A8A",
+      "sec": "#F2C94C",
+      "shorts": "#0F1B44",
+      "pattern": "hoops",
+      "team": "Ubers"
+    }
+  },
+  "skills": [
+    "lorenzo_manmark",
+    "lorenzo_intercept",
+    "lorenzo_libero_pass"
+  ],
+  "awakening": [
+    "lorenzo_ace_eater",
+    "lorenzo_libero_zone"
+  ],
+  "evolution": null,
+  "average": 87.0
+}

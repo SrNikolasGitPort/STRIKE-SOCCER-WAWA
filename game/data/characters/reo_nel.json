@@ -1,0 +1,52 @@
+{
+  "id": "reo_nel",
+  "name": "Reo Nel",
+  "full_name": "Reo Mikage",
+  "rarity": "world_class",
+  "position": "Meia",
+  "stats": {
+    "chute": 99,
+    "velocidade": 99,
+    "aceleracao": 99,
+    "drible": 99,
+    "passe": 99,
+    "defesa": 99,
+    "fisico": 99,
+    "visao": 99
+  },
+  "number": 10,
+  "base_id": "reo",
+  "original": false,
+  "visual": {
+    "hair": "ponytail",
+    "hair_color": "#8E72D8",
+    "hair_accent": "",
+    "eye_color": "#8E72D8",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#FFFFFF",
+    "glasses": false,
+    "kit": {
+      "main": "#6CABDD",
+      "sec": "#FFFFFF",
+      "shorts": "#FFFFFF",
+      "pattern": "plain",
+      "team": "Manshine City"
+    },
+    "nel": true
+  },
+  "evolution": null,
+  "bio": "Versão Neo Egoist League de Reo. World Class.",
+  "skills": [
+    "reo_precise_pass",
+    "reo_copy_shot",
+    "reo_copy_run"
+  ],
+  "awakening": [
+    "reo_nel_chameleon",
+    "reo_nel_organizer",
+    "reo_nel_perfect_copy"
+  ],
+  "evolved_normals": true,
+  "average": 99.0
+}

@@ -1,0 +1,50 @@
+{
+  "id": "yukimiya",
+  "name": "Yukimiya",
+  "full_name": "Kenyu Yukimiya",
+  "rarity": "mitico",
+  "position": "Atacante",
+  "bio": "Atacante móvel craque do 1 contra 1. Dribles em velocidade e chutes giratórios.",
+  "stats": {
+    "chute": 82,
+    "velocidade": 92,
+    "aceleracao": 92,
+    "drible": 94,
+    "passe": 72,
+    "defesa": 56,
+    "fisico": 72,
+    "visao": 86
+  },
+  "number": 14,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "spiky",
+    "hair_color": "#7A3B2E",
+    "hair_accent": "",
+    "eye_color": "#6B3B2A",
+    "eye_color2": "",
+    "skin": "#EBC09A",
+    "aura": "#FF6B4A",
+    "glasses": false,
+    "kit": {
+      "main": "#B3202A",
+      "sec": "#D4AF37",
+      "shorts": "#111111",
+      "pattern": "stripes",
+      "team": "Bastard München"
+    }
+  },
+  "skills": [
+    "yukimiya_drag",
+    "yukimiya_gyro",
+    "yukimiya_sword_screw"
+  ],
+  "awakening": [
+    "yukimiya_flow",
+    "yukimiya_predator",
+    "yukimiya_emperor"
+  ],
+  "evolution": null,
+  "average": 80.8
+}

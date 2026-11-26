@@ -1,0 +1,49 @@
+{
+  "id": "karasu",
+  "name": "Karasu",
+  "full_name": "Tabito Karasu",
+  "rarity": "lendario",
+  "position": "Meia",
+  "bio": "Meio-campista analítico e de língua afiada. Desmonta defesas achando o elo mais fraco.",
+  "stats": {
+    "chute": 58,
+    "velocidade": 70,
+    "aceleracao": 70,
+    "drible": 78,
+    "passe": 88,
+    "defesa": 76,
+    "fisico": 66,
+    "visao": 94
+  },
+  "number": 69,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "spiky",
+    "hair_color": "#3A2E58",
+    "hair_accent": "",
+    "eye_color": "#4B7BD8",
+    "eye_color2": "",
+    "skin": "#F1C9A5",
+    "aura": "#8E72D8",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "karasu_arm_block",
+    "karasu_feint",
+    "karasu_weak_link"
+  ],
+  "awakening": [
+    "karasu_metavision",
+    "karasu_crow_rule"
+  ],
+  "evolution": null,
+  "average": 75.0
+}

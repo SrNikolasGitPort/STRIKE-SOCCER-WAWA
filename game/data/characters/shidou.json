@@ -1,0 +1,50 @@
+{
+  "id": "shidou",
+  "name": "Shidou",
+  "full_name": "Ryusei Shidou",
+  "rarity": "mitico",
+  "position": "Atacante",
+  "bio": "Instinto de gol selvagem. O jogador mais forte fisicamente e explosivo.",
+  "stats": {
+    "chute": 94,
+    "velocidade": 90,
+    "aceleracao": 88,
+    "drible": 86,
+    "passe": 52,
+    "defesa": 52,
+    "fisico": 98,
+    "visao": 84
+  },
+  "number": 9,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "pompadour",
+    "hair_color": "#E0402A",
+    "hair_accent": "",
+    "eye_color": "#E8C14A",
+    "eye_color2": "",
+    "skin": "#F1C9A5",
+    "aura": "#FF5A1F",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "shidou_drive",
+    "shidou_aggressive",
+    "shidou_bicycle"
+  ],
+  "awakening": [
+    "shidou_dragon",
+    "shidou_bigbang",
+    "shidou_instinct"
+  ],
+  "evolution": "shidou_nel",
+  "average": 80.5
+}

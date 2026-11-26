@@ -1,0 +1,52 @@
+{
+  "id": "isagi_nel",
+  "name": "Isagi Nel",
+  "full_name": "Yoichi Isagi",
+  "rarity": "world_class",
+  "position": "Atacante",
+  "stats": {
+    "chute": 94,
+    "velocidade": 86,
+    "aceleracao": 88,
+    "drible": 84,
+    "passe": 88,
+    "defesa": 70,
+    "fisico": 82,
+    "visao": 99
+  },
+  "number": 11,
+  "base_id": "isagi",
+  "original": false,
+  "visual": {
+    "hair": "short",
+    "hair_color": "#1A1B24",
+    "hair_accent": "",
+    "eye_color": "#3B7BD6",
+    "eye_color2": "",
+    "skin": "#F1C9A5",
+    "aura": "#FFFFFF",
+    "glasses": false,
+    "kit": {
+      "main": "#B3202A",
+      "sec": "#D4AF37",
+      "shorts": "#111111",
+      "pattern": "stripes",
+      "team": "Bastard München"
+    },
+    "nel": true
+  },
+  "evolution": null,
+  "bio": "Versão Neo Egoist League de Isagi. World Class.",
+  "skills": [
+    "isagi_direct_shot",
+    "isagi_backheel",
+    "isagi_offball"
+  ],
+  "awakening": [
+    "isagi_nel_metavision",
+    "isagi_nel_metaburst",
+    "isagi_nel_twogun"
+  ],
+  "evolved_normals": true,
+  "average": 86.4
+}

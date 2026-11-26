@@ -1,0 +1,2346 @@
+{
+ "isagi_direct_shot": {
+  "id": "isagi_direct_shot",
+  "owner": "isagi",
+  "cat": "normal",
+  "name_pt": "Chute Direto",
+  "name_en": "Direct Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 6.0,
+  "ono": "don",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 0.92,
+   "loft": 0.08,
+   "aim": 0.8
+  }
+ },
+ "isagi_backheel": {
+  "id": "isagi_backheel",
+  "owner": "isagi",
+  "cat": "normal",
+  "name_pt": "Calcanhar Reverso",
+  "name_en": "Reverse Back Heel Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 8.0,
+  "ono": "ba",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 0.8,
+   "loft": 0.05,
+   "aim": 1.0,
+   "goal_aim": true
+  }
+ },
+ "isagi_offball": {
+  "id": "isagi_offball",
+  "owner": "isagi",
+  "cat": "normal",
+  "name_pt": "Movimento Sem Bola",
+  "name_en": "Off-the-Ball Movement",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 9.0,
+  "ono": "shu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 2.0,
+   "speed": 1.3
+  }
+ },
+ "isagi_spatial": {
+  "id": "isagi_spatial",
+  "owner": "isagi",
+  "cat": "awake",
+  "name_pt": "Consciência Espacial",
+  "name_en": "Spatial Awareness",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 6.0,
+   "assist": 0.9
+  }
+ },
+ "isagi_flow": {
+  "id": "isagi_flow",
+  "owner": "isagi",
+  "cat": "awake",
+  "name_pt": "Estado de Flow",
+  "name_en": "Flow State",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 14.0,
+  "ono": "gogogo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 8.0,
+   "speed": 1.18,
+   "shot": 1.2,
+   "magnet": 0.5
+  }
+ },
+ "isagi_nel_metavision": {
+  "id": "isagi_nel_metavision",
+  "owner": "isagi",
+  "cat": "nel",
+  "name_pt": "Metavisão",
+  "name_en": "Metavision",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "kiin",
+  "ref": "cap. 182 (confirmar)",
+  "params": {
+   "duration": 7.0,
+   "assist": 1.0,
+   "slow": 0.6
+  }
+ },
+ "isagi_nel_metaburst": {
+  "id": "isagi_nel_metaburst",
+  "owner": "isagi",
+  "cat": "nel",
+  "name_pt": "Ponto Meta-Burst",
+  "name_en": "Meta-Burst Point",
+  "jp": "",
+  "effect": "steal",
+  "cooldown": 11.0,
+  "ono": "baki",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "radius": 5.5,
+   "pull": 1.0
+  }
+ },
+ "isagi_nel_twogun": {
+  "id": "isagi_nel_twogun",
+  "owner": "isagi",
+  "cat": "nel",
+  "name_pt": "Voleio de Duas Armas",
+  "name_en": "Two-Gun Volley",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 13.0,
+  "ono": "zudon",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 1.18,
+   "loft": 0.22,
+   "curve": 0.4,
+   "aim": 1.0,
+   "air": true
+  }
+ },
+ "igaguri_dive": {
+  "id": "igaguri_dive",
+  "owner": "igaguri",
+  "cat": "normal",
+  "name_pt": "Mergulho de Bloqueio",
+  "name_en": "Diving",
+  "jp": "",
+  "effect": "block",
+  "cooldown": 9.0,
+  "ono": "baki",
+  "ref": "MAL (sec.)",
+  "params": {
+   "duration": 1.0,
+   "radius": 2.6
+  }
+ },
+ "igaguri_malicia": {
+  "id": "igaguri_malicia",
+  "owner": "igaguri",
+  "cat": "normal",
+  "name_pt": "Malícia",
+  "name_en": "Malicious Dribbling",
+  "jp": "",
+  "effect": "shockwave",
+  "cooldown": 10.0,
+  "ono": "ba",
+  "ref": "cap. 208 (sec.)",
+  "params": {
+   "radius": 2.4,
+   "knock": 3.0,
+   "stun": 0.8
+  }
+ },
+ "igaguri_perseverance": {
+  "id": "igaguri_perseverance",
+  "owner": "igaguri",
+  "cat": "normal",
+  "name_pt": "Perseverança",
+  "name_en": "Perseverance",
+  "jp": "",
+  "effect": "rest",
+  "cooldown": 14.0,
+  "ono": "go",
+  "ref": "ideia do jogo",
+  "params": {
+   "amount": 45.0
+  }
+ },
+ "igaguri_malicia_total": {
+  "id": "igaguri_malicia_total",
+  "owner": "igaguri",
+  "cat": "awake",
+  "name_pt": "Malícia Total",
+  "name_en": "Total Malice",
+  "jp": "",
+  "effect": "shockwave",
+  "cooldown": 14.0,
+  "ono": "dododo",
+  "ref": "ideia do jogo",
+  "params": {
+   "radius": 4.0,
+   "knock": 4.5,
+   "stun": 1.4
+  }
+ },
+ "igaguri_heroic_dive": {
+  "id": "igaguri_heroic_dive",
+  "owner": "igaguri",
+  "cat": "awake",
+  "name_pt": "Mergulho Heroico",
+  "name_en": "Heroic Dive",
+  "jp": "",
+  "effect": "block",
+  "cooldown": 16.0,
+  "ono": "gogogo",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 1.6,
+   "radius": 3.6
+  }
+ },
+ "goat_karma_dive": {
+  "id": "goat_karma_dive",
+  "owner": "igaguri",
+  "cat": "goat",
+  "name_pt": "Mergulho do Sagrado Karma",
+  "name_en": "Sacred Karma Dive",
+  "jp": "",
+  "effect": "block",
+  "cooldown": 14.0,
+  "ono": "bonk",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 1.4,
+   "radius": 4.0
+  }
+ },
+ "goat_transcendental": {
+  "id": "goat_transcendental",
+  "owner": "igaguri",
+  "cat": "goat",
+  "name_pt": "Malícia Transcendental",
+  "name_en": "Transcendental Malice",
+  "jp": "",
+  "effect": "shockwave",
+  "cooldown": 15.0,
+  "ono": "bonk",
+  "ref": "ideia do jogo",
+  "params": {
+   "radius": 3.4,
+   "knock": 1.0,
+   "stun": 1.8
+  }
+ },
+ "goat_sermon": {
+  "id": "goat_sermon",
+  "owner": "igaguri",
+  "cat": "goat",
+  "name_pt": "Sermão do Templo",
+  "name_en": "Temple Sermon",
+  "jp": "",
+  "effect": "zone",
+  "cooldown": 18.0,
+  "ono": "gong",
+  "ref": "ideia do jogo",
+  "params": {
+   "radius": 7.0,
+   "duration": 3.0,
+   "slow": 0.45
+  }
+ },
+ "chigiri_long_sprint": {
+  "id": "chigiri_long_sprint",
+  "owner": "chigiri",
+  "cat": "normal",
+  "name_pt": "Corrida de Longa Distância",
+  "name_en": "Long-Distance Sprinting",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 9.0,
+  "ono": "shu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.7,
+   "speed": 1.55,
+   "push": 14.0
+  }
+ },
+ "chigiri_no_break": {
+  "id": "chigiri_no_break",
+  "owner": "chigiri",
+  "cat": "normal",
+  "name_pt": "Drible Sem Parar",
+  "name_en": "No-Break Dribble",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 8.0,
+  "ono": "zaa",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 2.2,
+   "speed": 1.35,
+   "magnet": 0.9
+  }
+ },
+ "chigiri_pressure": {
+  "id": "chigiri_pressure",
+  "owner": "chigiri",
+  "cat": "normal",
+  "name_pt": "Pressão em Alta Velocidade",
+  "name_en": "High-Speed Pressure",
+  "jp": "",
+  "effect": "steal",
+  "cooldown": 10.0,
+  "ono": "baki",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "radius": 3.0,
+   "pull": 0.8,
+   "speed": 1.3
+  }
+ },
+ "chigiri_immense": {
+  "id": "chigiri_immense",
+  "owner": "chigiri",
+  "cat": "awake",
+  "name_pt": "Velocidade Imensa",
+  "name_en": "Immense Speed",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 14.0,
+  "ono": "zaa",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 3.5,
+   "speed": 1.85,
+   "magnet": 0.6
+  }
+ },
+ "chigiri_sprint_through": {
+  "id": "chigiri_sprint_through",
+  "owner": "chigiri",
+  "cat": "awake",
+  "name_pt": "Atravessar a Defesa",
+  "name_en": "Sprint through the Defense",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 13.0,
+  "ono": "shu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.6,
+   "speed": 1.7,
+   "immune": true
+  }
+ },
+ "chigiri_nel_immense": {
+  "id": "chigiri_nel_immense",
+  "owner": "chigiri",
+  "cat": "nel",
+  "name_pt": "Velocidade Imensa Plena",
+  "name_en": "Immense Speed (Nel)",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 12.0,
+  "ono": "zaa",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 4.5,
+   "speed": 2.05,
+   "magnet": 0.8
+  }
+ },
+ "chigiri_nel_crimson": {
+  "id": "chigiri_nel_crimson",
+  "owner": "chigiri",
+  "cat": "nel",
+  "name_pt": "Corrida Carmesim",
+  "name_en": "Crimson Run",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 12.0,
+  "ono": "shu",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 2.0,
+   "speed": 1.9,
+   "immune": true
+  }
+ },
+ "chigiri_nel_burst": {
+  "id": "chigiri_nel_burst",
+  "owner": "chigiri",
+  "cat": "nel",
+  "name_pt": "Disparada Final",
+  "name_en": "Final Burst",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 15.0,
+  "ono": "gogogo",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 6.0,
+   "speed": 1.35,
+   "shot": 1.2,
+   "magnet": 0.7
+  }
+ },
+ "zantetsu_accel": {
+  "id": "zantetsu_accel",
+  "owner": "zantetsu",
+  "cat": "normal",
+  "name_pt": "Aceleração Explosiva",
+  "name_en": "Explosive Acceleration",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 8.0,
+  "ono": "shu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.2,
+   "speed": 1.7
+  }
+ },
+ "zantetsu_cutin": {
+  "id": "zantetsu_cutin",
+  "owner": "zantetsu",
+  "cat": "normal",
+  "name_pt": "Chute de Corte",
+  "name_en": "Left Foot Shooting",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 7.0,
+  "ono": "don",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 0.9,
+   "loft": 0.08,
+   "curve": -0.5,
+   "aim": 0.8
+  }
+ },
+ "zantetsu_cross": {
+  "id": "zantetsu_cross",
+  "owner": "zantetsu",
+  "cat": "normal",
+  "name_pt": "Cruzamento de Linha de Fundo",
+  "name_en": "Byline Cross",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 7.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.0,
+   "loft": 0.45,
+   "curve": 0.35
+  }
+ },
+ "zantetsu_blade": {
+  "id": "zantetsu_blade",
+  "owner": "zantetsu",
+  "cat": "awake",
+  "name_pt": "Investida Lâmina",
+  "name_en": "Blade Rush",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 14.0,
+  "ono": "shu",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 5.0,
+   "speed": 1.35,
+   "shot": 1.25
+  }
+ },
+ "zantetsu_iron": {
+  "id": "zantetsu_iron",
+  "owner": "zantetsu",
+  "cat": "awake",
+  "name_pt": "Cortador de Ferro",
+  "name_en": "Iron Cutter",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 13.0,
+  "ono": "baki",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 1.5,
+   "speed": 1.6,
+   "immune": true
+  }
+ },
+ "otoya_infiltration": {
+  "id": "otoya_infiltration",
+  "owner": "otoya",
+  "cat": "normal",
+  "name_pt": "Infiltração Veloz",
+  "name_en": "High Speed Infiltration",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 8.0,
+  "ono": "shu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.8,
+   "speed": 1.5
+  }
+ },
+ "otoya_offball": {
+  "id": "otoya_offball",
+  "owner": "otoya",
+  "cat": "normal",
+  "name_pt": "Movimento Sem Bola",
+  "name_en": "Off-the-Ball Movements",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 9.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.4,
+   "speed": 1.4,
+   "immune": true
+  }
+ },
+ "otoya_taunt": {
+  "id": "otoya_taunt",
+  "owner": "otoya",
+  "cat": "normal",
+  "name_pt": "Provocação",
+  "name_en": "Taunt",
+  "jp": "",
+  "effect": "mark",
+  "cooldown": 11.0,
+  "ono": "dododo",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 3.0,
+   "radius": 9.0,
+   "speed_debuff": 0.8,
+   "power_debuff": 0.75
+  }
+ },
+ "otoya_ninja": {
+  "id": "otoya_ninja",
+  "owner": "otoya",
+  "cat": "awake",
+  "name_pt": "Ninja Total",
+  "name_en": "Ninja Stealth Walk",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 14.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 5.0,
+   "speed": 1.6,
+   "magnet": 0.5
+  }
+ },
+ "otoya_blindspot": {
+  "id": "otoya_blindspot",
+  "owner": "otoya",
+  "cat": "awake",
+  "name_pt": "Ponto Cego Perfeito",
+  "name_en": "Perfect Blind Spot",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 14.0,
+  "ono": "kiin",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 5.0,
+   "shot": 1.3,
+   "speed": 1.15
+  }
+ },
+ "bachira_elastic": {
+  "id": "bachira_elastic",
+  "owner": "bachira",
+  "cat": "normal",
+  "name_pt": "Drible Elástico",
+  "name_en": "Elastic Dribbling",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 7.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.2,
+   "speed": 1.45,
+   "immune": true
+  }
+ },
+ "bachira_lift": {
+  "id": "bachira_lift",
+  "owner": "bachira",
+  "cat": "normal",
+  "name_pt": "Monster Lift",
+  "name_en": "Monster Lift",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 8.0,
+  "ono": "paan",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 0.55,
+   "loft": 0.65,
+   "aim": 0.7
+  }
+ },
+ "bachira_backspin": {
+  "id": "bachira_backspin",
+  "owner": "bachira",
+  "cat": "normal",
+  "name_pt": "Passe Longo com Efeito",
+  "name_en": "Long-Range Backspin Pass",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 9.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.25,
+   "loft": 0.55
+  }
+ },
+ "bachira_monstrance": {
+  "id": "bachira_monstrance",
+  "owner": "bachira",
+  "cat": "awake",
+  "name_pt": "Monstrance",
+  "name_en": "Monstrance",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 14.0,
+  "ono": "gogogo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 4.0,
+   "speed": 1.5,
+   "magnet": 1.0
+  }
+ },
+ "bachira_triple": {
+  "id": "bachira_triple",
+  "owner": "bachira",
+  "cat": "awake",
+  "name_pt": "Triplo Túnel",
+  "name_en": "Triple Nutmeg",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 12.0,
+  "ono": "baki",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.8,
+   "speed": 1.55,
+   "immune": true
+  }
+ },
+ "bachira_egotistical": {
+  "id": "bachira_egotistical",
+  "owner": "bachira",
+  "cat": "awake",
+  "name_pt": "Estilo Egoísta",
+  "name_en": "Egotistical Style",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 15.0,
+  "ono": "zudon",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 6.0,
+   "shot": 1.3,
+   "speed": 1.12,
+   "magnet": 0.6
+  }
+ },
+ "bachira_nel_monster": {
+  "id": "bachira_nel_monster",
+  "owner": "bachira",
+  "cat": "nel",
+  "name_pt": "Monstro Desperto",
+  "name_en": "Monster Awakening",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 15.0,
+  "ono": "gogogo",
+  "ref": "blog (não confiável); ideia do jogo",
+  "params": {
+   "duration": 7.0,
+   "speed": 1.3,
+   "shot": 1.25,
+   "magnet": 0.9
+  }
+ },
+ "bachira_nel_roulette": {
+  "id": "bachira_nel_roulette",
+  "owner": "bachira",
+  "cat": "nel",
+  "name_pt": "Roleta e Lift",
+  "name_en": "Roulette Lift",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 10.0,
+  "ono": "paan",
+  "ref": "cap. 296 (sec.)",
+  "params": {
+   "duration": 1.6,
+   "speed": 1.6,
+   "immune": true
+  }
+ },
+ "bachira_nel_cross": {
+  "id": "bachira_nel_cross",
+  "owner": "bachira",
+  "cat": "nel",
+  "name_pt": "Cruzamento Veloz",
+  "name_en": "Quick Cross",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 8.0,
+  "ono": "hyu",
+  "ref": "cap. 296 (sec.)",
+  "params": {
+   "speed": 1.35,
+   "loft": 0.3,
+   "curve": 0.3
+  }
+ },
+ "hiori_first_touch": {
+  "id": "hiori_first_touch",
+  "owner": "hiori",
+  "cat": "normal",
+  "name_pt": "Passe de Primeira",
+  "name_en": "First Touch Pass",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 5.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.1,
+   "loft": 0.03
+  }
+ },
+ "hiori_rabona": {
+  "id": "hiori_rabona",
+  "owner": "hiori",
+  "cat": "normal",
+  "name_pt": "Cruzamento de Rabona",
+  "name_en": "Rabona Cross",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 8.0,
+  "ono": "paan",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.05,
+   "loft": 0.4,
+   "curve": 0.5
+  }
+ },
+ "hiori_scissors": {
+  "id": "hiori_scissors",
+  "owner": "hiori",
+  "cat": "normal",
+  "name_pt": "Tesoura Hipervelocidade",
+  "name_en": "Hyperspeed Scissors",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 8.0,
+  "ono": "shu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.2,
+   "speed": 1.45,
+   "immune": true
+  }
+ },
+ "hiori_metavision": {
+  "id": "hiori_metavision",
+  "owner": "hiori",
+  "cat": "awake",
+  "name_pt": "Metavisão",
+  "name_en": "Metavision",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 6.0,
+   "assist": 0.95,
+   "slow": 0.7
+  }
+ },
+ "hiori_protagonism": {
+  "id": "hiori_protagonism",
+  "owner": "hiori",
+  "cat": "awake",
+  "name_pt": "Protagonismo",
+  "name_en": "Protagonism",
+  "jp": "",
+  "effect": "mark",
+  "cooldown": 13.0,
+  "ono": "gogogo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 5.0,
+   "radius": 12.0,
+   "speed_debuff": 0.8,
+   "power_debuff": 0.7
+  }
+ },
+ "hiori_two_stage": {
+  "id": "hiori_two_stage",
+  "owner": "hiori",
+  "cat": "awake",
+  "name_pt": "Passe Falso em 2 Tempos",
+  "name_en": "2-Stage Fake Pass",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 10.0,
+  "ono": "baki",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.4,
+   "loft": 0.05,
+   "target_buff": 1.3
+  }
+ },
+ "aiku_total_defense": {
+  "id": "aiku_total_defense",
+  "owner": "aiku",
+  "cat": "normal",
+  "name_pt": "Defesa Total",
+  "name_en": "Total Defense",
+  "jp": "",
+  "effect": "steal",
+  "cooldown": 9.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "radius": 5.0,
+   "pull": 1.0
+  }
+ },
+ "aiku_libero": {
+  "id": "aiku_libero",
+  "owner": "aiku",
+  "cat": "normal",
+  "name_pt": "Varredura de Líbero",
+  "name_en": "Libero Sweep",
+  "jp": "",
+  "effect": "block",
+  "cooldown": 9.0,
+  "ono": "zaa",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 1.1,
+   "radius": 3.0
+  }
+ },
+ "aiku_anticipation": {
+  "id": "aiku_anticipation",
+  "owner": "aiku",
+  "cat": "normal",
+  "name_pt": "Antecipação",
+  "name_en": "Reflex",
+  "jp": "",
+  "effect": "mark",
+  "cooldown": 11.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 4.0,
+   "radius": 10.0,
+   "speed_debuff": 0.75,
+   "power_debuff": 0.8
+  }
+ },
+ "aiku_flow": {
+  "id": "aiku_flow",
+  "owner": "aiku",
+  "cat": "awake",
+  "name_pt": "Estado de Flow",
+  "name_en": "Flow State",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 14.0,
+  "ono": "gogogo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 8.0,
+   "assist": 0.7,
+   "slow": 0.75
+  }
+ },
+ "aiku_offensive_libero": {
+  "id": "aiku_offensive_libero",
+  "owner": "aiku",
+  "cat": "awake",
+  "name_pt": "Líbero Ofensivo",
+  "name_en": "Attacking Libero",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 14.0,
+  "ono": "don",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 5.0,
+   "speed": 1.25,
+   "shot": 1.3,
+   "magnet": 0.7
+  }
+ },
+ "aiku_fortress": {
+  "id": "aiku_fortress",
+  "owner": "aiku",
+  "cat": "awake",
+  "name_pt": "Fortaleza",
+  "name_en": "Fortress",
+  "jp": "",
+  "effect": "zone",
+  "cooldown": 15.0,
+  "ono": "gong",
+  "ref": "ideia do jogo",
+  "params": {
+   "radius": 5.5,
+   "duration": 4.0,
+   "slow": 0.5
+  }
+ },
+ "aiku_nel_flow": {
+  "id": "aiku_nel_flow",
+  "owner": "aiku",
+  "cat": "nel",
+  "name_pt": "Flow Total",
+  "name_en": "Total Flow",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "gogogo",
+  "ref": "Nel original (não existe no mangá)",
+  "params": {
+   "duration": 9.0,
+   "assist": 0.95,
+   "slow": 0.6
+  }
+ },
+ "aiku_nel_libero": {
+  "id": "aiku_nel_libero",
+  "owner": "aiku",
+  "cat": "nel",
+  "name_pt": "Líbero Dourado",
+  "name_en": "Golden Libero",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 13.0,
+  "ono": "don",
+  "ref": "Nel original (não existe no mangá)",
+  "params": {
+   "duration": 6.0,
+   "speed": 1.35,
+   "shot": 1.4,
+   "magnet": 0.8
+  }
+ },
+ "aiku_nel_fortress": {
+  "id": "aiku_nel_fortress",
+  "owner": "aiku",
+  "cat": "nel",
+  "name_pt": "Fortaleza Eterna",
+  "name_en": "Eternal Fortress",
+  "jp": "",
+  "effect": "zone",
+  "cooldown": 14.0,
+  "ono": "gong",
+  "ref": "Nel original (não existe no mangá)",
+  "params": {
+   "radius": 6.5,
+   "duration": 5.0,
+   "slow": 0.6
+  }
+ },
+ "kunigami_left_shot": {
+  "id": "kunigami_left_shot",
+  "owner": "kunigami",
+  "cat": "normal",
+  "name_pt": "Chute de Esquerda",
+  "name_en": "Left-Foot Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 6.0,
+  "ono": "zudon",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 1.0,
+   "loft": 0.07,
+   "aim": 0.7
+  }
+ },
+ "kunigami_power_charge": {
+  "id": "kunigami_power_charge",
+  "owner": "kunigami",
+  "cat": "normal",
+  "name_pt": "Investida de Ombro",
+  "name_en": "Power Charge",
+  "jp": "",
+  "effect": "shockwave",
+  "cooldown": 9.0,
+  "ono": "go",
+  "ref": "ideia do jogo",
+  "params": {
+   "radius": 2.6,
+   "knock": 4.0,
+   "stun": 0.4
+  }
+ },
+ "kunigami_press": {
+  "id": "kunigami_press",
+  "owner": "kunigami",
+  "cat": "normal",
+  "name_pt": "Corrida de Pressão",
+  "name_en": "Press Run",
+  "jp": "",
+  "effect": "steal",
+  "cooldown": 10.0,
+  "ono": "dododo",
+  "ref": "ideia do jogo",
+  "params": {
+   "radius": 3.2,
+   "pull": 0.8,
+   "speed": 1.25
+  }
+ },
+ "kunigami_hero": {
+  "id": "kunigami_hero",
+  "owner": "kunigami",
+  "cat": "awake",
+  "name_pt": "Modo Herói",
+  "name_en": "Hero Mode",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 14.0,
+  "ono": "gogogo",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 6.0,
+   "shot": 1.4,
+   "speed": 1.12
+  }
+ },
+ "kunigami_hot_blood": {
+  "id": "kunigami_hot_blood",
+  "owner": "kunigami",
+  "cat": "awake",
+  "name_pt": "Empurrão de Sangue Quente",
+  "name_en": "Hot-Blood Push",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 12.0,
+  "ono": "go",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 1.6,
+   "speed": 1.5,
+   "immune": true
+  }
+ },
+ "karasu_arm_block": {
+  "id": "karasu_arm_block",
+  "owner": "karasu",
+  "cat": "normal",
+  "name_pt": "Bloqueio de Braço",
+  "name_en": "Expert Ball Control",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 10.0,
+  "ono": "go",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 2.0,
+   "shield": true,
+   "magnet": 0.8
+  }
+ },
+ "karasu_feint": {
+  "id": "karasu_feint",
+  "owner": "karasu",
+  "cat": "normal",
+  "name_pt": "Finta de Passe",
+  "name_en": "Feints",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 8.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.2,
+   "speed": 1.4,
+   "immune": true
+  }
+ },
+ "karasu_weak_link": {
+  "id": "karasu_weak_link",
+  "owner": "karasu",
+  "cat": "normal",
+  "name_pt": "Análise do Elo Fraco",
+  "name_en": "Sharp Analytical Ability",
+  "jp": "",
+  "effect": "mark",
+  "cooldown": 11.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 5.0,
+   "radius": 10.0,
+   "speed_debuff": 0.8,
+   "power_debuff": 0.8
+  }
+ },
+ "karasu_metavision": {
+  "id": "karasu_metavision",
+  "owner": "karasu",
+  "cat": "awake",
+  "name_pt": "Metavisão",
+  "name_en": "Metavision",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 6.0,
+   "assist": 0.9,
+   "slow": 0.7
+  }
+ },
+ "karasu_crow_rule": {
+  "id": "karasu_crow_rule",
+  "owner": "karasu",
+  "cat": "awake",
+  "name_pt": "Regra do Corvo",
+  "name_en": "Crow's Rule",
+  "jp": "",
+  "effect": "mark",
+  "cooldown": 14.0,
+  "ono": "gogogo",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 5.0,
+   "radius": 12.0,
+   "speed_debuff": 0.7,
+   "power_debuff": 0.6,
+   "silence": true
+  }
+ },
+ "reo_precise_pass": {
+  "id": "reo_precise_pass",
+  "owner": "reo",
+  "cat": "normal",
+  "name_pt": "Passe Preciso",
+  "name_en": "Precise Pass",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 5.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.15,
+   "loft": 0.05
+  }
+ },
+ "reo_copy_shot": {
+  "id": "reo_copy_shot",
+  "owner": "reo",
+  "cat": "normal",
+  "name_pt": "Cópia do Chute Direto",
+  "name_en": "Direct Shot (copy)",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 7.0,
+  "ono": "don",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 0.78,
+   "loft": 0.08,
+   "aim": 0.8
+  }
+ },
+ "reo_copy_run": {
+  "id": "reo_copy_run",
+  "owner": "reo",
+  "cat": "normal",
+  "name_pt": "Cópia de Corrida",
+  "name_en": "Run Copy",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 9.0,
+  "ono": "shu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.8,
+   "speed": 1.4
+  }
+ },
+ "reo_chameleon": {
+  "id": "reo_chameleon",
+  "owner": "reo",
+  "cat": "awake",
+  "name_pt": "Camaleão",
+  "name_en": "The Chameleon",
+  "jp": "",
+  "effect": "copy",
+  "cooldown": 16.0,
+  "ono": "gogogo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "fraction": 0.75
+  }
+ },
+ "reo_organizer": {
+  "id": "reo_organizer",
+  "owner": "reo",
+  "cat": "awake",
+  "name_pt": "Organizador",
+  "name_en": "Organizer",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 14.0,
+  "ono": "kiin",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 6.0,
+   "speed": 1.12,
+   "shot": 1.15,
+   "allies": 8.0
+  }
+ },
+ "reo_nel_chameleon": {
+  "id": "reo_nel_chameleon",
+  "owner": "reo",
+  "cat": "nel",
+  "name_pt": "Camaleão Pleno",
+  "name_en": "The Chameleon (Nel)",
+  "jp": "",
+  "effect": "copy",
+  "cooldown": 12.0,
+  "ono": "gogogo",
+  "ref": "cap. 297 (sec.)",
+  "params": {
+   "fraction": 0.92
+  }
+ },
+ "reo_nel_organizer": {
+  "id": "reo_nel_organizer",
+  "owner": "reo",
+  "cat": "nel",
+  "name_pt": "Maestro do Manshine",
+  "name_en": "Manshine Conductor",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 13.0,
+  "ono": "kiin",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 7.0,
+   "speed": 1.2,
+   "shot": 1.25,
+   "allies": 10.0
+  }
+ },
+ "reo_nel_perfect_copy": {
+  "id": "reo_nel_perfect_copy",
+  "owner": "reo",
+  "cat": "nel",
+  "name_pt": "Cópia Perfeita",
+  "name_en": "Perfect Copy",
+  "jp": "",
+  "effect": "copy",
+  "cooldown": 14.0,
+  "ono": "zudon",
+  "ref": "ideia do jogo",
+  "params": {
+   "fraction": 1.0
+  }
+ },
+ "nagi_trap_shot": {
+  "id": "nagi_trap_shot",
+  "owner": "nagi",
+  "cat": "normal",
+  "name_pt": "Chute com Domínio",
+  "name_en": "Trap Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 6.0,
+  "ono": "paan",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 0.95,
+   "loft": 0.07,
+   "aim": 0.9,
+   "trap": true
+  }
+ },
+ "nagi_creative_trap": {
+  "id": "nagi_creative_trap",
+  "owner": "nagi",
+  "cat": "normal",
+  "name_pt": "Domínio Criativo",
+  "name_en": "Creative Trap",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 8.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.0,
+   "speed": 1.3,
+   "immune": true,
+   "magnet": 1.0
+  }
+ },
+ "nagi_black_hole": {
+  "id": "nagi_black_hole",
+  "owner": "nagi",
+  "cat": "normal",
+  "name_pt": "Domínio Buraco Negro",
+  "name_en": "Black Hole Trap",
+  "jp": "",
+  "effect": "steal",
+  "cooldown": 9.0,
+  "ono": "zaa",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "radius": 4.2,
+   "pull": 1.0
+  }
+ },
+ "nagi_two_stage": {
+  "id": "nagi_two_stage",
+  "owner": "nagi",
+  "cat": "awake",
+  "name_pt": "Voleio Falso em 2 Estágios",
+  "name_en": "2 Stage Fake Volley Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 11.0,
+  "ono": "zudon",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 1.1,
+   "loft": 0.2,
+   "curve": 0.6,
+   "aim": 1.0,
+   "air": true
+  }
+ },
+ "nagi_flow_trap": {
+  "id": "nagi_flow_trap",
+  "owner": "nagi",
+  "cat": "awake",
+  "name_pt": "Domínio em Flow",
+  "name_en": "Flow Trap",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 13.0,
+  "ono": "gogogo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 6.0,
+   "magnet": 1.0,
+   "speed": 1.1,
+   "shot": 1.1
+  }
+ },
+ "nagi_nel_two_stage": {
+  "id": "nagi_nel_two_stage",
+  "owner": "nagi",
+  "cat": "nel",
+  "name_pt": "Voleio Falso em 2 Estágios (Nel)",
+  "name_en": "2 Stage Fake Volley (Nel)",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 9.0,
+  "ono": "zudon",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 1.25,
+   "loft": 0.2,
+   "curve": 0.7,
+   "aim": 1.0,
+   "air": true
+  }
+ },
+ "nagi_nel_revolver": {
+  "id": "nagi_nel_revolver",
+  "owner": "nagi",
+  "cat": "nel",
+  "name_pt": "Revólver de Cinco Tiros",
+  "name_en": "Five-Shot Revolver Fake Volley",
+  "jp": "",
+  "effect": "multishot",
+  "cooldown": 14.0,
+  "ono": "dododo",
+  "ref": "só o nome (Sportskeeda); efeito A CONFIRMAR",
+  "params": {
+   "power": 0.9,
+   "shots": 3
+  }
+ },
+ "nagi_nel_flow": {
+  "id": "nagi_nel_flow",
+  "owner": "nagi",
+  "cat": "nel",
+  "name_pt": "Flow de Domínio Absoluto",
+  "name_en": "Absolute Trap Flow",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 12.0,
+  "ono": "gogogo",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 7.0,
+   "magnet": 1.0,
+   "speed": 1.18,
+   "shot": 1.2
+  }
+ },
+ "yukimiya_drag": {
+  "id": "yukimiya_drag",
+  "owner": "yukimiya",
+  "cat": "normal",
+  "name_pt": "Tesoura de Arrasto",
+  "name_en": "Drag Scissors",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 7.0,
+  "ono": "shu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.2,
+   "speed": 1.5,
+   "immune": true
+  }
+ },
+ "yukimiya_gyro": {
+  "id": "yukimiya_gyro",
+  "owner": "yukimiya",
+  "cat": "normal",
+  "name_pt": "Chute Giroscópico",
+  "name_en": "Gyro Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 7.0,
+  "ono": "paan",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 0.95,
+   "loft": 0.3,
+   "curve": 0.7,
+   "aim": 0.8
+  }
+ },
+ "yukimiya_sword_screw": {
+  "id": "yukimiya_sword_screw",
+  "owner": "yukimiya",
+  "cat": "normal",
+  "name_pt": "Parafuso da Espada",
+  "name_en": "Sword Screw",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 9.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 0.9,
+   "loft": 0.4,
+   "curve": -0.4,
+   "aim": 0.9
+  }
+ },
+ "yukimiya_flow": {
+  "id": "yukimiya_flow",
+  "owner": "yukimiya",
+  "cat": "awake",
+  "name_pt": "Estado de Flow",
+  "name_en": "Flow State",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 14.0,
+  "ono": "gogogo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 6.0,
+   "speed": 1.2,
+   "magnet": 0.9,
+   "shot": 1.15
+  }
+ },
+ "yukimiya_predator": {
+  "id": "yukimiya_predator",
+  "owner": "yukimiya",
+  "cat": "awake",
+  "name_pt": "Olhar de Predador",
+  "name_en": "Predator Eye",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "kiin",
+  "ref": "cap. 217 (confirmar)",
+  "params": {
+   "duration": 5.0,
+   "assist": 1.0,
+   "slow": 0.8
+  }
+ },
+ "yukimiya_emperor": {
+  "id": "yukimiya_emperor",
+  "owner": "yukimiya",
+  "cat": "awake",
+  "name_pt": "Estilo Imperador do 1x1",
+  "name_en": "1-on-1 Emperor Style",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 13.0,
+  "ono": "go",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 2.0,
+   "speed": 1.7,
+   "immune": true
+  }
+ },
+ "charles_risky_pass": {
+  "id": "charles_risky_pass",
+  "owner": "charles",
+  "cat": "normal",
+  "name_pt": "Passe Arriscado",
+  "name_en": "Passing Accuracy",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 5.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.2,
+   "loft": 0.04
+  }
+ },
+ "charles_sky_arch": {
+  "id": "charles_sky_arch",
+  "owner": "charles",
+  "cat": "normal",
+  "name_pt": "Passe Arco do Céu",
+  "name_en": "Sky Arch Pass",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 8.0,
+  "ono": "paan",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.1,
+   "loft": 0.6,
+   "curve": 0.4
+  }
+ },
+ "charles_rabona": {
+  "id": "charles_rabona",
+  "owner": "charles",
+  "cat": "normal",
+  "name_pt": "Cruzamento de Rabona",
+  "name_en": "Rabona Cross",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 8.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.1,
+   "loft": 0.35,
+   "curve": 0.5
+  }
+ },
+ "charles_metavision": {
+  "id": "charles_metavision",
+  "owner": "charles",
+  "cat": "awake",
+  "name_pt": "Metavisão",
+  "name_en": "Metavision",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 6.0,
+   "assist": 0.95,
+   "slow": 0.7
+  }
+ },
+ "charles_heart_pass": {
+  "id": "charles_heart_pass",
+  "owner": "charles",
+  "cat": "awake",
+  "name_pt": "Passe do Coração",
+  "name_en": "Heart of PXG Pass",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 13.0,
+  "ono": "gogogo",
+  "ref": "ideia do jogo",
+  "params": {
+   "speed": 1.4,
+   "loft": 0.05,
+   "target_buff": 1.4
+  }
+ },
+ "barou_middle_shot": {
+  "id": "barou_middle_shot",
+  "owner": "barou",
+  "cat": "normal",
+  "name_pt": "Chute Médio",
+  "name_en": "Middle Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 6.0,
+  "ono": "don",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 0.98,
+   "loft": 0.1,
+   "aim": 0.75
+  }
+ },
+ "barou_charging": {
+  "id": "barou_charging",
+  "owner": "barou",
+  "cat": "normal",
+  "name_pt": "Habilidade de Investida",
+  "name_en": "Charging Skill",
+  "jp": "",
+  "effect": "shockwave",
+  "cooldown": 9.0,
+  "ono": "go",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "radius": 2.8,
+   "knock": 4.5,
+   "stun": 0.5
+  }
+ },
+ "barou_chop": {
+  "id": "barou_chop",
+  "owner": "barou",
+  "cat": "normal",
+  "name_pt": "Finta de Corte",
+  "name_en": "Chop Feint",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 8.0,
+  "ono": "ba",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.2,
+   "speed": 1.45,
+   "immune": true
+  }
+ },
+ "barou_villain_flow": {
+  "id": "barou_villain_flow",
+  "owner": "barou",
+  "cat": "awake",
+  "name_pt": "Fluxo Vilão",
+  "name_en": "Villainous Soccer",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 14.0,
+  "ono": "gogogo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 6.0,
+   "speed": 1.2,
+   "magnet": 0.9,
+   "shot": 1.2
+  }
+ },
+ "barou_lightning": {
+  "id": "barou_lightning",
+  "owner": "barou",
+  "cat": "awake",
+  "name_pt": "Drible Relâmpago",
+  "name_en": "Lightning Dribble",
+  "jp": "",
+  "effect": "dash",
+  "cooldown": 11.0,
+  "ono": "baki",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 2.2,
+   "speed": 1.4,
+   "magnet": 1.0
+  }
+ },
+ "barou_nel_stealth": {
+  "id": "barou_nel_stealth",
+  "owner": "barou",
+  "cat": "nel",
+  "name_pt": "Chute Assassino Furtivo",
+  "name_en": "Stealth Kill Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 11.0,
+  "ono": "zudon",
+  "ref": "cap. 216",
+  "params": {
+   "power": 1.1,
+   "loft": 0.15,
+   "curve": 0.8,
+   "aim": 1.0
+  }
+ },
+ "barou_nel_predator": {
+  "id": "barou_nel_predator",
+  "owner": "barou",
+  "cat": "nel",
+  "name_pt": "Olhar de Predador",
+  "name_en": "Predator Eye",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "kiin",
+  "ref": "cap. 217",
+  "params": {
+   "duration": 6.0,
+   "assist": 1.0,
+   "slow": 0.8
+  }
+ },
+ "barou_nel_double": {
+  "id": "barou_nel_double",
+  "owner": "barou",
+  "cat": "nel",
+  "name_pt": "Chute de Túnel Duplo",
+  "name_en": "Double Nutmeg Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 11.0,
+  "ono": "dododo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 1.2,
+   "loft": 0.1,
+   "aim": 1.0
+  }
+ },
+ "shidou_drive": {
+  "id": "shidou_drive",
+  "owner": "shidou",
+  "cat": "normal",
+  "name_pt": "Chute Drive",
+  "name_en": "Drive Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 6.0,
+  "ono": "zudon",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 1.0,
+   "loft": 0.08,
+   "aim": 0.75
+  }
+ },
+ "shidou_aggressive": {
+  "id": "shidou_aggressive",
+  "owner": "shidou",
+  "cat": "normal",
+  "name_pt": "Drible Agressivo",
+  "name_en": "Aggressive Dribble",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 8.0,
+  "ono": "dododo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.3,
+   "speed": 1.5,
+   "immune": true
+  }
+ },
+ "shidou_bicycle": {
+  "id": "shidou_bicycle",
+  "owner": "shidou",
+  "cat": "normal",
+  "name_pt": "Bicicleta",
+  "name_en": "Bicycle Kick",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 10.0,
+  "ono": "baki",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 1.05,
+   "loft": 0.35,
+   "aim": 1.0,
+   "air": true
+  }
+ },
+ "shidou_dragon": {
+  "id": "shidou_dragon",
+  "owner": "shidou",
+  "cat": "awake",
+  "name_pt": "Dragon Drive",
+  "name_en": "Dragon Drive",
+  "jp": "",
+  "effect": "dashshot",
+  "cooldown": 13.0,
+  "ono": "zudon",
+  "ref": "anime T2 ep. 10",
+  "params": {
+   "power": 1.2,
+   "loft": 0.12,
+   "aim": 1.0,
+   "run": 0.55,
+   "speed": 1.6
+  }
+ },
+ "shidou_bigbang": {
+  "id": "shidou_bigbang",
+  "owner": "shidou",
+  "cat": "awake",
+  "name_pt": "Big Bang Drive",
+  "name_en": "Big Bang Drive",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 14.0,
+  "ono": "zudon",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 1.3,
+   "loft": 0.3,
+   "aim": 1.0,
+   "air": true
+  }
+ },
+ "shidou_instinct": {
+  "id": "shidou_instinct",
+  "owner": "shidou",
+  "cat": "awake",
+  "name_pt": "Instinto de Gol",
+  "name_en": "Extreme Spatial Awareness",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 5.0,
+   "assist": 1.0,
+   "slow": 0.8
+  }
+ },
+ "shidou_nel_dragon": {
+  "id": "shidou_nel_dragon",
+  "owner": "shidou",
+  "cat": "nel",
+  "name_pt": "Dragon Drive II",
+  "name_en": "Dragon Drive II",
+  "jp": "",
+  "effect": "dashshot",
+  "cooldown": 11.0,
+  "ono": "zudon",
+  "ref": "evolução do jogo (sem técnica Nel oficial)",
+  "params": {
+   "power": 1.35,
+   "loft": 0.12,
+   "aim": 1.0,
+   "run": 0.5,
+   "speed": 1.8
+  }
+ },
+ "shidou_nel_bigbang": {
+  "id": "shidou_nel_bigbang",
+  "owner": "shidou",
+  "cat": "nel",
+  "name_pt": "Big Bang Drive II",
+  "name_en": "Big Bang Drive II",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 12.0,
+  "ono": "zudon",
+  "ref": "evolução do jogo",
+  "params": {
+   "power": 1.45,
+   "loft": 0.3,
+   "aim": 1.0,
+   "air": true
+  }
+ },
+ "shidou_nel_frenzy": {
+  "id": "shidou_nel_frenzy",
+  "owner": "shidou",
+  "cat": "nel",
+  "name_pt": "Frenesi do Artilheiro",
+  "name_en": "Goal Poacher Frenzy",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 15.0,
+  "ono": "gogogo",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 7.0,
+   "speed": 1.25,
+   "shot": 1.35,
+   "magnet": 0.8
+  }
+ },
+ "rin_trivela": {
+  "id": "rin_trivela",
+  "owner": "rin",
+  "cat": "normal",
+  "name_pt": "Chute de Trivela",
+  "name_en": "Trivela Shot",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 6.0,
+  "ono": "paan",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 0.95,
+   "loft": 0.1,
+   "curve": 0.8,
+   "aim": 0.85
+  }
+ },
+ "rin_elastico": {
+  "id": "rin_elastico",
+  "owner": "rin",
+  "cat": "normal",
+  "name_pt": "Caneta Elástica",
+  "name_en": "Elastico Nutmeg",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 8.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.3,
+   "speed": 1.5,
+   "immune": true
+  }
+ },
+ "rin_oppressive": {
+  "id": "rin_oppressive",
+  "owner": "rin",
+  "cat": "normal",
+  "name_pt": "Passe Opressor",
+  "name_en": "Oppressive Pass",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 7.0,
+  "ono": "go",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.45,
+   "loft": 0.05
+  }
+ },
+ "rin_puppet": {
+  "id": "rin_puppet",
+  "owner": "rin",
+  "cat": "awake",
+  "name_pt": "Fluxo do Marionetista",
+  "name_en": "Puppet Flow",
+  "jp": "",
+  "effect": "mark",
+  "cooldown": 13.0,
+  "ono": "gogogo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 5.0,
+   "radius": 12.0,
+   "speed_debuff": 0.75,
+   "power_debuff": 0.75
+  }
+ },
+ "rin_cog_burst": {
+  "id": "rin_cog_burst",
+  "owner": "rin",
+  "cat": "awake",
+  "name_pt": "Explosão do Centro de Gravidade",
+  "name_en": "Centre of Gravity Full Burst",
+  "jp": "",
+  "effect": "shockwave",
+  "cooldown": 12.0,
+  "ono": "dododo",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "radius": 3.2,
+   "knock": 5.0,
+   "stun": 0.6
+  }
+ },
+ "rin_sync": {
+  "id": "rin_sync",
+  "owner": "rin",
+  "cat": "awake",
+  "name_pt": "Sincronização",
+  "name_en": "Synchronization",
+  "jp": "",
+  "effect": "steal",
+  "cooldown": 11.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "radius": 4.8,
+   "pull": 1.0
+  }
+ },
+ "rin_nel_scissor": {
+  "id": "rin_nel_scissor",
+  "owner": "rin",
+  "cat": "nel",
+  "name_pt": "Voleio Tesoura",
+  "name_en": "Scissor Kick Volley",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 11.0,
+  "ono": "zudon",
+  "ref": "cap. 275",
+  "params": {
+   "power": 1.25,
+   "loft": 0.25,
+   "curve": 0.5,
+   "aim": 1.0,
+   "air": true
+  }
+ },
+ "rin_nel_opposite": {
+  "id": "rin_nel_opposite",
+  "owner": "rin",
+  "cat": "nel",
+  "name_pt": "Aceleração Oposta",
+  "name_en": "Opposite Acceleration",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 10.0,
+  "ono": "shu",
+  "ref": "Japan U-20 (confirmar)",
+  "params": {
+   "duration": 1.8,
+   "speed": 1.8,
+   "immune": true
+  }
+ },
+ "rin_nel_puppet": {
+  "id": "rin_nel_puppet",
+  "owner": "rin",
+  "cat": "nel",
+  "name_pt": "Fluxo do Marionetista II",
+  "name_en": "Puppet Flow II",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "gogogo",
+  "ref": "cap. 269-270 (confirmar)",
+  "params": {
+   "duration": 7.0,
+   "assist": 1.0,
+   "slow": 0.7
+  }
+ },
+ "sae_long_pass": {
+  "id": "sae_long_pass",
+  "owner": "sae",
+  "cat": "normal",
+  "name_pt": "Passe Longo Cortante",
+  "name_en": "Long Driven Pass",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 6.0,
+  "ono": "hyu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.6,
+   "loft": 0.28
+  }
+ },
+ "sae_trivela": {
+  "id": "sae_trivela",
+  "owner": "sae",
+  "cat": "normal",
+  "name_pt": "Passe de Trivela",
+  "name_en": "Trivela",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 7.0,
+  "ono": "paan",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 1.25,
+   "loft": 0.1,
+   "curve": 0.6
+  }
+ },
+ "sae_counter": {
+  "id": "sae_counter",
+  "owner": "sae",
+  "cat": "normal",
+  "name_pt": "Contra-Drible",
+  "name_en": "Counter Dribbling",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 8.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.2,
+   "speed": 1.4,
+   "immune": true
+  }
+ },
+ "sae_metavision": {
+  "id": "sae_metavision",
+  "owner": "sae",
+  "cat": "awake",
+  "name_pt": "Meta Visão",
+  "name_en": "Meta Vision",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "kiin",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 6.0,
+   "assist": 1.0,
+   "slow": 0.5
+  }
+ },
+ "sae_ultra_pass": {
+  "id": "sae_ultra_pass",
+  "owner": "sae",
+  "cat": "awake",
+  "name_pt": "Passe Ultrarrápido",
+  "name_en": "Ultra-Fast Pass",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 10.0,
+  "ono": "zudon",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "speed": 2.0,
+   "loft": 0.02
+  }
+ },
+ "sae_nutmeg_combo": {
+  "id": "sae_nutmeg_combo",
+  "owner": "sae",
+  "cat": "awake",
+  "name_pt": "Combo Elástico e Rabona",
+  "name_en": "Elastico/Rabona Nutmeg",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 12.0,
+  "ono": "baki",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.8,
+   "speed": 1.6,
+   "immune": true
+  }
+ },
+ "lorenzo_manmark": {
+  "id": "lorenzo_manmark",
+  "owner": "don_lorenzo",
+  "cat": "normal",
+  "name_pt": "Marcação Individual",
+  "name_en": "Manmarking",
+  "jp": "",
+  "effect": "mark",
+  "cooldown": 10.0,
+  "ono": "go",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 5.0,
+   "radius": 10.0,
+   "speed_debuff": 0.75,
+   "power_debuff": 0.85
+  }
+ },
+ "lorenzo_intercept": {
+  "id": "lorenzo_intercept",
+  "owner": "don_lorenzo",
+  "cat": "normal",
+  "name_pt": "Interceptação Preditiva",
+  "name_en": "Predictive Interception",
+  "jp": "",
+  "effect": "steal",
+  "cooldown": 8.0,
+  "ono": "kiin",
+  "ref": "ideia do jogo",
+  "params": {
+   "radius": 4.6,
+   "pull": 1.0
+  }
+ },
+ "lorenzo_libero_pass": {
+  "id": "lorenzo_libero_pass",
+  "owner": "don_lorenzo",
+  "cat": "normal",
+  "name_pt": "Lançamento de Líbero",
+  "name_en": "Libero Pass",
+  "jp": "",
+  "effect": "pass",
+  "cooldown": 7.0,
+  "ono": "hyu",
+  "ref": "ideia do jogo",
+  "params": {
+   "speed": 1.5,
+   "loft": 0.35
+  }
+ },
+ "lorenzo_ace_eater": {
+  "id": "lorenzo_ace_eater",
+  "owner": "don_lorenzo",
+  "cat": "awake",
+  "name_pt": "Devorador de Ases",
+  "name_en": "Ace-Eater",
+  "jp": "",
+  "effect": "mark",
+  "cooldown": 14.0,
+  "ono": "gogogo",
+  "ref": "apelido (sec.)",
+  "params": {
+   "duration": 5.0,
+   "radius": 14.0,
+   "speed_debuff": 0.7,
+   "power_debuff": 0.6,
+   "silence": true
+  }
+ },
+ "lorenzo_libero_zone": {
+  "id": "lorenzo_libero_zone",
+  "owner": "don_lorenzo",
+  "cat": "awake",
+  "name_pt": "Zona de Líbero",
+  "name_en": "Libero Zone",
+  "jp": "",
+  "effect": "zone",
+  "cooldown": 15.0,
+  "ono": "gong",
+  "ref": "ideia do jogo",
+  "params": {
+   "radius": 6.0,
+   "duration": 4.5,
+   "slow": 0.55
+  }
+ },
+ "kaiser_impact": {
+  "id": "kaiser_impact",
+  "owner": "kaiser",
+  "cat": "normal",
+  "name_pt": "Kaiser Impact",
+  "name_en": "Kaiser Impact",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 6.0,
+  "ono": "zudon",
+  "ref": "cap. 162",
+  "params": {
+   "power": 1.12,
+   "loft": 0.06,
+   "aim": 0.9
+  }
+ },
+ "kaiser_offball": {
+  "id": "kaiser_offball",
+  "owner": "kaiser",
+  "cat": "normal",
+  "name_pt": "Movimento Sem Bola",
+  "name_en": "Off the Ball Movements",
+  "jp": "",
+  "effect": "evade",
+  "cooldown": 8.0,
+  "ono": "shu",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "duration": 1.3,
+   "speed": 1.4,
+   "immune": true
+  }
+ },
+ "kaiser_pressure": {
+  "id": "kaiser_pressure",
+  "owner": "kaiser",
+  "cat": "normal",
+  "name_pt": "Domínio Sob Pressão",
+  "name_en": "Pressure Control",
+  "jp": "",
+  "effect": "buff",
+  "cooldown": 9.0,
+  "ono": "go",
+  "ref": "ideia do jogo",
+  "params": {
+   "duration": 2.5,
+   "shield": true,
+   "magnet": 0.9
+  }
+ },
+ "kaiser_impact_evo": {
+  "id": "kaiser_impact_evo",
+  "owner": "kaiser",
+  "cat": "awake",
+  "name_pt": "Kaiser Impact Evoluído",
+  "name_en": "Evolved Kaiser Impact",
+  "jp": "",
+  "effect": "shot",
+  "cooldown": 12.0,
+  "ono": "zudon",
+  "ref": "A CONFIRMAR",
+  "params": {
+   "power": 1.4,
+   "loft": 0.06,
+   "aim": 1.0
+  }
+ },
+ "kaiser_metavision": {
+  "id": "kaiser_metavision",
+  "owner": "kaiser",
+  "cat": "awake",
+  "name_pt": "Metavisão",
+  "name_en": "Metavision",
+  "jp": "",
+  "effect": "vision",
+  "cooldown": 12.0,
+  "ono": "kiin",
+  "ref": "sec. (confirmar)",
+  "params": {
+   "duration": 6.0,
+   "assist": 1.0,
+   "slow": 0.6
+  }
+ }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "igaguri_goat",
+  "name": "Igaguri GOAT",
+  "full_name": "Gurimu Igarashi",
+  "rarity": "world_class",
+  "position": "Zagueiro",
+  "stats": {
+    "chute": 60,
+    "velocidade": 80,
+    "aceleracao": 76,
+    "drible": 86,
+    "passe": 64,
+    "defesa": 92,
+    "fisico": 88,
+    "visao": 62
+  },
+  "number": 13,
+  "base_id": "igaguri",
+  "original": true,
+  "visual": {
+    "hair": "bald",
+    "hair_color": "#2A2A2A",
+    "hair_accent": "",
+    "eye_color": "#4A3B2A",
+    "eye_color2": "",
+    "skin": "#EBC09A",
+    "aura": "#F2C94C",
+    "glasses": false,
+    "kit": {
+      "main": "#F2C94C",
+      "sec": "#FFFFFF",
+      "shorts": "#E03C4B",
+      "pattern": "hoops",
+      "team": "GOAT"
+    },
+    "nel": true
+  },
+  "evolution": null,
+  "bio": "Evolução MEME do Igaguri (ideia original do jogo): visual e skills absurdos, mas balanceados.",
+  "skills": [
+    "igaguri_dive",
+    "igaguri_malicia",
+    "igaguri_perseverance"
+  ],
+  "awakening": [
+    "goat_karma_dive",
+    "goat_transcendental",
+    "goat_sermon"
+  ],
+  "evolved_normals": true,
+  "average": 76.0
+}

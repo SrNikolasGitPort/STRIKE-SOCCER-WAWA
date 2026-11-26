@@ -1,0 +1,49 @@
+{
+  "id": "kunigami",
+  "name": "Kunigami",
+  "full_name": "Rensuke Kunigami",
+  "rarity": "lendario",
+  "position": "Atacante",
+  "bio": "Atacante de sangue quente com um chute poderoso de perna esquerda. Sonha ser o herói do futebol.",
+  "stats": {
+    "chute": 92,
+    "velocidade": 76,
+    "aceleracao": 72,
+    "drible": 66,
+    "passe": 58,
+    "defesa": 58,
+    "fisico": 88,
+    "visao": 68
+  },
+  "number": 9,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "short",
+    "hair_color": "#202428",
+    "hair_accent": "",
+    "eye_color": "#C8A24A",
+    "eye_color2": "",
+    "skin": "#EBC09A",
+    "aura": "#FF9F43",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "kunigami_left_shot",
+    "kunigami_power_charge",
+    "kunigami_press"
+  ],
+  "awakening": [
+    "kunigami_hero",
+    "kunigami_hot_blood"
+  ],
+  "evolution": null,
+  "average": 72.2
+}

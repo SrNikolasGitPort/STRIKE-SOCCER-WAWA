@@ -1,0 +1,50 @@
+{
+  "id": "sae",
+  "name": "Itoshi Sae",
+  "full_name": "Sae Itoshi",
+  "rarity": "world_class",
+  "position": "Meia",
+  "bio": "O maestro do Real Madrid Youth. Passes longos perfeitos e visão de jogo absurda.",
+  "stats": {
+    "chute": 92,
+    "velocidade": 84,
+    "aceleracao": 84,
+    "drible": 94,
+    "passe": 99,
+    "defesa": 66,
+    "fisico": 78,
+    "visao": 98
+  },
+  "number": 10,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "short",
+    "hair_color": "#1F5F6B",
+    "hair_accent": "",
+    "eye_color": "#2AB7A9",
+    "eye_color2": "",
+    "skin": "#F1C9A5",
+    "aura": "#FFFFFF",
+    "glasses": false,
+    "kit": {
+      "main": "#F4F4F4",
+      "sec": "#D4AF37",
+      "shorts": "#F4F4F4",
+      "pattern": "plain",
+      "team": "Real Madrid Youth"
+    }
+  },
+  "skills": [
+    "sae_long_pass",
+    "sae_trivela",
+    "sae_counter"
+  ],
+  "awakening": [
+    "sae_metavision",
+    "sae_ultra_pass",
+    "sae_nutmeg_combo"
+  ],
+  "evolution": null,
+  "average": 86.9
+}

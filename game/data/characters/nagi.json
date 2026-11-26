@@ -1,0 +1,49 @@
+{
+  "id": "nagi",
+  "name": "Nagi",
+  "full_name": "Seishiro Nagi",
+  "rarity": "lendario",
+  "position": "Meia",
+  "bio": "Talento natural com domínio de bola perfeito. Mata a bola e chuta entre os defensores.",
+  "stats": {
+    "chute": 84,
+    "velocidade": 70,
+    "aceleracao": 66,
+    "drible": 86,
+    "passe": 72,
+    "defesa": 50,
+    "fisico": 66,
+    "visao": 88
+  },
+  "number": 7,
+  "base_id": null,
+  "original": false,
+  "visual": {
+    "hair": "bob",
+    "hair_color": "#E9EAF2",
+    "hair_accent": "",
+    "eye_color": "#8E8EC8",
+    "eye_color2": "",
+    "skin": "#F4D2B6",
+    "aura": "#CFD8FF",
+    "glasses": false,
+    "kit": {
+      "main": "#2F80ED",
+      "sec": "#FFFFFF",
+      "shorts": "#0B1226",
+      "pattern": "stripes",
+      "team": "Blue Lock"
+    }
+  },
+  "skills": [
+    "nagi_trap_shot",
+    "nagi_creative_trap",
+    "nagi_black_hole"
+  ],
+  "awakening": [
+    "nagi_two_stage",
+    "nagi_flow_trap"
+  ],
+  "evolution": "nagi_nel",
+  "average": 72.8
+}
