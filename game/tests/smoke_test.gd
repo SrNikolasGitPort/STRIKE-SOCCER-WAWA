@@ -60,12 +60,12 @@ func _run() -> void:
 
 	print("[3] Movimento e stamina")
 	var start_x: float = _player().global_position.x
-	Input.action_press("move_right")
+	Input.action_press("move_forward")  # "frente" = +X (direção do gol adversário)
 	Input.action_press("sprint")
 	await _frames(60)
 	var vx: float = _player().velocity.x
 	var stamina: float = _player().stamina
-	Input.action_release("move_right")
+	Input.action_release("move_forward")
 	Input.action_release("sprint")
 	_check(_player().global_position.x > start_x + 3.0, "jogador andou para frente (x=%.1f)" % _player().global_position.x)
 	_check(vx > 8.0, "velocidade de sprint (%.1f m/s)" % vx)
@@ -101,10 +101,10 @@ func _run() -> void:
 	print("[6] Gol no lado +X (ponto do time 0)")
 	_ball().reset_to(Vector3(half_l - 4.0, 0.4, 0.0))
 	_ball().kick(Vector3.RIGHT, 18.0)
-	await _frames(90)
+	await _frames(40)
 	_check(_match.score[0] == 1 and _match.score[1] == 0, "placar 1 x 0 (%d x %d)" % [_match.score[0], _match.score[1]])
 	_check(Engine.time_scale < 1.0, "câmera lenta do gol ativa")
-	await _frames(300)
+	await _frames(350)
 	_check(Engine.time_scale == 1.0, "câmera lenta terminou")
 	_check(_match.state == 0, "partida voltou ao saque (PLAYING)")
 	_check(absf(_ball().global_position.x) < 1.0, "bola voltou ao centro")
@@ -112,7 +112,7 @@ func _run() -> void:
 	print("[7] Gol no lado -X (ponto do time 1)")
 	_ball().reset_to(Vector3(-half_l + 4.0, 0.4, 0.0))
 	_ball().kick(Vector3.LEFT, 18.0)
-	await _frames(90)
+	await _frames(40)
 	_check(_match.score[0] == 1 and _match.score[1] == 1, "placar 1 x 1 (%d x %d)" % [_match.score[0], _match.score[1]])
 	await _frames(300)
 
