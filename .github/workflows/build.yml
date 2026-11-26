@@ -80,12 +80,6 @@ jobs:
           godot --headless --path game --import || true
           godot --headless --path game --import
 
-      - name: Checar scripts com o parser do Godot (aviso, não bloqueia)
-        run: |
-          for f in $(cd game && find scripts -name "*.gd" | sort); do
-            godot --headless --path game --check-only --script "res://$f" || echo "::warning file=game/$f::o parser do Godot reportou erro (veja o log)"
-          done
-
       - name: Exportar Windows
         run: |
           mkdir -p build/windows
@@ -122,3 +116,12 @@ jobs:
             build/StrikeSoccerWAWA-windows.zip
             build/android/*.apk
           if-no-files-found: error
+
+      - name: Smoke test headless (roda a partida e confere física, chute, gols e paredes)
+        run: |
+          set -o pipefail
+          godot --headless --fixed-fps 60 --path game -s res://tests/smoke_test.gd 2>&1 | tee smoke.log
+          if grep -E "SCRIPT ERROR|Parse Error|Compile Error" smoke.log; then
+            echo "::error::Erros de script detectados durante o smoke test"
+            exit 1
+          fi
