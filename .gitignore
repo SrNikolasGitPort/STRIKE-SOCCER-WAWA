@@ -1,0 +1,16 @@
+# Godot
+game/.godot/
+game/.import/
+*.translation
+export_credentials.cfg
+
+# Builds
+build/
+dist/
+
+# Segredos (nunca versionar)
+*.keystore
+*.jks
+*.p12
+.env
+*.env
