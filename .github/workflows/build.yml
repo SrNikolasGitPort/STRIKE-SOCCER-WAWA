@@ -120,7 +120,8 @@ jobs:
       - name: Smoke test headless (roda a partida e confere física, chute, gols e paredes)
         run: |
           set -o pipefail
-          godot --headless --fixed-fps 60 --path game -s res://tests/smoke_test.gd 2>&1 | tee smoke.log
+          timeout 300 godot --headless --fixed-fps 60 --path game -s res://tests/smoke_test.gd 2>&1 | tee smoke.log || true
+          grep -q "Resultado: 0 falha" smoke.log || { echo "::error::Smoke test não terminou com 0 falhas (veja o log)"; exit 1; }
           if grep -E "SCRIPT ERROR|Parse Error|Compile Error" smoke.log; then
             echo "::error::Erros de script detectados durante o smoke test"
             exit 1
