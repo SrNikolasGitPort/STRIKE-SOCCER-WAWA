@@ -33,6 +33,7 @@ jobs:
             dist/*.zip
             dist/android/*.apk
           generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
           body: |
             Build automática do **Strike Soccer WAWA** (fan game, sem fins lucrativos).
             - Windows: baixe o .zip e execute o .exe
