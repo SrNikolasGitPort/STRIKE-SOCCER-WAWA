@@ -11,7 +11,6 @@ var _fps: Label
 var _stamina_bar: ProgressBar
 var _power_bar: ProgressBar
 var _flow_bar: ProgressBar
-var _awake_bar: ProgressBar
 var _awake_label: Label
 var _toast_box: VBoxContainer
 var _msg_tween: Tween
@@ -36,12 +35,8 @@ func _ready() -> void:
 	_message.visible = false
 
 	_stamina_bar = _bar(root, Control.PRESET_TOP_LEFT, Vector2(20.0, 20.0), Vector2(220.0, 14.0), Color(0.3, 0.85, 1.0))
-	_flow_bar = _bar(root, Control.PRESET_TOP_LEFT, Vector2(20.0, 40.0), Vector2(220.0, 10.0), Color(0.75, 0.45, 1.0))
-	_awake_bar = _bar(root, Control.PRESET_TOP_LEFT, Vector2(20.0, 58.0), Vector2(220.0, 14.0), Color(1.0, 0.82, 0.2))
-	_awake_bar.visible = false
-	_awake_label = _label(root, 16, Control.PRESET_TOP_LEFT, Vector2(20.0, 74.0), Vector2(220.0, 22.0))
-	_awake_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_power_bar = _bar(root, Control.PRESET_CENTER_BOTTOM, Vector2(-130.0, -150.0), Vector2(260.0, 14.0), Color(1.0, 0.75, 0.2))
+	_build_flow(root)
+	_power_bar = _bar(root, Control.PRESET_CENTER_BOTTOM, Vector2(-130.0, -210.0), Vector2(260.0, 14.0), Color(1.0, 0.75, 0.2))
 	_power_bar.visible = false
 
 	_toast_box = VBoxContainer.new()
@@ -63,17 +58,37 @@ func _ready() -> void:
 	set_time(0.0)
 
 
+func _slot_size() -> float:
+	return clampf(get_viewport().get_visible_rect().size.x / 15.0, 54.0, 88.0)
+
+
+func _build_flow(root: Control) -> void:
+	var size: float = _slot_size()
+	var total: float = 6.0 * size + 5.0 * 6.0 + 22.0
+	_flow_bar = _bar(root, Control.PRESET_CENTER_BOTTOM, Vector2(-total / 2.0, -size - 52.0), Vector2(total, 24.0), Color(0.6, 0.4, 1.0))
+	_flow_bar.mouse_filter = Control.MOUSE_FILTER_STOP
+	_flow_bar.gui_input.connect(_flow_input)
+	_awake_label = _label(root, 15, Control.PRESET_CENTER_BOTTOM, Vector2(-total / 2.0, -size - 52.0), Vector2(total, 24.0))
+	_awake_label.add_theme_constant_override("outline_size", 5)
+
+
+func _flow_input(ev: InputEvent) -> void:
+	if ev is InputEventMouseButton and (ev as InputEventMouseButton).pressed and (ev as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+		Input.action_press("awaken")
+		get_tree().create_timer(0.12).timeout.connect(func() -> void: Input.action_release("awaken"))
+
+
 func _make_slot(root: Control, i: int) -> void:
-	var size: float = 62.0
-	var gap: float = 8.0
-	var group_gap: float = 26.0 if i >= 3 else 0.0
-	var total: float = 6.0 * size + 5.0 * gap + 26.0
+	var size: float = _slot_size()
+	var gap: float = 6.0
+	var group_gap: float = 22.0 if i >= 3 else 0.0
+	var total: float = 6.0 * size + 5.0 * gap + 22.0
 	var x: float = -total / 2.0 + float(i) * (size + gap) + group_gap
 	var panel: Panel = Panel.new()
 	_place(panel, Control.PRESET_CENTER_BOTTOM, Vector2(x, -size - 14.0), Vector2(size, size))
 	var sb: StyleBoxFlat = StyleBoxFlat.new()
-	sb.bg_color = Color(0.03, 0.05, 0.12, 0.8)
-	sb.set_corner_radius_all(10)
+	sb.bg_color = Color(0.03, 0.05, 0.12, 0.82)
+	sb.set_corner_radius_all(6)
 	sb.set_border_width_all(2)
 	sb.border_color = Color(1.0, 0.82, 0.2) if i >= 3 else Color(0.4, 0.7, 1.0)
 	panel.add_theme_stylebox_override("panel", sb)
@@ -81,32 +96,46 @@ func _make_slot(root: Control, i: int) -> void:
 	root.add_child(panel)
 	var icon: TextureRect = TextureRect.new()
 	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	icon.offset_left = 6.0
+	icon.offset_left = 8.0
 	icon.offset_top = 6.0
-	icon.offset_right = -6.0
-	icon.offset_bottom = -6.0
+	icon.offset_right = -8.0
+	icon.offset_bottom = -size * 0.36
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.add_child(icon)
+	var nm: Label = Label.new()
+	nm.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	nm.offset_top = -size * 0.36
+	nm.offset_left = 2.0
+	nm.offset_right = -2.0
+	nm.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	nm.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	nm.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	nm.clip_text = true
+	nm.add_theme_font_size_override("font_size", int(clampf(size * 0.15, 9.0, 13.0)))
+	nm.add_theme_constant_override("outline_size", 3)
+	nm.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.add_child(nm)
 	var cd: Label = Label.new()
 	cd.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	cd.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cd.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	cd.add_theme_font_size_override("font_size", 24)
+	cd.add_theme_font_size_override("font_size", int(size * 0.4))
 	cd.add_theme_color_override("font_outline_color", Color.BLACK)
 	cd.add_theme_constant_override("outline_size", 6)
 	cd.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.add_child(cd)
 	var key: Label = Label.new()
 	key.text = str(i + 1)
-	key.position = Vector2(4.0, 0.0)
+	key.position = Vector2(5.0, 1.0)
 	key.add_theme_font_size_override("font_size", 14)
+	key.add_theme_constant_override("outline_size", 4)
 	key.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.add_child(key)
 	var action: String = "skill_%d" % (i + 1)
-	panel.gui_input.connect(func(ev: InputEvent) -> void: _slot_input(ev, action))
-	_slots.append({"panel": panel, "icon": icon, "cd": cd, "sb": sb, "sid": ""})
+	panel.gui_input.connect(_slot_input.bind(action))
+	_slots.append({"panel": panel, "icon": icon, "cd": cd, "sb": sb, "sid": "", "name": nm})
 
 
 func _slot_input(ev: InputEvent, action: String) -> void:
@@ -190,14 +219,30 @@ func update_bars(stamina_ratio: float, charge: float, charging: bool) -> void:
 	_fps.text = "%d FPS" % Engine.get_frames_per_second()
 	if _player == null or not is_instance_valid(_player):
 		return
-	_flow_bar.value = float(_player.get("flow")) / Config.f("flow.max") if float(_player.get("flow_t")) <= 0.0 else float(_player.get("flow_t")) / Config.f("flow.duration_s")
 	var awake: bool = bool(_player.get("awakened"))
-	_awake_bar.visible = awake
-	_awake_label.text = (Game.t("DESPERTAR!", "AWAKENING!") if awake else "")
+	var fmax: float = Config.f("flow.max")
+	var is_ready: bool = bool(_player.call("awaken_ready"))
 	if awake:
-		_awake_bar.value = float(_player.get("awake_left")) / Config.f("awakening.duration_s")
+		_flow_bar.value = float(_player.get("awake_left")) / Config.f("awakening.duration_s")
+		_awake_label.text = Game.t("DESPERTAR!", "AWAKENING!")
+		_set_fill(_flow_bar, Color(1.0, 0.82, 0.2))
+	elif is_ready:
+		_flow_bar.value = 1.0
+		var pulse: float = 0.5 + 0.5 * sin(Time.get_ticks_msec() / 140.0)
+		_set_fill(_flow_bar, Color(1.0, 0.82, 0.2).lerp(Color(1.0, 1.0, 0.7), pulse))
+		_awake_label.text = Game.t("DESPERTAR [G]", "AWAKEN [G]")
+	else:
+		_flow_bar.value = float(_player.get("flow")) / fmax
+		_set_fill(_flow_bar, Color(0.6, 0.4, 1.0))
+		_awake_label.text = "%s %d%%" % [Game.t("FLUXO", "FLOW"), int(float(_player.get("flow")) / fmax * 100.0)]
 	for i: int in range(6):
 		_update_slot(i, awake)
+
+
+func _set_fill(bar: ProgressBar, color: Color) -> void:
+	var sb: StyleBox = bar.get_theme_stylebox("fill")
+	if sb is StyleBoxFlat:
+		(sb as StyleBoxFlat).bg_color = color
 
 
 func _update_slot(i: int, awake: bool) -> void:
@@ -207,6 +252,7 @@ func _update_slot(i: int, awake: bool) -> void:
 	if sid != String(slot["sid"]):
 		slot["sid"] = sid
 		var icon: TextureRect = slot["icon"]
+		(slot["name"] as Label).text = Game.skill_name(sid) if sid != "" else ""
 		if sid == "":
 			icon.texture = null
 		else:

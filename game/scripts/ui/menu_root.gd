@@ -106,7 +106,7 @@ func _build_modes() -> Control:
 	var modes: Array = [
 		["2v2", "2 vs 2", Game.t("Partida rápida de dupla contra bots", "Quick duo match vs bots")],
 		["4v4", "4 vs 4", Game.t("Partida completa de 4 contra 4", "Full 4v4 match")],
-		["training", Game.t("TREINAMENTO", "TRAINING"), Game.t("Sem adversários: treine chutes e skills (T = Despertar)", "No opponents: practice shots and skills (T = Awaken)")],
+		["training", Game.t("TREINAMENTO", "TRAINING"), Game.t("Sem adversários: treine chutes e skills (T = encher Fluxo)", "No opponents: practice shots and skills (T = Awaken)")],
 		["online", "MULTIPLAYER", Game.t("Salas públicas/privadas, amigos e login Google", "Public/private rooms, friends and Google login")],
 	]
 	for m: Array in modes:
@@ -231,7 +231,7 @@ func _build_settings() -> Control:
 	fps.toggled.connect(_on_toggle.bind("show_fps"))
 	v.add_child(fps)
 
-	v.add_child(Kit.label(Game.t("Controles (PC): WASD mover • Shift sprint • Espaço chute (segure) • E passe • Q passe alto • 1-3 skills • 4-6 Despertar • T Despertar (treino) • Esc pausa", "Controls (PC): WASD move • Shift sprint • Space shoot (hold) • E pass • Q lob • 1-3 skills • 4-6 Awakening • T Awaken (training) • Esc pause"), 16, Color(0.8, 0.9, 1.0)))
+	v.add_child(Kit.label(Game.t("Controles (PC): WASD mover • botão direito do mouse/setas girar câmera • roda zoom • Shift sprint • Espaço chute (segure) • E passe • F passe alto • Q drible • C desarme • 1-3 skills • G despertar (barra de Fluxo cheia) • 4-6 skills de Despertar • T enche o Fluxo (treino) • Esc pausa", "Controls (PC): WASD move • right mouse/arrows rotate camera • wheel zoom • Shift sprint • Space shoot (hold) • E pass • F lob • Q dribble • C tackle • 1-3 skills • G awaken (Flow bar full) • 4-6 Awakening skills • T fill Flow (training) • Esc pause"), 16, Color(0.8, 0.9, 1.0)))
 	v.add_child(Kit.button(Game.t("Apagar progresso", "Reset progress"), _on_reset, Vector2(260, 44), 18))
 	var cred: Label = Kit.label("Strike Soccer WAWA v%s — fan game não oficial de Blue Lock (obra de Muneyuki Kaneshiro e Kota Nomura). Sem fins lucrativos. Fonte Inter (OFL). Veja CREDITS.md." % Config.VERSION, 14, Color(0.7, 0.8, 1.0))
 	cred.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

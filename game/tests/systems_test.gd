@@ -2,8 +2,6 @@ extends SceneTree
 ## Teste de sistemas: menus, partida 4v4 com bots, skills, Despertar, missões Nel,
 ## códigos de sala e dados. Sai com código 1 se algo falhar.
 
-const SkillsScript = preload("res://scripts/gameplay/skills.gd")
-
 var _failures: int = 0
 var G: Node = null
 var N: Node = null
@@ -92,16 +90,21 @@ func _run() -> void:
 	ball.reset_to((h as Node3D).global_position + Vector3(1.0, 0.4, 0.0))
 	await _frames(3)
 	h.call("try_skill", 0)
-	await _frames(5)
+	await _frames(30)
 	_check(float(h.call("cooldown_left", 0)) > 0.0, "skill 1 entrou em recarga")
-	m.call("_awaken", h)
+	h.set("flow", 100.0)
+	_check(bool(h.call("awaken_ready")), "barra de Fluxo cheia libera o Despertar")
+	_check(bool(h.call("try_awaken")), "Despertar ativado pelo jogador")
 	await _frames(5)
-	_check(bool(h.get("awakened")), "Despertar ativado")
+	_check(bool(h.get("awakened")), "Despertar em andamento")
+	_check(not bool(h.call("awaken_ready")), "não dá para despertar duas vezes")
 	var used: int = 0
 	for slot: int in range(1, 6):
+		ball.reset_to((h as Node3D).global_position + Vector3(1.0, 0.4, 0.0))
+		await _frames(3)
 		if h.call("try_skill", slot):
 			used += 1
-		await _frames(4)
+		await _frames(30)
 	_check(used >= 2, "skills normais e de Despertar executaram (%d)" % used)
 	await _frames(240)
 	Engine.time_scale = 1.0
@@ -114,7 +117,10 @@ func _run() -> void:
 			var sk: Dictionary = G.skill(String(skid))
 			ball.reset_to((h as Node3D).global_position + Vector3(1.0, 0.4, 0.0))
 			h.set("stamina", 100.0)
-			SkillsScript.execute(h, sk, m)
+			h.set("silence_t", 0.0)
+			h.call("clear_kick_cd")
+			m.get("players")[0].call("add_buff", "x", 1.0, 0.1)
+			(load("res://scripts/gameplay/skills.gd") as GDScript).call("execute", h, sk, m)
 	await _frames(30)
 	_check(_failures == errors_before, "137 skills executaram sem erro de script")
 

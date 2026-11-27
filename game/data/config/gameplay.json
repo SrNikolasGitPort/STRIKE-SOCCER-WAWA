@@ -71,15 +71,22 @@
     "power_stat_factor": 0.25
   },
   "camera": {
-    "distance": 15.0,
+    "distance": 7.0,
     "height": 10.0,
     "look_ahead": 5.0,
-    "follow_speed": 4.5,
-    "fov": 62.0,
-    "ball_weight": 0.35,
+    "follow_speed": 14.0,
+    "fov": 72.0,
+    "ball_weight": 0.0,
     "min_zoom_out": 0.0,
     "max_zoom_out": 6.0,
-    "zoom_speed": 2.0
+    "zoom_speed": 2.0,
+    "min_distance": 4.0,
+    "max_distance": 14.0,
+    "pitch_deg": 17.0,
+    "min_pitch_deg": -4.0,
+    "max_pitch_deg": 62.0,
+    "shoulder": 0.7,
+    "sensitivity": 0.0032
   },
   "quality": {
     "low_scale_3d": 0.67,
@@ -98,7 +105,6 @@
     "opacity": 0.55
   },
   "awakening": {
-    "interval_s": 90.0,
     "duration_s": 30.0,
     "speed_mult": 1.08,
     "power_mult": 1.18,
@@ -107,23 +113,32 @@
   },
   "flow": {
     "max": 100.0,
-    "per_goal": 40.0,
-    "per_assist": 25.0,
-    "per_steal": 15.0,
-    "per_skill": 6.0,
-    "duration_s": 10.0,
-    "speed_mult": 1.06,
-    "power_mult": 1.1
+    "per_goal": 45.0,
+    "per_assist": 30.0,
+    "per_steal": 18.0,
+    "per_skill": 8.0,
+    "per_pass": 3.0,
+    "per_second": 1.2,
+    "per_second_ball": 3.0,
+    "duration_s": 30.0
   },
   "skills": {
-    "shot_range": 2.6,
+    "shot_range": 5.0,
     "stun_default_s": 0.5,
-    "global_cooldown_s": 0.4,
+    "global_cooldown_s": 0.25,
     "dash_base_speed": 9.0,
     "magnet_range": 2.2,
     "steal_cooldown_s": 1.1,
     "steal_range": 1.25,
-    "steal_base_chance": 0.55
+    "steal_base_chance": 0.55,
+    "tackle_cd_s": 1.2,
+    "tackle_speed": 1.7,
+    "tackle_dur_s": 0.28,
+    "tackle_steal_chance": 0.8,
+    "dodge_cd_s": 1.4,
+    "dodge_dur_s": 0.3,
+    "dodge_speed": 1.6,
+    "dodge_stamina": 18.0
   },
   "ai": {
     "reaction_s": 0.18,

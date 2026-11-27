@@ -34,8 +34,6 @@ var fx: FxScript
 var sun: DirectionalLight3D
 var env: Environment
 var _goal_token: int = 0
-var _awaken_clock: float = 0.0
-var _awaken_next_team: int = 0
 var _zones: Array = []
 var _stats: Dictionary = {"goals": 0, "assists": 0, "steals": 0}
 var _last_kick: Array = [{}, {}]
@@ -70,6 +68,7 @@ func _ready() -> void:
 	rig = CameraRigScript.new()
 	add_child(rig)
 	fx.rig = rig
+	rig.touch = touch
 
 	field.goal_scored.connect(_on_goal_scored)
 	hud.pause_requested.connect(_toggle_pause)
@@ -368,8 +367,6 @@ func _new_match() -> void:
 			time_left = Config.f("modes.match_4v4_s")
 		_:
 			time_left = Config.f("modes.match_2v2_s") if Game.mode == "2v2" else Config.f("match.duration_s")
-	_awaken_clock = 0.0
-	_awaken_next_team = _rng.randi() % 2
 	hud.set_score(0, 0)
 	hud.set_time(time_left)
 	_kickoff()
@@ -405,13 +402,12 @@ func _process(delta: float) -> void:
 		State.PLAYING:
 			if not is_client:
 				time_left -= delta
-				_tick_awakening(delta)
 			hud.set_time(time_left)
 			if Input.is_action_just_pressed("reset_ball") and not online:
 				ball.reset_to(Vector3(0.0, Config.f("ball.reset_height"), 0.0))
 				ball.set_meta("last_team", -1)
 			if Game.mode == "training" and Input.is_action_just_pressed("awaken_test") and human != null:
-				_awaken(human)
+				human.set("flow", Config.f("flow.max"))
 			if time_left <= 0.0 and not is_client:
 				_finish_match()
 		State.FINISHED:
@@ -422,22 +418,13 @@ func _process(delta: float) -> void:
 
 
 # --------------------------------------------------------------- Despertar
-func _tick_awakening(delta: float) -> void:
-	_awaken_clock += delta
-	if _awaken_clock >= Config.f("awakening.interval_s"):
-		_awaken_clock = 0.0
-		var pool: Array = []
-		for p: Node in players:
-			if int(p.get("team")) == _awaken_next_team and not bool(p.get("awakened")):
-				pool.append(p)
-		_awaken_next_team = 1 - _awaken_next_team
-		if pool.is_empty():
-			return
-		_awaken(pool[_rng.randi() % pool.size()])
+## Chamado pelo jogador quando a barra de Fluxo está cheia e ele ativa o Despertar.
+func start_awakening(p: Node) -> void:
+	_awaken(p)
 
 
 func _awaken(p: Node) -> void:
-	if p.get("awake_ids").is_empty():
+	if p.get("awake_ids").is_empty() or bool(p.get("awakened")):
 		return
 	p.call("awaken", Config.f("awakening.duration_s"))
 	var col: Color = p.call("_aura_color")
@@ -454,11 +441,11 @@ func _awaken(p: Node) -> void:
 		net.call("send_event", {"t": "awaken", "team": p.get("team"), "idx": p.get("index")})
 
 
-func on_flow(p: Node) -> void:
-	fx.call("ring", self, (p as Node3D).global_position, Color(0.75, 0.45, 1.0), 6.0, 0.6)
+func on_flow_full(p: Node) -> void:
 	if p == human:
-		hud.toast(Game.t("FLOW!", "FLOW!"), Color(0.8, 0.5, 1.0))
+		hud.toast(Game.t("FLUXO CHEIO! Aperte G para despertar", "FLOW FULL! Press G to awaken"), Color(1.0, 0.9, 0.3))
 		Sfx.play("buff")
+		fx.call("ring", self, (p as Node3D).global_position, Color(1.0, 0.85, 0.3), 5.0, 0.6)
 
 
 func on_skill(p: Node, _sk: Dictionary) -> void:
@@ -553,6 +540,8 @@ func _on_player_kick(_kind: String, _power: float, p: Node) -> void:
 		snd = "kick_strong" if _power > Config.f("kick.max_power") * 0.7 else "kick_medium"
 	elif _kind == "pass" or _kind == "lob":
 		snd = "pass"
+		if p == human:
+			p.call("add_flow", Config.f("flow.per_pass"))
 	Sfx.play(snd, -3.0 if p != human else 0.0)
 
 

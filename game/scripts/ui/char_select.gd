@@ -122,7 +122,7 @@ func _card(id: String) -> Control:
 		Sfx.play("ui_click", -4.0)
 		_show_detail(id))
 	var port: TextureRect = TextureRect.new()
-	port.texture = Kit.texture("res://assets/textures/portraits/%s.png" % id)
+	port.texture = Kit.portrait(id)
 	Kit.full(port)
 	port.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	port.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
@@ -170,6 +170,12 @@ func _show_detail(id: String) -> void:
 		return
 	var rar: String = String(c.get("rarity", "raro"))
 	var rc: Color = Config.rarity_color(rar)
+	var big: TextureRect = TextureRect.new()
+	big.texture = Kit.portrait(id)
+	big.custom_minimum_size = Vector2(0, 190)
+	big.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	big.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_detail.add_child(big)
 	_detail.add_child(Kit.label(String(c.get("name", id)), 34, rc))
 	_detail.add_child(Kit.label("%s — %s   #%d" % [String(Game.RARITY_NAMES_PT.get(rar, rar)), String(c.get("position", "")), int(c.get("number", 0))], 18, rc))
 	var bio: Label = Kit.label(String(c.get("bio", "")), 17, Color(0.85, 0.92, 1.0))
@@ -184,7 +190,7 @@ func _show_detail(id: String) -> void:
 	_detail.add_child(Kit.label(Game.t("SKILLS", "SKILLS"), 22, Kit.GOLD))
 	for sid: Variant in c.get("skills", []):
 		_detail.add_child(_skill_row(String(sid)))
-	_detail.add_child(Kit.label(Game.t("DESPERTAR (a cada 1:30)", "AWAKENING (every 1:30)"), 22, Kit.GOLD))
+	_detail.add_child(Kit.label(Game.t("DESPERTAR (encha a barra de Fluxo)", "AWAKENING (fill the Flow bar)"), 22, Kit.GOLD))
 	var awake: Array = c.get("awakening", [])
 	var avail: Array = Game.awakening_skills(id)
 	for sid2: Variant in awake:

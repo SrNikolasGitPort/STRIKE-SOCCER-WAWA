@@ -104,3 +104,18 @@ static func logo(parent: Control, width: float = 640.0) -> TextureRect:
 	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(r)
 	return r
+
+
+## Retrato do personagem: usa imagem do próprio jogador se existir
+## (user://portraits/<id>.png ou res://assets/custom_portraits/<id>.png),
+## senão o retrato gerado do jogo.
+static func portrait(id: String) -> Texture2D:
+	for path: String in ["user://portraits/%s.png" % id, "res://assets/custom_portraits/%s.png" % id]:
+		if path.begins_with("user://"):
+			if FileAccess.file_exists(path):
+				var img: Image = Image.load_from_file(ProjectSettings.globalize_path(path))
+				if img != null:
+					return ImageTexture.create_from_image(img)
+		elif ResourceLoader.exists(path):
+			return load(path)
+	return texture("res://assets/textures/portraits/%s.png" % id)

@@ -96,6 +96,8 @@ static func fire_shot(p: Node, params: Dictionary, arena: Node) -> bool:
 	if not p.call("ball_in_range", Config.f("skills.shot_range") - Config.f("kick.range")):
 		return false
 	var ball: RigidBody3D = p.get("ball")
+	if (ball.global_position - (p as Node3D).global_position).length() > Config.f("kick.range") * 0.9:
+		p.call("snap_ball")
 	var pos: Vector3 = (p as Node3D).global_position
 	var goal: Vector3 = p.get("attack_goal")
 	var aim: Vector3 = p.call("aim_direction")
@@ -119,6 +121,7 @@ static func fire_shot(p: Node, params: Dictionary, arena: Node) -> bool:
 	if arena != null:
 		var fx: Node = _fx(arena)
 		if fx != null:
+			fx.call("attach_trail", ball, _color(p), 1.6)
 			fx.call("burst", arena, ball.global_position, _color(p), 18, 7.0, 0.6, 0.5, "glow")
 	return true
 

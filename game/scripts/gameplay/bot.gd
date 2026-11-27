@@ -80,6 +80,8 @@ func _decide() -> void:
 	var half: Vector2 = _field_half()
 	p.set("in_pass", false)
 	p.set("in_lob", false)
+	if bool(p.call("awaken_ready")) and randf() < 0.25:
+		p.call("try_awaken")
 
 	if bool(p.call("has_ball")):
 		var opp: Node3D = _nearest_opponent()

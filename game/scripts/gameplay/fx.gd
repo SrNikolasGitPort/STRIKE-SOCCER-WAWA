@@ -191,6 +191,17 @@ func attach_aura(player: Node3D, color: Color) -> Node3D:
 	return holder
 
 
+## Rastro luminoso preso à bola durante um chute de skill.
+func attach_trail(target: Node3D, color: Color, seconds: float) -> void:
+	var p: CPUParticles3D = _particles(target, Vector3.ZERO, color, 30, 0.4, 0.8, 0.5, "glow", 0.0, false)
+	p.spread = 180.0
+	p.local_coords = false
+	get_tree().create_timer(seconds).timeout.connect(func() -> void:
+		if is_instance_valid(p):
+			p.emitting = false
+			get_tree().create_timer(0.6).timeout.connect(p.queue_free))
+
+
 func trail(world: Node3D, pos: Vector3, color: Color) -> void:
 	burst(world, pos, color, 6, 1.2, 0.5, 0.35, "soft")
 

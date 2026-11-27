@@ -444,19 +444,26 @@ func _send_input() -> void:
 	if me == null:
 		return
 	var iv: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var cam: float = float(me.get("cam_side"))
-	var wish: Vector3 = Vector3(-iv.y, 0.0, iv.x) * cam
+	var rig: Node = m.get("rig")
+	var wish: Vector3 = rig.call("world_wish", iv)
+	var aim: Vector3 = rig.call("forward")
 	var bits: int = _latched
+	if Input.is_action_just_pressed("dribble"):
+		bits |= 1024
+	if Input.is_action_just_pressed("tackle"):
+		bits |= 2048
+	if Input.is_action_just_pressed("awaken"):
+		bits |= 4096
 	_latched = 0
 	if Input.is_action_pressed("sprint"):
 		bits |= 1
 	if Input.is_action_pressed("shoot"):
 		bits |= 2
-	rpc_id(1, "rpc_input", wish.x, wish.z, bits)
+	rpc_id(1, "rpc_input", wish.x, wish.z, aim.x, aim.z, bits)
 
 
 @rpc("any_peer", "call_remote", "unreliable_ordered")
-func rpc_input(wx: float, wz: float, bits: int) -> void:
+func rpc_input(wx: float, wz: float, ax: float, az: float, bits: int) -> void:
 	if role != "host" or m == null:
 		return
 	var id: int = multiplayer.get_remote_sender_id()
@@ -470,6 +477,13 @@ func rpc_input(wx: float, wz: float, bits: int) -> void:
 			var p: Node = players[i]
 			var w: Vector3 = Vector3(clampf(wx, -1.0, 1.0), 0.0, clampf(wz, -1.0, 1.0)).limit_length(1.0)
 			p.set("in_wish", w)
+			p.set("in_aim", Vector3(clampf(ax, -1.0, 1.0), 0.0, clampf(az, -1.0, 1.0)).limit_length(1.0))
+			if bits & 1024 != 0:
+				p.set("in_dribble", true)
+			if bits & 2048 != 0:
+				p.set("in_tackle", true)
+			if bits & 4096 != 0:
+				p.set("in_awaken", true)
 			p.set("in_sprint", bits & 1 != 0)
 			p.set("in_shoot_held", bits & 2 != 0)
 			if bits & 4 != 0:

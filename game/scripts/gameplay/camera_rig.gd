@@ -1,11 +1,16 @@
 extends Node3D
-## Câmera 3ª pessoa dinâmica: acompanha jogador + bola, dá zoom-out quando
-## eles se afastam, olha um pouco à frente (+X, direção do ataque) e treme
-## em momentos de impacto (gol, chutes fortes).
+## Câmera 3ª pessoa ORBITAL estilo Roblox: fica atrás do jogador, gira com botão
+## direito do mouse / setas / analógico direito / arrastar o dedo (celular) e dá
+## zoom com a roda do mouse. O movimento e a mira são relativos à câmera.
 
 var player: Node3D = null
 var ball: Node3D = null
-var side: float = 1.0  # +1 olha para +X (time 0); -1 olha para -X (time 1 no online)
+var touch: Control = null
+var side: float = 1.0  # +1: começa olhando para +X (time 0); -1: para -X (time 1 online)
+
+var yaw: float = 0.0
+var pitch: float = 0.0
+var distance: float = 0.0
 
 var _cam: Camera3D
 var _focus: Vector3 = Vector3.ZERO
@@ -22,9 +27,12 @@ func _ready() -> void:
 	_cam.far = 400.0
 	_cam.current = true
 	add_child(_cam)
+	pitch = deg_to_rad(Config.f("camera.pitch_deg"))
+	distance = Config.f("camera.distance")
 
 
 func snap() -> void:
+	yaw = 0.0 if side > 0.0 else PI
 	if player != null:
 		_focus = _target_focus()
 		_apply(0.0)
@@ -42,32 +50,68 @@ func punch_fov(delta_deg: float, duration: float) -> void:
 	_fov_tween.tween_property(self, "_fov_kick", 0.0, duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 
 
+## Direção horizontal para onde a câmera olha (usada para mirar).
+func forward() -> Vector3:
+	return Vector3(cos(yaw), 0.0, sin(yaw))
+
+
+## Converte o vetor do joystick/WASD (x = direita, y = frente negativo) em direção de mundo.
+func world_wish(iv: Vector2) -> Vector3:
+	var f: Vector3 = forward()
+	var r: Vector3 = f.cross(Vector3.UP)
+	return f * (-iv.y) + r * iv.x
+
+
+func _rotate(dx: float, dy: float) -> void:
+	yaw += dx * Config.f("camera.sensitivity")
+	pitch = clampf(pitch + dy * Config.f("camera.sensitivity"), deg_to_rad(Config.f("camera.min_pitch_deg")), deg_to_rad(Config.f("camera.max_pitch_deg")))
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		var mm: InputEventMouseMotion = event
+		if (mm.button_mask & MOUSE_BUTTON_MASK_RIGHT) != 0:
+			_rotate(mm.relative.x, mm.relative.y)
+	elif event is InputEventMouseButton:
+		var mb: InputEventMouseButton = event
+		if mb.pressed and mb.button_index == MOUSE_BUTTON_WHEEL_UP:
+			distance = clampf(distance - 0.6, Config.f("camera.min_distance"), Config.f("camera.max_distance"))
+		elif mb.pressed and mb.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			distance = clampf(distance + 0.6, Config.f("camera.min_distance"), Config.f("camera.max_distance"))
+	elif event is InputEventScreenDrag:
+		var sd: InputEventScreenDrag = event
+		if touch != null and bool(touch.call("claims", sd.index)):
+			return
+		_rotate(sd.relative.x * 1.3, sd.relative.y * 1.3)
+
+
 func _target_focus() -> Vector3:
 	var target: Vector3 = player.global_position
 	if ball != null:
 		target = target.lerp(ball.global_position, Config.f("camera.ball_weight"))
-	target.y = 0.0
+	target.y = 1.5
 	return target
 
 
 func _process(delta: float) -> void:
 	if player == null:
 		return
+	var stick: Vector2 = Input.get_vector("cam_left", "cam_right", "cam_up", "cam_down")
+	if stick.length() > 0.05:
+		_rotate(stick.x * 520.0 * delta, stick.y * 380.0 * delta)
 	var t: float = 1.0 - exp(-Config.f("camera.follow_speed") * delta)
 	_focus = _focus.lerp(_target_focus(), t)
 	_apply(delta)
 
 
 func _apply(delta: float) -> void:
-	var separation: float = 0.0
-	if ball != null:
-		separation = player.global_position.distance_to(ball.global_position)
-	var zoom: float = clampf(separation / Config.f("camera.zoom_speed"), Config.f("camera.min_zoom_out"), Config.f("camera.max_zoom_out"))
-	var offset: Vector3 = Vector3(-side * (Config.f("camera.distance") + zoom), Config.f("camera.height") + zoom * 0.6, 0.0)
-	var pos: Vector3 = _focus + offset
+	var f: Vector3 = forward()
+	var r: Vector3 = f.cross(Vector3.UP)
+	var horiz: float = distance * cos(pitch)
+	var pos: Vector3 = _focus - f * horiz + Vector3(0.0, distance * sin(pitch), 0.0) + r * Config.f("camera.shoulder")
+	pos.y = maxf(pos.y, 0.7)
 	if _shake > 0.001:
 		pos += Vector3(_rng.randf_range(-1.0, 1.0), _rng.randf_range(-1.0, 1.0), _rng.randf_range(-1.0, 1.0)) * _shake
 		_shake = lerpf(_shake, 0.0, clampf(8.0 * delta, 0.0, 1.0))
-	var look: Vector3 = _focus + Vector3(side * Config.f("camera.look_ahead"), 0.0, 0.0)
 	_cam.fov = Config.f("camera.fov") + _fov_kick
-	_cam.look_at_from_position(pos, look, Vector3.UP)
+	_cam.look_at_from_position(pos, _focus + f * 3.0, Vector3.UP)

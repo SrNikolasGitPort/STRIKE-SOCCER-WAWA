@@ -33,6 +33,12 @@ var in_wish: Vector3 = Vector3.ZERO
 var in_sprint: bool = false
 var in_shoot_held: bool = false
 var in_pass: bool = false
+var in_aim: Vector3 = Vector3.ZERO
+var in_dribble: bool = false
+var in_awaken: bool = false
+var in_tackle: bool = false
+var _dodge_cd: float = 0.0
+var _tackle_t: float = 0.0
 var in_lob: bool = false
 var in_skill: Array[bool] = [false, false, false, false, false, false]
 var cam_side: float = 1.0
@@ -41,7 +47,6 @@ var stamina: float = 100.0
 var charge: float = 0.0
 var charging: bool = false
 var flow: float = 0.0
-var flow_t: float = 0.0
 var awakened: bool = false
 var awake_left: float = 0.0
 var cooldowns: Dictionary = {}
@@ -149,15 +154,26 @@ func stun(duration: float) -> void:
 	stun_t = maxf(stun_t, duration)
 
 
+## Barra de Fluxo = barra de Despertar: enche jogando; cheia, o jogador ativa o Despertar.
 func add_flow(amount: float) -> void:
-	if flow_t > 0.0:
+	if awakened:
 		return
+	var was_full: bool = flow >= Config.f("flow.max")
 	flow = minf(flow + amount, Config.f("flow.max"))
-	if flow >= Config.f("flow.max"):
-		flow = 0.0
-		flow_t = Config.f("flow.duration_s")
-		if arena != null and arena.has_method("on_flow"):
-			arena.call("on_flow", self)
+	if flow >= Config.f("flow.max") and not was_full and arena != null and arena.has_method("on_flow_full"):
+		arena.call("on_flow_full", self)
+
+
+func awaken_ready() -> bool:
+	return not awakened and flow >= Config.f("flow.max") and not awake_ids.is_empty()
+
+
+func try_awaken() -> bool:
+	if not awaken_ready() or stun_t > 0.0 or arena == null:
+		return false
+	flow = 0.0
+	arena.call("start_awakening", self)
+	return true
 
 
 func start_dash(dir: Vector3, speed_mult: float, duration: float) -> void:
@@ -228,7 +244,11 @@ func try_skill(slot: int) -> bool:
 		add_flow(Config.f("flow.per_skill"))
 		skill_used.emit(self, sid)
 	else:
-		cooldowns[sid] = 0.6
+		_gcd = 0.2
+		if is_human and arena != null:
+			var hud: Node = arena.get("hud")
+			if hud != null:
+				hud.call("toast", Game.t("Chegue perto da bola para usar essa skill", "Get close to the ball to use this skill"), Color(1.0, 0.7, 0.4))
 	return ok
 
 
@@ -408,7 +428,16 @@ func _build_model(visual: Dictionary) -> void:
 # -------------------------------------------------------------- entrada
 func _read_human_input() -> void:
 	var in_vec: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	in_wish = Vector3(-in_vec.y, 0.0, in_vec.x) * cam_side
+	var rig: Node = arena.get("rig") if arena != null else null
+	if rig != null:
+		in_wish = rig.call("world_wish", in_vec)
+		in_aim = rig.call("forward")
+	else:
+		in_wish = Vector3(-in_vec.y, 0.0, in_vec.x) * cam_side
+	in_dribble = Input.is_action_just_pressed("dribble")
+	in_tackle = Input.is_action_just_pressed("tackle")
+	if Input.is_action_just_pressed("awaken"):
+		in_awaken = true
 	in_sprint = Input.is_action_pressed("sprint")
 	in_shoot_held = Input.is_action_pressed("shoot")
 	in_pass = Input.is_action_just_pressed("pass")
@@ -450,6 +479,7 @@ func _physics_process(delta: float) -> void:
 	_update_movement(delta, wish, moving)
 	_update_kicking(delta, wish)
 	_update_ball_interaction(delta, wish, moving)
+	_update_actions()
 	_update_tackle(delta)
 	_update_block()
 	_animate(delta)
@@ -467,6 +497,8 @@ func _tick_timers(delta: float) -> void:
 	_dribble_cd = maxf(_dribble_cd - delta, 0.0)
 	_kick_anim = maxf(_kick_anim - delta, 0.0)
 	_tackle_cd = maxf(_tackle_cd - delta, 0.0)
+	_dodge_cd = maxf(_dodge_cd - delta, 0.0)
+	_tackle_t = maxf(_tackle_t - delta, 0.0)
 	_gcd = maxf(_gcd - delta, 0.0)
 	stun_t = maxf(stun_t - delta, 0.0)
 	immune_t = maxf(immune_t - delta, 0.0)
@@ -474,7 +506,12 @@ func _tick_timers(delta: float) -> void:
 	block_t = maxf(block_t - delta, 0.0)
 	vision_t = maxf(vision_t - delta, 0.0)
 	silence_t = maxf(silence_t - delta, 0.0)
-	flow_t = maxf(flow_t - delta, 0.0)
+	if not awakened:
+		var rate: float = Config.f("flow.per_second_ball") if has_ball() else Config.f("flow.per_second")
+		add_flow(rate * delta)
+	if in_awaken:
+		in_awaken = false
+		try_awaken()
 	for k: Variant in cooldowns.keys():
 		cooldowns[k] = maxf(float(cooldowns[k]) - delta, 0.0)
 	for k: Variant in buffs.keys():
@@ -503,8 +540,6 @@ func _speed_total() -> float:
 	var m: float = _speed_mult * buff("speed") * buff("debuff_speed")
 	if awakened:
 		m *= Config.f("awakening.speed_mult")
-	if flow_t > 0.0:
-		m *= Config.f("flow.speed_mult")
 	if arena != null and arena.has_method("zone_factor"):
 		m *= float(arena.call("zone_factor", self))
 	return m
@@ -514,8 +549,6 @@ func power_total() -> float:
 	var m: float = _power_mult * buff("shot") * buff("debuff_power") * power_scale_once
 	if awakened:
 		m *= Config.f("awakening.power_mult")
-	if flow_t > 0.0:
-		m *= Config.f("flow.power_mult")
 	return m
 
 
@@ -558,6 +591,9 @@ func _update_movement(delta: float, wish: Vector3, moving: bool) -> void:
 	move_and_slide()
 
 	var look: Vector3 = dash_dir if dash_t > 0.0 else wish
+	if is_human and in_aim.length() > 0.1 and dash_t <= 0.0 and (charging or (ball != null and ball_in_range(1.5))):
+		look = in_aim
+		moving = true
 	if moving:
 		facing = facing.slerp(look.normalized(), clampf(Config.f("player.turn_speed") * delta, 0.0, 1.0))
 		if facing.length() < 0.01:
@@ -589,6 +625,8 @@ func aim_assist_strength() -> float:
 
 func aim_direction() -> Vector3:
 	var aim: Vector3 = Vector3(facing.x, 0.0, facing.z).normalized()
+	if in_aim.length() > 0.1:
+		aim = Vector3(in_aim.x, 0.0, in_aim.z).normalized()
 	var to_goal: Vector3 = attack_goal - global_position
 	to_goal.y = 0.0
 	if to_goal.length() > 0.5:
@@ -719,7 +757,8 @@ func _update_tackle(_delta: float) -> void:
 	if ball == null or _tackle_cd > 0.0 or stun_t > 0.0 or not controls_enabled:
 		return
 	var dist_ball: float = global_position.distance_to(ball.global_position)
-	if dist_ball > Config.f("skills.steal_range") or ball.global_position.y > 1.0:
+	var reach: float = Config.f("skills.steal_range") * (1.7 if _tackle_t > 0.0 else 1.0)
+	if dist_ball > reach or ball.global_position.y > 1.0:
 		return
 	if int(ball.get_meta("last_team", team)) == team:
 		return
@@ -737,7 +776,9 @@ func _update_tackle(_delta: float) -> void:
 		return
 	_tackle_cd = Config.f("skills.steal_cooldown_s")
 	var chance: float = Config.f("skills.steal_base_chance") * (stat("defesa") + 20.0) / (float(holder.call("stat", "drible")) + 20.0)
-	if randf() < clampf(chance, 0.1, 0.85):
+	if _tackle_t > 0.0:
+		chance = maxf(chance, Config.f("skills.tackle_steal_chance"))
+	if randf() < clampf(chance, 0.1, 0.9):
 		var dir: Vector3 = (global_position - ball.global_position)
 		dir.y = 0.0
 		ball.linear_velocity = dir.normalized() * 4.0
@@ -747,6 +788,46 @@ func _update_tackle(_delta: float) -> void:
 		ball.set_meta("last_skill", "")
 		holder.call("stun", 0.25)
 		stole_ball.emit(self)
+
+
+## Dribles/desarmes ativos: Q = drible rápido (esquiva), Espaço/C = bote de desarme.
+func _update_actions() -> void:
+	if stun_t > 0.0 or not controls_enabled:
+		in_dribble = false
+		in_tackle = false
+		return
+	if in_dribble and _dodge_cd <= 0.0 and stamina >= Config.f("skills.dodge_stamina"):
+		var dir: Vector3 = in_wish if in_wish.length() > 0.2 else facing
+		var side_dir: Vector3 = dir.cross(Vector3.UP).normalized() * (1.0 if randf() > 0.5 else -1.0)
+		if in_wish.length() > 0.2:
+			side_dir = dir.normalized()
+		start_dash(side_dir, Config.f("skills.dodge_speed"), Config.f("skills.dodge_dur_s"))
+		immune_t = Config.f("skills.dodge_dur_s") + 0.1
+		add_buff("magnet", 0.8, 0.6)
+		stamina -= Config.f("skills.dodge_stamina")
+		_regen_wait = Config.f("player.stamina_regen_delay")
+		_dodge_cd = Config.f("skills.dodge_cd_s")
+		Sfx.play("whoosh", -3.0)
+	if in_tackle and _tackle_cd <= 0.0 and dash_t <= 0.0:
+		var dir2: Vector3 = in_aim if in_aim.length() > 0.1 else facing
+		if in_wish.length() > 0.2:
+			dir2 = in_wish
+		start_dash(dir2, Config.f("skills.tackle_speed"), Config.f("skills.tackle_dur_s"))
+		_tackle_t = Config.f("skills.tackle_dur_s") + 0.15
+		_tackle_cd = Config.f("skills.tackle_cd_s")
+		Sfx.play("dash", -2.0)
+	in_dribble = false
+	in_tackle = false
+
+
+## Puxa a bola para os pés (usado pelas skills de chute quando a bola está perto).
+func snap_ball() -> void:
+	if ball == null:
+		return
+	var f: Vector3 = Vector3(facing.x, 0.0, facing.z).normalized()
+	ball.global_position = global_position + f * 0.8 + Vector3(0.0, Config.f("ball.radius") - Config.f("player.body_height") / 2.0 + 0.1, 0.0)
+	ball.linear_velocity = Vector3.ZERO
+	ball.angular_velocity = Vector3.ZERO
 
 
 func _update_block() -> void:

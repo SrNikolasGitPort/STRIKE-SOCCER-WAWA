@@ -6,6 +6,7 @@ extends Node
 const ACTIONS: PackedStringArray = [
 	"move_left", "move_right", "move_forward", "move_back",
 	"sprint", "shoot", "pass", "lob", "reset_ball", "toggle_quality", "pause", "awaken_test",
+	"dribble", "tackle", "awaken", "cam_left", "cam_right", "cam_up", "cam_down",
 	"skill_1", "skill_2", "skill_3", "skill_4", "skill_5", "skill_6",
 ]
 
@@ -15,22 +16,28 @@ func _ready() -> void:
 		if not InputMap.has_action(action):
 			InputMap.add_action(action, 0.2)
 	_key("move_left", KEY_A)
-	_key("move_left", KEY_LEFT)
 	_key("move_right", KEY_D)
-	_key("move_right", KEY_RIGHT)
 	_key("move_forward", KEY_W)
-	_key("move_forward", KEY_UP)
 	_key("move_back", KEY_S)
-	_key("move_back", KEY_DOWN)
 	_key("sprint", KEY_SHIFT)
 	_key("shoot", KEY_SPACE)
+	_key("shoot", KEY_X)
 	_key("pass", KEY_E)
-	_key("lob", KEY_Q)
+	_key("lob", KEY_F)
+	_key("dribble", KEY_Q)
+	_key("tackle", KEY_C)
+	_key("tackle", KEY_CTRL)
+	_key("cam_left", KEY_LEFT)
+	_key("cam_right", KEY_RIGHT)
+	_key("cam_up", KEY_UP)
+	_key("cam_down", KEY_DOWN)
 	_key("reset_ball", KEY_R)
 	_key("toggle_quality", KEY_F2)
 	_key("pause", KEY_ESCAPE)
 	_key("pause", KEY_P)
 	_key("awaken_test", KEY_T)
+	_key("awaken", KEY_G)
+	_key("awaken", KEY_V)
 	var skill_keys: Array[Key] = [KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6]
 	var alt_keys: Array[Key] = [KEY_J, KEY_K, KEY_L, KEY_U, KEY_I, KEY_O]
 	for i: int in range(6):
@@ -43,16 +50,23 @@ func _ready() -> void:
 	_axis("move_back", JOY_AXIS_LEFT_Y, 1.0)
 	_button("sprint", JOY_BUTTON_LEFT_SHOULDER)
 	_button("shoot", JOY_BUTTON_X)
+	_button("dribble", JOY_BUTTON_RIGHT_STICK)
+	_button("tackle", JOY_BUTTON_LEFT_STICK)
+	_button("awaken", JOY_BUTTON_BACK)
+	_button("reset_ball", JOY_BUTTON_MISC1)
+	_axis("cam_left", JOY_AXIS_RIGHT_X, -1.0)
+	_axis("cam_right", JOY_AXIS_RIGHT_X, 1.0)
+	_axis("cam_up", JOY_AXIS_RIGHT_Y, -1.0)
+	_axis("cam_down", JOY_AXIS_RIGHT_Y, 1.0)
 	_button("pass", JOY_BUTTON_A)
 	_button("lob", JOY_BUTTON_Y)
-	_button("reset_ball", JOY_BUTTON_BACK)
 	_button("pause", JOY_BUTTON_START)
 	_button("skill_1", JOY_BUTTON_B)
 	_button("skill_2", JOY_BUTTON_RIGHT_SHOULDER)
-	_button("skill_3", JOY_BUTTON_RIGHT_STICK)
+	_button("skill_3", JOY_BUTTON_DPAD_UP)
 	_axis("skill_4", JOY_AXIS_TRIGGER_LEFT, 1.0)
 	_axis("skill_5", JOY_AXIS_TRIGGER_RIGHT, 1.0)
-	_button("skill_6", JOY_BUTTON_LEFT_STICK)
+	_button("skill_6", JOY_BUTTON_DPAD_DOWN)
 
 
 func _key(action: String, keycode: Key) -> void:
@@ -70,5 +84,11 @@ func _axis(action: String, axis: JoyAxis, value: float) -> void:
 
 func _button(action: String, button: JoyButton) -> void:
 	var ev: InputEventJoypadButton = InputEventJoypadButton.new()
+	ev.button_index = button
+	InputMap.action_add_event(action, ev)
+
+
+func _mouse(action: String, button: MouseButton) -> void:
+	var ev: InputEventMouseButton = InputEventMouseButton.new()
 	ev.button_index = button
 	InputMap.action_add_event(action, ev)

@@ -25,8 +25,21 @@ func _ready() -> void:
 		"pass": {"action": "pass", "label": "PASSE", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
 		"lob": {"action": "lob", "label": "ALTO", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
 		"sprint": {"action": "sprint", "label": "SPRINT", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
+		"dribble": {"action": "dribble", "label": "DRIBLE", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
+		"tackle": {"action": "tackle", "label": "DESARME", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
+		"awaken": {"action": "awaken", "label": "DESPERTAR", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
 		"reset": {"action": "reset_ball", "label": "R", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius") * 0.55, "finger": -1},
 	}
+
+
+## Verdadeiro se o dedo está controlando joystick ou botão (senão gira a câmera).
+func claims(index: int) -> bool:
+	if index == _joy_id:
+		return true
+	for key: String in _buttons.keys():
+		if int((_buttons[key] as Dictionary)["finger"]) == index:
+			return true
+	return false
 
 
 func _layout() -> void:
@@ -40,6 +53,9 @@ func _layout() -> void:
 	_buttons["pass"]["center"] = Vector2(shoot.x - big - small - gap, shoot.y + (big - small))
 	_buttons["lob"]["center"] = Vector2(shoot.x, shoot.y - big - small - gap)
 	_buttons["sprint"]["center"] = Vector2(shoot.x - big - small - gap, shoot.y - small * 2.0 - gap + (big - small))
+	_buttons["dribble"]["center"] = Vector2(shoot.x - big - small * 3.0 - gap * 2.0, shoot.y + (big - small))
+	_buttons["tackle"]["center"] = Vector2(shoot.x - big - small * 3.0 - gap * 2.0, shoot.y - small * 2.0 - gap + (big - small))
+	_buttons["awaken"]["center"] = Vector2(shoot.x, shoot.y - big - small * 3.0 - gap * 2.0)
 	_buttons["reset"]["center"] = Vector2(view.x - m - 30.0, 120.0)
 
 
