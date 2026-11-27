@@ -27,6 +27,7 @@
     "aura": "#FFFFFF",
     "glasses": false,
     "kit": {
+      "id": "barcha",
       "main": "#A50044",
       "sec": "#004D98",
       "shorts": "#004D98",

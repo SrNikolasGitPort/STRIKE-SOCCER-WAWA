@@ -28,6 +28,7 @@
     "aura": "#C9C9C9",
     "glasses": false,
     "kit": {
+      "id": "bluelock",
       "main": "#2F80ED",
       "sec": "#FFFFFF",
       "shorts": "#0B1226",

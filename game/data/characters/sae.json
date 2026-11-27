@@ -28,6 +28,7 @@
     "aura": "#FFFFFF",
     "glasses": false,
     "kit": {
+      "id": "real",
       "main": "#F4F4F4",
       "sec": "#D4AF37",
       "shorts": "#F4F4F4",

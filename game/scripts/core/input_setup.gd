@@ -5,7 +5,8 @@ extends Node
 
 const ACTIONS: PackedStringArray = [
 	"move_left", "move_right", "move_forward", "move_back",
-	"sprint", "shoot", "pass", "lob", "reset_ball", "toggle_quality",
+	"sprint", "shoot", "pass", "lob", "reset_ball", "toggle_quality", "pause", "awaken_test",
+	"skill_1", "skill_2", "skill_3", "skill_4", "skill_5", "skill_6",
 ]
 
 
@@ -27,6 +28,14 @@ func _ready() -> void:
 	_key("lob", KEY_Q)
 	_key("reset_ball", KEY_R)
 	_key("toggle_quality", KEY_F2)
+	_key("pause", KEY_ESCAPE)
+	_key("pause", KEY_P)
+	_key("awaken_test", KEY_T)
+	var skill_keys: Array[Key] = [KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6]
+	var alt_keys: Array[Key] = [KEY_J, KEY_K, KEY_L, KEY_U, KEY_I, KEY_O]
+	for i: int in range(6):
+		_key("skill_%d" % (i + 1), skill_keys[i])
+		_key("skill_%d" % (i + 1), alt_keys[i])
 
 	_axis("move_left", JOY_AXIS_LEFT_X, -1.0)
 	_axis("move_right", JOY_AXIS_LEFT_X, 1.0)
@@ -37,6 +46,13 @@ func _ready() -> void:
 	_button("pass", JOY_BUTTON_A)
 	_button("lob", JOY_BUTTON_Y)
 	_button("reset_ball", JOY_BUTTON_BACK)
+	_button("pause", JOY_BUTTON_START)
+	_button("skill_1", JOY_BUTTON_B)
+	_button("skill_2", JOY_BUTTON_RIGHT_SHOULDER)
+	_button("skill_3", JOY_BUTTON_RIGHT_STICK)
+	_axis("skill_4", JOY_AXIS_TRIGGER_LEFT, 1.0)
+	_axis("skill_5", JOY_AXIS_TRIGGER_RIGHT, 1.0)
+	_button("skill_6", JOY_BUTTON_LEFT_STICK)
 
 
 func _key(action: String, keycode: Key) -> void:

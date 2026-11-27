@@ -27,6 +27,7 @@
     "aura": "#FFFFFF",
     "glasses": false,
     "kit": {
+      "id": "pxg",
       "main": "#0A2240",
       "sec": "#E03C4B",
       "shorts": "#0A2240",

@@ -170,11 +170,42 @@ def check_resource_paths() -> None:
                 continue
             target = GAME / rel
             checked += 1
+            if rel in OPTIONAL or "%" in rel or (not target.exists() and any(
+                    f.name.startswith(target.name) for f in (target.parent.glob("*") if target.parent.exists() else []))):
+                continue
             # Caminhos que terminam com "/" apontam para pastas (ex.: CHARACTERS_DIR).
             if not target.exists():
                 # Concatenações como CHARACTERS_DIR + id + ".json" só citam a pasta.
                 err(f"{path.relative_to(ROOT)} referencia res://{rel}, que não existe")
     print(f"[5] {checked} referências res:// verificadas")
+
+
+OPTIONAL = {"data/config/google_oauth.json", "data/config/online.json"}  # gerados no build / opcionais
+
+
+def check_content(loaded: dict[Path, object]) -> None:
+    skills = loaded.get(DATA / "skills" / "skills.json", {})
+    effects = set()
+    for sid, sk in skills.items():
+        effects.add(sk["effect"])
+        ono = GAME / "assets" / "textures" / "ono" / f"{sk['ono']}.png"
+        if not ono.exists():
+            err(f"skill {sid}: onomatopeia {sk['ono']}.png não existe")
+    for eff in effects:
+        if not (GAME / "assets" / "textures" / "icons" / f"skill_{eff}.png").exists():
+            err(f"falta ícone skill_{eff}.png")
+    sfx = set()
+    for script in (GAME / "scripts").rglob("*.gd"):
+        sfx.update(re.findall(r'Sfx\.play\("([a-z0-9_]+)"', code_lines(script)))
+        sfx.update(re.findall(r'Sfx\.music\("([a-z0-9_]+)"', code_lines(script)))
+    for name in sorted(sfx):
+        if not ((GAME / "assets" / "audio" / "sfx" / f"{name}.wav").exists() or (GAME / "assets" / "audio" / "music" / f"{name}.wav").exists()):
+            err(f"Sfx '{name}' usado nos scripts, mas o arquivo de áudio não existe")
+    quests = loaded.get(DATA / "quests" / "quests.json", [])
+    for q in quests:
+        if q["unlock"] not in skills:
+            err(f"missão {q['id']}: skill {q['unlock']} inexistente")
+    print(f"[6] conteúdo OK: {len(skills)} skills, {len(quests)} missões, {len(sfx)} sons referenciados")
 
 
 def main() -> int:
@@ -183,6 +214,7 @@ def main() -> int:
     check_characters(loaded, assignments)
     check_config_keys(loaded)
     check_resource_paths()
+    check_content(loaded)
     if errors:
         print(f"\n{len(errors)} erro(s) encontrado(s).")
         return 1

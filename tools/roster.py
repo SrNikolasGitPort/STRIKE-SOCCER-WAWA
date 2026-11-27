@@ -297,7 +297,7 @@ def build_all():
             stats=stats_dict(c["stats"]), number=c["num"], base_id=None, original=False,
             visual=dict(hair=c["hair"], hair_color=c["hc"], hair_accent=c.get("hc2", ""), eye_color=c["eyes"],
                         eye_color2=c.get("eyes2", ""), skin=c["skin"], aura=c["aura"], glasses=bool(c.get("glasses")),
-                        kit=dict(main=k["main"], sec=k["sec"], shorts=k["shorts"], pattern=k["pattern"], team=k["team"])),
+                        kit=dict(id=c["kit"], main=k["main"], sec=k["sec"], shorts=k["shorts"], pattern=k["pattern"], team=k["team"])),
             skills=sk_c.get("normal", []), awakening=sk_c.get("awake", []),
             evolution=None,
         )
@@ -314,7 +314,7 @@ def build_all():
             else:
                 ns = nel_stats(c["stats"])
             vis = dict(base["visual"])
-            vis["kit"] = dict(main=nk["main"], sec=nk["sec"], shorts=nk["shorts"], pattern=nk["pattern"], team=nk["team"])
+            vis["kit"] = dict(id=("goat" if nel_kind == "goat" else nel_kind), main=nk["main"], sec=nk["sec"], shorts=nk["shorts"], pattern=nk["pattern"], team=nk["team"])
             vis["aura"] = "#F2C94C" if nel_kind == "goat" else "#FFFFFF"
             vis["nel"] = True
             chars.append(dict(

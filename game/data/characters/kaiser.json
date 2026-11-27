@@ -28,6 +28,7 @@
     "aura": "#4DA3FF",
     "glasses": false,
     "kit": {
+      "id": "munchen",
       "main": "#B3202A",
       "sec": "#D4AF37",
       "shorts": "#111111",

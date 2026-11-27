@@ -27,6 +27,7 @@
     "aura": "#FFFFFF",
     "glasses": false,
     "kit": {
+      "id": "ubers",
       "main": "#1E3A8A",
       "sec": "#F2C94C",
       "shorts": "#0F1B44",

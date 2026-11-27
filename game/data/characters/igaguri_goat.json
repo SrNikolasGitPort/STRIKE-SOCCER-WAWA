@@ -27,6 +27,7 @@
     "aura": "#F2C94C",
     "glasses": false,
     "kit": {
+      "id": "goat",
       "main": "#F2C94C",
       "sec": "#FFFFFF",
       "shorts": "#E03C4B",

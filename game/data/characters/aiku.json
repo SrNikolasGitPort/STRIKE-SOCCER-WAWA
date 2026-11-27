@@ -28,6 +28,7 @@
     "aura": "#3FAE6B",
     "glasses": false,
     "kit": {
+      "id": "japan",
       "main": "#FFFFFF",
       "sec": "#C8102E",
       "shorts": "#FFFFFF",

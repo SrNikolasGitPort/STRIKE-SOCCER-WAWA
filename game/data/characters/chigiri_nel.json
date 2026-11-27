@@ -27,6 +27,7 @@
     "aura": "#FFFFFF",
     "glasses": false,
     "kit": {
+      "id": "manshine",
       "main": "#6CABDD",
       "sec": "#FFFFFF",
       "shorts": "#FFFFFF",
