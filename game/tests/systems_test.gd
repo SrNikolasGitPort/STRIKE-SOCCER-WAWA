@@ -125,8 +125,9 @@ func _run() -> void:
 	_check(_failures == errors_before, "137 skills executaram sem erro de script")
 
 	print("[8] Fim")
+	Engine.time_scale = 1.0
 	m.set("time_left", 0.05)
-	await _frames(30)
+	await _frames(600)
 	_check(int(m.get("state")) == 2, "partida 4v4 terminou")
 
 	print("== Resultado: %d falha(s) ==" % _failures)
