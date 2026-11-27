@@ -29,10 +29,21 @@ O APK debug instala em qualquer celular. Para um APK **release** assinado:
 
 **Nunca** commite a keystore. O `.gitignore` já bloqueia `*.keystore`, `*.jks` e `.env`.
 
-## 3. Login com Google (necessário só no M5)
+## 3. Login com Google (opcional)
 
-Ficará aqui o passo a passo completo (Google Cloud Console, tela de consentimento OAuth, Client IDs Web/Android/Desktop, SHA-1 da keystore debug e release, Secrets `GOOGLE_WEB_CLIENT_ID` e `GOOGLE_DESKTOP_CLIENT_ID`). Será escrito junto com o M5.
+O jogo usa o fluxo OAuth 2.0 **Device Authorization** (o jogo mostra um código; o jogador autoriza no navegador). Nenhum token é salvo.
 
-## 4. Servidor online (necessário só no M5)
+1. Google Cloud Console > crie um projeto > **APIs e serviços > Tela de consentimento OAuth** (tipo Externo; escopos `openid`, `email`, `profile`; adicione seus testadores).
+2. **Credenciais > Criar credenciais > ID do cliente OAuth > tipo "TVs e dispositivos de entrada limitada"**.
+3. No GitHub, crie os Secrets `GOOGLE_OAUTH_CLIENT_ID` e `GOOGLE_OAUTH_CLIENT_SECRET` (o secret desse tipo de cliente não é confidencial de verdade, mas mantenha fora do repositório).
+4. O CI gera `game/data/config/google_oauth.json` a partir dos Secrets durante o build (arquivo ignorado pelo git). Para testar localmente, salve o mesmo JSON em `user://google_oauth.json`.
 
-Hospedagem do servidor dedicado, domínio e provedor de autenticação serão definidos no M5.
+Sem esses Secrets o jogo funciona normalmente como convidado; o botão do Google só mostra um aviso.
+
+## 4. Multiplayer online
+
+- **Modelo**: um jogador é o **host** (servidor autoritativo: só ele simula; clientes enviam entradas).
+- **Código da sala**: codifica IP+porta (UDP 24565). O host tenta abrir a porta via UPnP; se o roteador não permitir, o código só funciona na mesma rede (LAN) — nesse caso abra/encaminhe a porta UDP 24565.
+- **Salas públicas**: aparecem automaticamente na LAN (broadcast UDP 24566). Para lista pela **internet**, rode `python3 tools/master_server.py 8080` em um servidor seu e crie o Secret `MASTER_SERVER_URL`.
+- **Amigos**: lista local por código de amigo; salas com amigos aparecem com ★.
+- Sem predição de movimento no cliente (há latência igual ao ping).

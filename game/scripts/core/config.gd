@@ -2,7 +2,7 @@ extends Node
 ## Autoload "Config": carrega os valores balanceáveis de res://data/config/*.json.
 ## Nenhum número mágico no código de gameplay: tudo vem daqui (Config.f("secao.chave")).
 
-const VERSION: String = "0.1.0-m1"
+const VERSION: String = "1.0.0-rc1"
 const GAMEPLAY_PATH: String = "res://data/config/gameplay.json"
 const RARITIES_PATH: String = "res://data/config/rarities.json"
 const CHARACTERS_DIR: String = "res://data/characters/"

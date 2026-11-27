@@ -14,3 +14,7 @@ dist/
 *.p12
 .env
 *.env
+
+# gerados no build a partir dos Secrets (nunca commitar)
+game/data/config/google_oauth.json
+game/data/config/online.json

@@ -75,6 +75,21 @@ jobs:
           echo "GODOT_ANDROID_KEYSTORE_DEBUG_USER=androiddebugkey" >> "$GITHUB_ENV"
           echo "GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD=android" >> "$GITHUB_ENV"
 
+      - name: Injetar configuração online (Google OAuth / servidor mestre) a partir dos Secrets
+        env:
+          G_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          G_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          MASTER_URL: ${{ secrets.MASTER_SERVER_URL }}
+        run: |
+          if [ -n "$G_ID" ]; then
+            python3 -c "import json,os; print(json.dumps({'client_id': os.environ['G_ID'], 'client_secret': os.environ.get('G_SECRET','')}))" > game/data/config/google_oauth.json
+          else
+            echo "::warning::GOOGLE_OAUTH_CLIENT_ID ausente: login Google desativado neste build (veja docs/SETUP.md)."
+          fi
+          if [ -n "$MASTER_URL" ]; then
+            python3 -c "import json,os; print(json.dumps({'master_url': os.environ['MASTER_URL']}))" > game/data/config/online.json
+          fi
+
       - name: Importar o projeto (gera o cache de recursos)
         run: |
           godot --headless --path game --import || true
