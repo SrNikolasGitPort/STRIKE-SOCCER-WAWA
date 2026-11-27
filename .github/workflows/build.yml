@@ -126,3 +126,13 @@ jobs:
             echo "::error::Erros de script detectados durante o smoke test"
             exit 1
           fi
+
+      - name: Teste de sistemas (menus, bots 4v4, skills, Despertar, missões)
+        run: |
+          set -o pipefail
+          timeout 400 godot --headless --fixed-fps 60 --path game -s res://tests/systems_test.gd 2>&1 | tee systems.log || true
+          if grep -E "SCRIPT ERROR|Parse Error|Compile Error" systems.log | head -20; then
+            echo "::error::Erros de script no teste de sistemas"
+            exit 1
+          fi
+          grep -q "Resultado: 0 falha" systems.log || { echo "::error::Teste de sistemas falhou"; grep FALHOU systems.log; exit 1; }
