@@ -2,6 +2,8 @@ extends SceneTree
 ## Teste de sistemas: menus, partida 4v4 com bots, skills, Despertar, missões Nel,
 ## códigos de sala e dados. Sai com código 1 se algo falhar.
 
+const SkillsScript = preload("res://scripts/gameplay/skills.gd")
+
 var _failures: int = 0
 
 
@@ -108,7 +110,6 @@ func _run() -> void:
 			var sk: Dictionary = Game.skill(String(skid))
 			ball.reset_to((h as Node3D).global_position + Vector3(1.0, 0.4, 0.0))
 			h.set("stamina", 100.0)
-			const SkillsScript = preload("res://scripts/gameplay/skills.gd")
 			SkillsScript.execute(h, sk, m)
 	await _frames(30)
 	_check(_failures == errors_before, "137 skills executaram sem erro de script")
