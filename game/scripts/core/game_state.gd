@@ -55,9 +55,9 @@ func _ready() -> void:
 	load_game()
 	for cid: String in STARTERS:
 		unlocked[cid] = true
-	var q: int = int(settings.get("quality", -1))
-	if q >= 0:
-		Config.quality_level = q
+	var qlevel: int = int(settings.get("quality", -1))
+	if qlevel >= 0:
+		Config.quality_level = qlevel
 
 
 func _read_json(path: String) -> Dictionary:

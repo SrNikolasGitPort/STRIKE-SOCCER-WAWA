@@ -151,7 +151,7 @@ func _refresh_rooms() -> void:
 	_fill_rooms()
 
 
-func _set_size(n: int) -> void:
+func _set_room_size(n: int) -> void:
 	_size = n
 	_say(Game.t("Formato: %dv%d", "Format: %dv%d") % [n, n])
 
@@ -294,7 +294,7 @@ func _build_create() -> void:
 	sz.add_theme_constant_override("separation", 8)
 	v.add_child(sz)
 	for n: int in [2, 4]:
-		var b: Button = Kit.button("%dv%d" % [n, n], _set_size.bind(n), Vector2(100, 44), 20)
+		var b: Button = Kit.button("%dv%d" % [n, n], _set_room_size.bind(n), Vector2(100, 44), 20)
 		sz.add_child(b)
 	v.add_child(Kit.button(Game.t("Criar", "Create"), _create_room.bind(room_name), Vector2(220, 52), 22))
 	v.add_child(Kit.label(Game.t("Dica: pelo celular/PC no mesmo Wi-Fi funciona direto; pela internet o jogo tenta abrir a porta via UPnP.", "Tip: same Wi-Fi works directly; over the internet the game tries UPnP."), 14, Color(0.7, 0.8, 1.0)))
