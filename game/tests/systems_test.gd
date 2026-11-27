@@ -5,6 +5,8 @@ extends SceneTree
 const SkillsScript = preload("res://scripts/gameplay/skills.gd")
 
 var _failures: int = 0
+var G: Node = null
+var N: Node = null
 
 
 func _initialize() -> void:
@@ -26,32 +28,34 @@ func _frames(count: int) -> void:
 
 func _run() -> void:
 	await _frames(5)
+	G = root.get_node("Game")
+	N = root.get_node("Net")
 	print("[1] Dados")
-	var order: Array = Game.char_order()
+	var order: Array = G.char_order()
 	_check(order.size() == 30, "30 personagens carregados (%d)" % order.size())
 	var bad: int = 0
 	for cid: Variant in order:
-		var c: Dictionary = Game.character(String(cid))
+		var c: Dictionary = G.character(String(cid))
 		for sid: Variant in c.get("skills", []) + c.get("awakening", []):
-			if Game.skill(String(sid)).is_empty():
+			if G.skill(String(sid)).is_empty():
 				bad += 1
 	_check(bad == 0, "todas as skills dos personagens existem")
-	_check(Game.is_unlocked("isagi") and not Game.is_unlocked("isagi_nel"), "Nel começa bloqueado")
+	_check(G.is_unlocked("isagi") and not G.is_unlocked("isagi_nel"), "Nel começa bloqueado")
 
 	print("[2] Missões Nel")
-	var qs: Array = Game.quests_for("isagi")
+	var qs: Array = G.quests_for("isagi")
 	_check(qs.size() == 3, "Isagi tem 3 missões")
 	var first: Dictionary = qs[0]
-	Game.report_event(String(first["event"]), "isagi", int(first["target"]))
-	_check(Game.quest_done.has(String(first["id"])), "missão concluída pelo evento")
-	_check(Game.is_unlocked("isagi_nel"), "Nel liberado após 1ª missão")
-	_check(Game.awakening_skills("isagi_nel").size() == 1, "1 skill de Despertar Nel liberada")
+	G.report_event(String(first["event"]), "isagi", int(first["target"]))
+	_check(G.quest_done.has(String(first["id"])), "missão concluída pelo evento")
+	_check(G.is_unlocked("isagi_nel"), "Nel liberado após 1ª missão")
+	_check(G.awakening_skills("isagi_nel").size() == 1, "1 skill de Despertar Nel liberada")
 
 	print("[3] Códigos de sala")
-	var code: String = Net.encode_room("192.168.1.23", 24565)
-	var dec: Dictionary = Net.decode_room(code)
+	var code: String = N.encode_room("192.168.1.23", 24565)
+	var dec: Dictionary = N.decode_room(code)
 	_check(code.length() == 11 and String(dec.get("ip", "")) == "192.168.1.23" and int(dec.get("port", 0)) == 24565, "código %s ida e volta" % code)
-	_check(Net.decode_room("xxxx").is_empty(), "código inválido rejeitado")
+	_check(N.decode_room("xxxx").is_empty(), "código inválido rejeitado")
 
 	print("[4] Menus")
 	var main: Node = (load("res://scenes/menu/Main.tscn") as PackedScene).instantiate()
@@ -65,8 +69,8 @@ func _run() -> void:
 	await _frames(3)
 
 	print("[5] Partida 4v4 com bots")
-	Game.mode = "4v4"
-	Game.selected_char = "isagi"
+	G.mode = "4v4"
+	G.selected_char = "isagi"
 	var m: Node = (load("res://scenes/match/Match.tscn") as PackedScene).instantiate()
 	root.add_child(m)
 	await _frames(10)
@@ -104,10 +108,10 @@ func _run() -> void:
 
 	print("[7] Todos os efeitos de skill")
 	var errors_before: int = _failures
-	for sid: Variant in Game.char_order():
-		var c2: Dictionary = Game.character(String(sid))
+	for sid: Variant in G.char_order():
+		var c2: Dictionary = G.character(String(sid))
 		for skid: Variant in c2.get("skills", []) + c2.get("awakening", []):
-			var sk: Dictionary = Game.skill(String(skid))
+			var sk: Dictionary = G.skill(String(skid))
 			ball.reset_to((h as Node3D).global_position + Vector3(1.0, 0.4, 0.0))
 			h.set("stamina", 100.0)
 			SkillsScript.execute(h, sk, m)
