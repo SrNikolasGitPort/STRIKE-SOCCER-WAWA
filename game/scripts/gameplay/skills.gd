@@ -42,6 +42,8 @@ static func execute(p: Node, sk: Dictionary, arena: Node) -> bool:
 			_dash(p, params, arena)
 		"evade":
 			_evade(p, params)
+		"dribble":
+			ok = _dribble(p, params, arena)
 		"steal":
 			_steal(p, params, arena)
 		"shockwave":
@@ -116,7 +118,16 @@ static func fire_shot(p: Node, params: Dictionary, arena: Node) -> bool:
 	var loft: float = float(params.get("loft", Config.f("kick.shot_loft")))
 	if bool(params.get("air", false)):
 		loft = maxf(loft, 0.45)
-	var curve: float = float(params.get("curve", 0.0)) * Config.f("kick.curve_spin") * float(p.get("side"))
+	loft += float(p.get("in_elev")) * 0.6
+	p.set("in_elev", 0.0)
+	var curve_k: float = float(params.get("curve", 0.0))
+	var curve: float = curve_k * Config.f("kick.curve_spin") * float(p.get("side"))
+	if curve != 0.0:
+		# compensa a curva: mira para fora para a bola voltar ao gol (efeito Magnus)
+		var dist: float = maxf((goal - pos).length() * 0.8, 6.0)
+		var theta: float = 0.5 * absf(curve) * Config.f("ball.magnus_k") * dist / (Config.f("ball.mass") * maxf(power, 1.0)) * 0.75
+		theta = minf(theta, deg_to_rad(38.0)) * float(params.get("comp", 1.0))
+		aim = aim.rotated(Vector3.UP, -signf(curve) * theta)
 	p.call("do_kick", Vector3(aim.x, loft, aim.z), power, curve, "skill")
 	p.call("kick_anim_now")
 	Sfx.play("kick_strong", -2.0)
@@ -275,13 +286,36 @@ static func _block(p: Node, params: Dictionary, arena: Node) -> void:
 	Sfx.play("buff", -2.0)
 
 
+## Metavisão: buff mínimo de velocidade, Ball Predict avançada, hitbox/interceptação (se houver)
+## e a Dimensão Omnisférica do personagem (cúpula quadriculada com motivos).
 static func _vision(p: Node, params: Dictionary, arena: Node) -> void:
-	p.set("vision_t", float(params.get("duration", 6.0)))
+	var dur: float = float(params.get("duration", 6.0))
+	p.set("vision_t", dur)
 	p.set("vision_assist", float(params.get("assist", 0.9)))
 	var slow: float = float(params.get("slow", 0.7))
 	for o: Node in _team_players(arena, int(p.get("team")), false):
-		o.call("add_buff", "debuff_speed", lerpf(1.0, slow, 0.5), float(params.get("duration", 6.0)) * 0.6)
+		o.call("add_buff", "debuff_speed", lerpf(1.0, slow, 0.5), dur * 0.6)
+	var sp: float = maxf(Config.f("predict.vision_speed_min"), float(p.call("buff", "speed")))
+	p.call("add_buff", "speed", sp, dur)
+	var icpt: float = float(params.get("intercept", 0.0))
+	p.set("intercept_r", icpt)
+	if icpt > 0.0:
+		p.call("add_buff", "reach", 0.9, dur)
+	var fx: Node = _fx(arena)
+	if fx != null:
+		fx.call("omni_dimension", p, String(params.get("omni", "default")), dur)
 	Sfx.play("vision")
+
+
+## Dribles de skill: zigzag, elastic, roulette, feint, nutmeg, stepover (Angle Breaker incluso).
+static func _dribble(p: Node, params: Dictionary, arena: Node) -> bool:
+	var wish: Vector3 = p.get("in_wish")
+	var base: Vector3 = wish if wish.length() > 0.2 else p.get("facing")
+	p.call("start_dribble", String(params.get("pattern", "zigzag")), float(params.get("duration", 1.4)),
+		float(params.get("speed", 1.4)), float(params.get("amp", 40.0)), float(params.get("freq", 2.2)),
+		float(params.get("brk", 1.0)), base)
+	Sfx.play("whoosh", -2.0)
+	return true
 
 
 static func _mark(p: Node, params: Dictionary, arena: Node) -> void:

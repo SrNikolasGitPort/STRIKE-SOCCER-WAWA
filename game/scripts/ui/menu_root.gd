@@ -5,6 +5,7 @@ extends Control
 const Kit = preload("res://scripts/ui/ui_kit.gd")
 const CharSelectScript = preload("res://scripts/ui/char_select.gd")
 const OnlineMenuScript = preload("res://scripts/ui/online_menu.gd")
+const ProfileScript = preload("res://scripts/ui/profile_menu.gd")
 
 var _current: Control = null
 var _pending_mode: String = ""
@@ -36,11 +37,18 @@ func _go(screen: String) -> void:
 			_current = _build_online()
 		"select":
 			_current = _build_select(false)
+		"profile":
+			_current = _build_profile_screen()
 		"lobby_pick":
 			_current = _build_select(true)
 		_:
 			_current = _build_main()
 	add_child(_current)
+	_current.modulate.a = 0.0
+	create_tween().tween_property(_current, "modulate:a", 1.0, 0.25)
+	for ch: Node in _current.get_children():
+		if ch is VBoxContainer:
+			Kit.animate_in(ch)
 
 
 # ------------------------------------------------------------------ principal
@@ -49,7 +57,7 @@ func _build_main() -> Control:
 	Kit.full(c)
 	Kit.background(c)
 	var center: VBoxContainer = VBoxContainer.new()
-	Kit.full(center)
+	Kit.safe_full(center)
 	center.alignment = BoxContainer.ALIGNMENT_CENTER
 	center.add_theme_constant_override("separation", 12)
 	c.add_child(center)
@@ -57,12 +65,17 @@ func _build_main() -> Control:
 	center.add_child(logo_holder)
 	var logo: TextureRect = Kit.logo(logo_holder, minf(get_viewport_rect().size.x * 0.7, 760.0))
 	logo.visible = true
+	logo.pivot_offset = logo.custom_minimum_size / 2.0
+	var pulse: Tween = logo.create_tween().set_loops()
+	pulse.tween_property(logo, "scale", Vector2(1.03, 1.03), 1.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	pulse.tween_property(logo, "scale", Vector2.ONE, 1.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	var info: Label = Kit.label("%s   •   %s %d   •   🪙 %d" % [Game.player_name, Game.t("Nível", "Level"), Game.level(), Game.coins], 22, Kit.GOLD, HORIZONTAL_ALIGNMENT_CENTER)
 	center.add_child(info)
 	var items: Array = [
 		[Game.t("JOGAR", "PLAY"), "mode"],
 		[Game.t("PERSONAGENS", "CHARACTERS"), "select"],
 		["MULTIPLAYER", "online"],
+		[Game.t("PERFIL", "PROFILE"), "profile"],
 		[Game.t("CONFIGURAÇÕES", "SETTINGS"), "settings"],
 	]
 	for it: Array in items:
@@ -98,7 +111,7 @@ func _build_modes() -> Control:
 	Kit.full(c)
 	Kit.background(c)
 	var box: VBoxContainer = VBoxContainer.new()
-	Kit.full(box)
+	Kit.safe_full(box)
 	box.alignment = BoxContainer.ALIGNMENT_CENTER
 	box.add_theme_constant_override("separation", 14)
 	c.add_child(box)
@@ -152,9 +165,16 @@ func _on_chosen(char_id: String, for_lobby: bool) -> void:
 
 
 # ------------------------------------------------------------------ online
+func _build_profile_screen() -> Control:
+	var o: Control = ProfileScript.new()
+	o.connect("back", _on_nav.bind("main"))
+	return o
+
+
 func _build_online() -> Control:
 	var o: Control = OnlineMenuScript.new()
 	o.connect("back", _on_nav.bind("main"))
+	o.connect("open_profile", _on_nav.bind("profile"))
 	o.connect("pick_character", _on_pick_lobby)
 	return o
 
@@ -170,7 +190,7 @@ func _build_settings() -> Control:
 	Kit.full(c)
 	Kit.background(c)
 	var margin: MarginContainer = MarginContainer.new()
-	Kit.full(margin)
+	Kit.safe_full(margin)
 	for side: String in ["left", "right", "top", "bottom"]:
 		margin.add_theme_constant_override("margin_" + side, 24)
 	c.add_child(margin)

@@ -1,10 +1,13 @@
 extends Control
 ## Controles de toque: joystick flutuante (metade esquerda da tela) e
 ## botões virtuais à direita. Injeta as MESMAS ações do teclado/gamepad
-## (move_*, sprint, shoot, pass, lob, reset_ball). Só aparece em dispositivos
+## (move_*, sprint, shoot, pass, jump, lock, reset_ball). Só aparece em dispositivos
 ## com tela de toque. Editor de posição/tamanho dos botões entra no M2.
 
+const KitScript = preload("res://scripts/ui/ui_kit.gd")
+
 var enabled: bool = false
+var _shoot_y0: float = 0.0
 
 var _joy_id: int = -1
 var _joy_origin: Vector2 = Vector2.ZERO
@@ -23,10 +26,11 @@ func _ready() -> void:
 	_buttons = {
 		"shoot": {"action": "shoot", "label": "CHUTE", "center": Vector2.ZERO, "radius": Config.f("touch.button_big_radius"), "finger": -1},
 		"pass": {"action": "pass", "label": "PASSE", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
-		"lob": {"action": "lob", "label": "ALTO", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
+		"jump": {"action": "jump", "label": "PULO", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
+		"lock": {"action": "lock", "label": "MIRA", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius") * 0.8, "finger": -1},
 		"sprint": {"action": "sprint", "label": "SPRINT", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
 		"dribble": {"action": "dribble", "label": "DRIBLE", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
-		"tackle": {"action": "tackle", "label": "DESARME", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
+		"tackle": {"action": "tackle", "label": "CARRINHO", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
 		"awaken": {"action": "awaken", "label": "DESPERTAR", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius"), "finger": -1},
 		"reset": {"action": "reset_ball", "label": "R", "center": Vector2.ZERO, "radius": Config.f("touch.button_small_radius") * 0.55, "finger": -1},
 	}
@@ -44,19 +48,21 @@ func claims(index: int) -> bool:
 
 func _layout() -> void:
 	var view: Vector2 = get_viewport_rect().size
+	var inset: Vector4 = KitScript.safe_inset(get_viewport())
 	var m: float = Config.f("touch.margin")
 	var big: float = Config.f("touch.button_big_radius")
 	var small: float = Config.f("touch.button_small_radius")
 	var gap: float = 14.0
-	var shoot: Vector2 = Vector2(view.x - m - big, view.y - m - big)
+	var shoot: Vector2 = Vector2(view.x - inset.z - m * 0.6 - big, view.y - inset.w - m * 0.6 - big)
 	_buttons["shoot"]["center"] = shoot
 	_buttons["pass"]["center"] = Vector2(shoot.x - big - small - gap, shoot.y + (big - small))
-	_buttons["lob"]["center"] = Vector2(shoot.x, shoot.y - big - small - gap)
+	_buttons["jump"]["center"] = Vector2(shoot.x, shoot.y - big - small - gap)
+	_buttons["lock"]["center"] = Vector2(view.x - inset.z - 50.0, 130.0 + inset.y)
 	_buttons["sprint"]["center"] = Vector2(shoot.x - big - small - gap, shoot.y - small * 2.0 - gap + (big - small))
 	_buttons["dribble"]["center"] = Vector2(shoot.x - big - small * 3.0 - gap * 2.0, shoot.y + (big - small))
 	_buttons["tackle"]["center"] = Vector2(shoot.x - big - small * 3.0 - gap * 2.0, shoot.y - small * 2.0 - gap + (big - small))
 	_buttons["awaken"]["center"] = Vector2(shoot.x, shoot.y - big - small * 3.0 - gap * 2.0)
-	_buttons["reset"]["center"] = Vector2(view.x - m - 30.0, 120.0)
+	_buttons["reset"]["center"] = Vector2(view.x - inset.z - 50.0, 215.0 + inset.y)
 
 
 func _process(_delta: float) -> void:
@@ -80,6 +86,15 @@ func _input(event: InputEvent) -> void:
 		if drag.index == _joy_id:
 			_joy_pos = drag.position
 			_update_stick()
+		elif int((_buttons["shoot"] as Dictionary)["finger"]) == drag.index:
+			# arrastar o botão de chute para cima/baixo ajusta a elevação do chute
+			var dy: float = _shoot_y0 - drag.position.y
+			if absf(dy) > 14.0:
+				Input.action_press("aim_up" if dy > 0.0 else "aim_down", clampf(absf(dy) / 120.0, 0.3, 1.0))
+				Input.action_release("aim_down" if dy > 0.0 else "aim_up")
+			else:
+				Input.action_release("aim_up")
+				Input.action_release("aim_down")
 
 
 func _on_press(index: int, pos: Vector2) -> void:
@@ -88,6 +103,8 @@ func _on_press(index: int, pos: Vector2) -> void:
 		if pos.distance_to(b["center"]) <= float(b["radius"]) * 1.15:
 			b["finger"] = index
 			Input.action_press(String(b["action"]))
+			if key == "shoot":
+				_shoot_y0 = pos.y
 			return
 	var view: Vector2 = get_viewport_rect().size
 	if _joy_id == -1 and pos.x < view.x * Config.f("touch.joystick_zone_fraction"):
@@ -103,6 +120,9 @@ func _on_release(index: int) -> void:
 		if int(b["finger"]) == index:
 			b["finger"] = -1
 			Input.action_release(String(b["action"]))
+			if key == "shoot":
+				Input.action_release("aim_up")
+				Input.action_release("aim_down")
 	if index == _joy_id:
 		_joy_id = -1
 		_joy_strength = Vector2.ZERO

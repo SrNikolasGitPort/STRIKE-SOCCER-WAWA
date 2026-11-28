@@ -8,6 +8,7 @@ var ball: Node3D = null
 var touch: Control = null
 var side: float = 1.0  # +1: começa olhando para +X (time 0); -1: para -X (time 1 online)
 
+var locked: bool = false  # trava de mira (shift lock): mouse controla a mira, corpo olha para a mira
 var yaw: float = 0.0
 var pitch: float = 0.0
 var distance: float = 0.0
@@ -98,10 +99,34 @@ func _rotate(dx: float, dy: float) -> void:
 	pitch = clampf(pitch + dy * Config.f("camera.sensitivity"), deg_to_rad(Config.f("camera.min_pitch_deg")), deg_to_rad(Config.f("camera.max_pitch_deg")))
 
 
+func toggle_lock() -> void:
+	locked = not locked
+	_sync_mouse()
+	if player != null and player.get("arena") != null:
+		var hud: Node = player.arena.get("hud")
+		if hud != null and hud.has_method("set_locked"):
+			hud.call("set_locked", locked)
+
+
+func _sync_mouse() -> void:
+	if OS.has_feature("mobile"):
+		return
+	var want: bool = locked and not get_tree().paused
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if want else Input.MOUSE_MODE_VISIBLE
+
+
+func _exit_tree() -> void:
+	if not OS.has_feature("mobile"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("lock"):
+		toggle_lock()
+		return
 	if event is InputEventMouseMotion:
 		var mm: InputEventMouseMotion = event
-		if (mm.button_mask & MOUSE_BUTTON_MASK_RIGHT) != 0:
+		if (mm.button_mask & MOUSE_BUTTON_MASK_RIGHT) != 0 or (locked and not get_tree().paused):
 			_rotate(mm.relative.x, mm.relative.y)
 	elif event is InputEventMouseButton:
 		var mb: InputEventMouseButton = event
@@ -149,14 +174,18 @@ func _process(delta: float) -> void:
 		_rotate(stick.x * 520.0 * delta, stick.y * 380.0 * delta)
 	var t: float = 1.0 - exp(-Config.f("camera.follow_speed") * delta)
 	_focus = _focus.lerp(_target_focus(), t)
+	if locked:
+		_sync_mouse()
 	_apply(delta)
 
 
 func _apply(delta: float) -> void:
 	var f: Vector3 = forward()
 	var r: Vector3 = f.cross(Vector3.UP)
-	var horiz: float = distance * cos(pitch)
-	var pos: Vector3 = _focus - f * horiz + Vector3(0.0, distance * sin(pitch), 0.0) + r * Config.f("camera.shoulder")
+	var dist: float = minf(distance, Config.f("camera.lock_distance")) if locked else distance
+	var shoulder: float = Config.f("camera.lock_shoulder") if locked else Config.f("camera.shoulder")
+	var horiz: float = dist * cos(pitch)
+	var pos: Vector3 = _focus - f * horiz + Vector3(0.0, dist * sin(pitch), 0.0) + r * shoulder
 	pos.y = maxf(pos.y, 0.7)
 	if _shake > 0.001:
 		pos += Vector3(_rng.randf_range(-1.0, 1.0), _rng.randf_range(-1.0, 1.0), _rng.randf_range(-1.0, 1.0)) * _shake

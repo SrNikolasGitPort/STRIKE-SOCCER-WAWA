@@ -18,6 +18,10 @@ var _slots: Array[Dictionary] = []
 var _player: Node = null
 var _names: Array[String] = ["AZUL", "VERMELHO"]
 var _last_score: Array[int] = [0, 0]
+var _root: Control
+var _elev_bar: ProgressBar
+var _cross: Label
+const KitScript = preload("res://scripts/ui/ui_kit.gd")
 
 
 func _ready() -> void:
@@ -26,6 +30,8 @@ func _ready() -> void:
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(root)
+	_root = root
+	KitScript.apply_safe(root)
 
 	_score = _label(root, 38, Control.PRESET_CENTER_TOP, Vector2(-300.0, 8.0), Vector2(600.0, 52.0))
 	_time = _label(root, 26, Control.PRESET_CENTER_TOP, Vector2(-120.0, 58.0), Vector2(240.0, 34.0))
@@ -38,6 +44,11 @@ func _ready() -> void:
 	_build_flow(root)
 	_power_bar = _bar(root, Control.PRESET_CENTER_BOTTOM, Vector2(-130.0, -210.0), Vector2(260.0, 14.0), Color(1.0, 0.75, 0.2))
 	_power_bar.visible = false
+	_elev_bar = _bar(root, Control.PRESET_CENTER_BOTTOM, Vector2(-130.0, -232.0), Vector2(260.0, 10.0), Color(0.4, 0.95, 1.0))
+	_elev_bar.visible = false
+	_cross = _label(root, 34, Control.PRESET_CENTER, Vector2(-20.0, -20.0), Vector2(40.0, 40.0))
+	_cross.text = "+"
+	_cross.visible = false
 
 	_toast_box = VBoxContainer.new()
 	_place(_toast_box, Control.PRESET_TOP_RIGHT, Vector2(-380.0, 44.0), Vector2(360.0, 200.0))
@@ -58,17 +69,29 @@ func _ready() -> void:
 	set_time(0.0)
 
 
+func _is_touch() -> bool:
+	return OS.has_feature("mobile") or DisplayServer.is_touchscreen_available()
+
+
+## No toque, as skills ficam entre o joystick (esquerda) e os botões (direita), sem sobrepor.
 func _slot_size() -> float:
-	return clampf(get_viewport().get_visible_rect().size.x / 15.0, 54.0, 88.0)
+	var w: float = get_viewport().get_visible_rect().size.x
+	if _is_touch():
+		return clampf((w - 810.0 - 52.0) / 6.0, 46.0, 70.0)
+	return clampf(w / 15.0, 54.0, 88.0)
+
+
+func _slot_shift() -> float:
+	return -75.0 if _is_touch() else 0.0
 
 
 func _build_flow(root: Control) -> void:
 	var size: float = _slot_size()
 	var total: float = 6.0 * size + 5.0 * 6.0 + 22.0
-	_flow_bar = _bar(root, Control.PRESET_CENTER_BOTTOM, Vector2(-total / 2.0, -size - 52.0), Vector2(total, 24.0), Color(0.6, 0.4, 1.0))
+	_flow_bar = _bar(root, Control.PRESET_CENTER_BOTTOM, Vector2(-total / 2.0 + _slot_shift(), -size - 52.0), Vector2(total, 24.0), Color(0.6, 0.4, 1.0))
 	_flow_bar.mouse_filter = Control.MOUSE_FILTER_STOP
 	_flow_bar.gui_input.connect(_flow_input)
-	_awake_label = _label(root, 15, Control.PRESET_CENTER_BOTTOM, Vector2(-total / 2.0, -size - 52.0), Vector2(total, 24.0))
+	_awake_label = _label(root, 15, Control.PRESET_CENTER_BOTTOM, Vector2(-total / 2.0 + _slot_shift(), -size - 52.0), Vector2(total, 24.0))
 	_awake_label.add_theme_constant_override("outline_size", 5)
 
 
@@ -83,7 +106,7 @@ func _make_slot(root: Control, i: int) -> void:
 	var gap: float = 6.0
 	var group_gap: float = 22.0 if i >= 3 else 0.0
 	var total: float = 6.0 * size + 5.0 * gap + 22.0
-	var x: float = -total / 2.0 + float(i) * (size + gap) + group_gap
+	var x: float = -total / 2.0 + float(i) * (size + gap) + group_gap + _slot_shift()
 	var panel: Panel = Panel.new()
 	_place(panel, Control.PRESET_CENTER_BOTTOM, Vector2(x, -size - 14.0), Vector2(size, size))
 	var sb: StyleBoxFlat = StyleBoxFlat.new()
@@ -211,7 +234,18 @@ func bind_player(p: Node) -> void:
 		_slots[i]["sid"] = "?"
 
 
+func set_locked(on: bool) -> void:
+	_cross.visible = on
+	toast(Game.t("Trava de mira: ON", "Aim lock: ON") if on else Game.t("Trava de mira: OFF", "Aim lock: OFF"), Color(0.5, 0.9, 1.0))
+
+
 func update_bars(stamina_ratio: float, charge: float, charging: bool) -> void:
+	if _root != null:
+		KitScript.apply_safe(_root)
+	if _player != null and is_instance_valid(_player):
+		var e: float = float(_player.get("in_elev"))
+		_elev_bar.visible = e > 0.02 or charging
+		_elev_bar.value = e
 	_stamina_bar.value = stamina_ratio
 	_power_bar.visible = charging
 	_power_bar.value = charge

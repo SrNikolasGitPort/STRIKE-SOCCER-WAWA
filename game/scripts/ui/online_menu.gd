@@ -4,6 +4,7 @@ extends Control
 
 signal back
 signal pick_character
+signal open_profile
 
 const Kit = preload("res://scripts/ui/ui_kit.gd")
 const GoogleAuth = preload("res://scripts/online/google_auth.gd")
@@ -31,7 +32,7 @@ func _ready() -> void:
 	Net.start_discovery()
 	Net.fetch_public_rooms()
 	var margin: MarginContainer = MarginContainer.new()
-	Kit.full(margin)
+	Kit.safe_full(margin)
 	for side: String in ["left", "right", "top", "bottom"]:
 		margin.add_theme_constant_override("margin_" + side, 22)
 	add_child(margin)
@@ -65,6 +66,10 @@ func _exit_tree() -> void:
 func _say(t: String) -> void:
 	if _msg != null:
 		_msg.text = t
+
+
+func _on_profile() -> void:
+	open_profile.emit()
 
 
 func _on_back() -> void:
@@ -123,6 +128,7 @@ func _build_account() -> void:
 		row.add_child(Kit.button(Game.t("Sair da conta", "Sign out"), _sign_out, Vector2(200, 46), 18))
 	else:
 		row.add_child(Kit.button(Game.t("Entrar com Google", "Sign in with Google"), _start_google, Vector2(260, 46), 18))
+	v.add_child(Kit.button(Game.t("Meu perfil / Personalizar", "My profile / Customize"), _on_profile, Vector2(300, 46), 18))
 	v.add_child(Kit.label(Game.t("Seu código de amigo: ", "Your friend code: ") + Net.friend_code(), 18, Color(0.7, 0.9, 1.0)))
 	var ne: HBoxContainer = HBoxContainer.new()
 	v.add_child(ne)

@@ -23,7 +23,7 @@ func _ready() -> void:
 	Kit.full(self)
 	Kit.background(self)
 	var margin: MarginContainer = MarginContainer.new()
-	Kit.full(margin)
+	Kit.safe_full(margin)
 	for side: String in ["left", "right", "top", "bottom"]:
 		margin.add_theme_constant_override("margin_" + side, 18)
 	add_child(margin)

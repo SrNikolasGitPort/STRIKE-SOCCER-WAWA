@@ -1,0 +1,16 @@
+{
+  "default":   {"a": "#1B2A6B", "b": "#7FB8FF", "motif": "diamond", "pattern": 0, "cells": 14, "radius": 11.0},
+  "isagi":     {"a": "#0A3C9E", "b": "#5CC8FF", "motif": "puzzle",  "pattern": 0, "cells": 14, "radius": 11.0},
+  "hiori":     {"a": "#3FA9CC", "b": "#E2FBFF", "motif": "ice",     "pattern": 0, "cells": 15, "radius": 11.0},
+  "reo_nel":   {"a": "#34156B", "b": "#B58CFF", "motif": "diamond", "pattern": 0, "cells": 18, "radius": 11.5},
+  "aiku":      {"a": "#0B5A2E", "b": "#55E08A", "motif": "snake",   "pattern": 0, "cells": 14, "radius": 11.0},
+  "aiku_nel":  {"a": "#08431F", "b": "#7CFFB0", "motif": "snake",   "pattern": 0, "cells": 16, "radius": 12.5},
+  "karasu":    {"a": "#1F1038", "b": "#8E6CD8", "motif": "raven",   "pattern": 0, "cells": 14, "radius": 11.5},
+  "charles":   {"a": "#7A5A0E", "b": "#FFE27A", "motif": "circle",  "pattern": 1, "cells": 16, "radius": 11.5},
+  "kaiser":    {"a": "#0A2A66", "b": "#4DA3FF", "motif": "rose",    "pattern": 0, "cells": 14, "radius": 11.5},
+  "yukimiya":  {"a": "#7A1D0A", "b": "#FF8A4A", "motif": "diamond", "pattern": 0, "cells": 14, "radius": 11.0},
+  "barou":     {"a": "#4A0A12", "b": "#FF3B3B", "motif": "diamond", "pattern": 0, "cells": 14, "radius": 11.0},
+  "shidou":    {"a": "#8A1252", "b": "#FFD84D", "motif": "diamond", "pattern": 0, "cells": 14, "radius": 11.0},
+  "rin":       {"a": "#0B4B52", "b": "#2AE0C9", "motif": "diamond", "pattern": 0, "cells": 14, "radius": 11.0},
+  "sae":       {"a": "#7A2A55", "b": "#FFC2E0", "motif": "circle",  "pattern": 0, "cells": 14, "radius": 11.0}
+}

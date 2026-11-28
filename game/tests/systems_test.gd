@@ -79,7 +79,12 @@ func _run() -> void:
 	root.add_child(m)
 	await _frames(10)
 	var players: Array = m.get("players")
-	_check(players.size() == 8, "8 jogadores em campo (%d)" % players.size())
+	_check(players.size() == 10, "8 jogadores + 2 goleiros em campo (%d)" % players.size())
+	var keepers: int = 0
+	for kp: Node in players:
+		if str(kp.get("role")) == "keeper":
+			keepers += 1
+	_check(keepers == 2, "um goleiro bot por time")
 	var start_ball: Vector3 = (m.get("ball") as Node3D).global_position
 	await _frames(600)
 	var moved: int = 0
@@ -129,6 +134,62 @@ func _run() -> void:
 			(load("res://scripts/gameplay/skills.gd") as GDScript).call("execute", h, sk, m)
 	await _frames(30)
 	_check(_failures == errors_before, "137 skills executaram sem erro de script")
+
+	print("[7b] Mecânicas novas (pulo, carrinho, drible, passe, predict, Metavisão, perfil)")
+	Engine.time_scale = 1.0
+	h.set("stun_t", 0.0)
+	h.set("fall_t", 0.0)
+	h.set("controls_enabled", true)
+	await _frames(60)
+	var y0: float = (h as Node3D).global_position.y
+	h.set("in_jump", true)
+	var ymax: float = y0
+	for _i: int in 40:
+		await _frames(1)
+		ymax = maxf(ymax, (h as Node3D).global_position.y)
+	_check(ymax > y0 + 0.5, "pulo levanta o jogador (%.2f -> %.2f)" % [y0, ymax])
+	await _frames(60)
+	h.call("start_slide")
+	await _frames(2)
+	_check(float(h.get("slide_t")) > 0.0, "carrinho iniciou")
+	await _frames(80)
+	_check(float(h.get("slide_t")) <= 0.0, "carrinho terminou")
+	h.set("recover_t", 0.0)
+	h.call("start_dribble", "zigzag", 0.6, 1.5, 40.0, 2.0, 1.0, Vector3(1, 0, 0))
+	await _frames(3)
+	_check(not (h.get("dsk") as Dictionary).is_empty(), "drible de skill ativo")
+	await _frames(60)
+	_check((h.get("dsk") as Dictionary).is_empty(), "drible de skill terminou")
+	var foe: Node = null
+	for q: Node in m.get("players"):
+		if int(q.get("team")) == 1 and str(q.get("role")) != "keeper":
+			foe = q
+	foe.set("immune_t", 0.0)
+	foe.set("shield_t", 0.0)
+	foe.call("knockdown", 1.0)
+	_check(float(foe.get("fall_t")) > 0.5, "knockdown derruba o adversário")
+	var info: Dictionary = m.call("choose_mate", h)
+	_check(info.get("mate") != null, "passe escolhe um parceiro (aleatório balanceado sem mira)")
+	var pred: Node3D = (load("res://scripts/gameplay/ball_predict.gd") as GDScript).new()
+	root.add_child(pred)
+	var sim: Dictionary = pred.call("simulate", Vector3(0, 0.3, 0), Vector3(18, 6, 0), 0.0, 2.0, 0.04, 1)
+	_check((sim["pts"] as Array).size() > 10, "Ball Predict simula a trajetória (%d pontos)" % (sim["pts"] as Array).size())
+	pred.queue_free()
+	var before_dim: int = 0
+	for ch: Node in m.get_children():
+		if ch.get_script() != null and String((ch.get_script() as Script).resource_path).ends_with("omni_dimension.gd"):
+			before_dim += 1
+	(load("res://scripts/gameplay/skills.gd") as GDScript).call("execute", h, G.skill("isagi_spatial"), m)
+	await _frames(5)
+	var dims: int = 0
+	for ch2: Node in m.get_children():
+		if ch2.get_script() != null and String((ch2.get_script() as Script).resource_path).ends_with("omni_dimension.gd"):
+			dims += 1
+	_check(dims == before_dim + 1, "Metavisão abre a Dimensão Omnisférica")
+	_check(float(h.get("vision_t")) > 0.0 and float(h.call("buff", "speed")) >= 1.08, "Metavisão dá buff mínimo de velocidade")
+	var matches0: int = int(G.career["matches"])
+	G.record_match({"score": [2, 1], "won": true, "draw": false, "stats": {"goals": 2}, "mode": "2v2"}, "isagi", 100.0)
+	_check(int(G.career["matches"]) == matches0 + 1 and G.history.size() >= 1, "perfil registra a partida no histórico")
 
 	print("[8] Fim")
 	Engine.time_scale = 1.0

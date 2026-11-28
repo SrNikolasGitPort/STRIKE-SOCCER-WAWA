@@ -73,13 +73,13 @@ CHARS = [
          stats=(94, 78, 76, 86, 58, 64, 96, 80), hair="wild", hc="#1C1C22", hc2="#C23030", eyes="#D3A030", skin="#EBC09A", aura="#FF3B3B",
          bio="O 'Rei' arrogante que devora o jogo. Físico dominante e finalização fria.", nel="ubers"),
     dict(id="shidou", name="Shidou", full="Ryusei Shidou", rarity="mitico", pos="Atacante", kit="bluelock", num=9,
-         stats=(94, 90, 88, 86, 52, 52, 98, 84), hair="pompadour", hc="#E0402A", eyes="#E8C14A", skin="#F1C9A5", aura="#FF5A1F",
+         stats=(94, 90, 88, 86, 52, 52, 98, 84), hair="pompadour", hc="#F5D33B", hc2="#FF6FB5", eyes="#FF6FB5", skin="#F1C9A5", aura="#FF5A9F",
          bio="Instinto de gol selvagem. O jogador mais forte fisicamente e explosivo.", nel="pxg"),
     dict(id="rin", name="Itoshi Rin", full="Rin Itoshi", rarity="mitico", pos="Atacante", kit="bluelock", num=10,
          stats=(94, 86, 84, 90, 88, 62, 82, 90), hair="short", hc="#1F5F6B", eyes="#2AB7A9", skin="#F1C9A5", aura="#2AE0C9",
          bio="Frio e obcecado. Joga como um marionetista, lendo e manipulando os rivais.", nel="pxg"),
     dict(id="sae", name="Itoshi Sae", full="Sae Itoshi", rarity="world_class", pos="Meia", kit="real", num=10,
-         stats=(92, 84, 84, 94, 99, 66, 78, 98), hair="short", hc="#1F5F6B", eyes="#2AB7A9", skin="#F1C9A5", aura="#FFFFFF",
+         stats=(92, 84, 84, 94, 99, 66, 78, 98), hair="short", hc="#F29BC0", eyes="#35C46B", skin="#F1C9A5", aura="#FFFFFF",
          bio="O maestro do Real Madrid Youth. Passes longos perfeitos e visão de jogo absurda."),
     dict(id="don_lorenzo", name="Don Lorenzo", full="Don Lorenzo", rarity="world_class", pos="Zagueiro", kit="ubers", num=3,
          stats=(64, 88, 86, 78, 88, 99, 94, 99), hair="short", hc="#2A2A2A", eyes="#B8963C", skin="#E0B48C", aura="#F2C94C",
@@ -102,10 +102,10 @@ def sk(sid, owner, cat, pt, en, effect, cd, ono=None, ref=TBC, jp="", **p):
 # ---- Isagi
 sk("isagi_direct_shot", "isagi", "normal", "Chute Direto", "Direct Shot", "shot", 6, "don", power=0.92, loft=0.08, aim=0.8)
 sk("isagi_backheel", "isagi", "normal", "Calcanhar Reverso", "Reverse Back Heel Shot", "shot", 8, "ba", power=0.8, loft=0.05, aim=1.0, goal_aim=True)
-sk("isagi_offball", "isagi", "normal", "Movimento Sem Bola", "Off-the-Ball Movement", "dash", 9, "shu", duration=2.0, speed=1.3)
-sk("isagi_spatial", "isagi", "awake", "Consciência Espacial", "Spatial Awareness", "vision", 12, "kiin", duration=6.0, assist=0.9)
+sk("isagi_offball", "isagi", "normal", "Movimento Sem Bola", "Off-the-Ball Movement", "dash", 8, "shu", duration=1.8, speed=1.35, magnet=0.4)
+sk("isagi_spatial", "isagi", "awake", "Metavisão: Espaço", "Meta-Vision: Space", "vision", 12, "kiin", duration=6.0, assist=0.9, omni="isagi")
 sk("isagi_flow", "isagi", "awake", "Estado de Flow", "Flow State", "buff", 14, "gogogo", duration=8.0, speed=1.18, shot=1.2, magnet=0.5)
-sk("isagi_nel_metavision", "isagi", "nel", "Metavisão", "Metavision", "vision", 12, "kiin", duration=7.0, assist=1.0, slow=0.6, ref="cap. 182 (confirmar)")
+sk("isagi_nel_metavision", "isagi", "nel", "Metavisão", "Metavision", "vision", 12, "kiin", duration=7.0, assist=1.0, slow=0.6, omni="isagi", ref="cap. 182 (confirmar)")
 sk("isagi_nel_metaburst", "isagi", "nel", "Ponto Meta-Burst", "Meta-Burst Point", "steal", 11, "baki", radius=5.5, pull=1.0)
 sk("isagi_nel_twogun", "isagi", "nel", "Voleio de Duas Armas", "Two-Gun Volley", "shot", 13, "zudon", power=1.18, loft=0.22, curve=0.4, aim=1.0, air=True)
 # ---- Igaguri
@@ -119,7 +119,7 @@ sk("goat_transcendental", "igaguri", "goat", "Malícia Transcendental", "Transce
 sk("goat_sermon", "igaguri", "goat", "Sermão do Templo", "Temple Sermon", "zone", 18, "gong", radius=7.0, duration=3.0, slow=0.45, ref=ORIG)
 # ---- Chigiri
 sk("chigiri_long_sprint", "chigiri", "normal", "Corrida de Longa Distância", "Long-Distance Sprinting", "dash", 9, "shu", duration=1.7, speed=1.55, push=14.0)
-sk("chigiri_no_break", "chigiri", "normal", "Drible Sem Parar", "No-Break Dribble", "dash", 8, "zaa", duration=2.2, speed=1.35, magnet=0.9)
+sk("chigiri_no_break", "chigiri", "normal", "Drible Sem Parar", "No-Break Dribble", "dribble", 8, "zaa", pattern="zigzag", duration=2.0, speed=1.5, amp=24, freq=1.7, brk=1.0)
 sk("chigiri_pressure", "chigiri", "normal", "Pressão em Alta Velocidade", "High-Speed Pressure", "steal", 10, "baki", radius=3.0, pull=0.8, speed=1.3)
 sk("chigiri_immense", "chigiri", "awake", "Velocidade Imensa", "Immense Speed", "dash", 14, "zaa", duration=3.5, speed=1.85, magnet=0.6)
 sk("chigiri_sprint_through", "chigiri", "awake", "Atravessar a Defesa", "Sprint through the Defense", "evade", 13, "shu", duration=1.6, speed=1.7, immune=True)
@@ -128,54 +128,54 @@ sk("chigiri_nel_crimson", "chigiri", "nel", "Corrida Carmesim", "Crimson Run", "
 sk("chigiri_nel_burst", "chigiri", "nel", "Disparada Final", "Final Burst", "buff", 15, "gogogo", duration=6.0, speed=1.35, shot=1.2, magnet=0.7, ref=ORIG)
 # ---- Zantetsu
 sk("zantetsu_accel", "zantetsu", "normal", "Aceleração Explosiva", "Explosive Acceleration", "dash", 8, "shu", duration=1.2, speed=1.7)
-sk("zantetsu_cutin", "zantetsu", "normal", "Chute de Corte", "Left Foot Shooting", "shot", 7, "don", power=0.9, loft=0.08, curve=-0.5, aim=0.8)
+sk("zantetsu_cutin", "zantetsu", "normal", "Chute de Corte", "Left Foot Shooting", "shot", 7, "don", power=0.9, loft=0.08, curve=-0.9, aim=0.8, goal_aim=True)
 sk("zantetsu_cross", "zantetsu", "normal", "Cruzamento de Linha de Fundo", "Byline Cross", "pass", 7, "hyu", speed=1.0, loft=0.45, curve=0.35)
 sk("zantetsu_blade", "zantetsu", "awake", "Investida Lâmina", "Blade Rush", "buff", 14, "shu", duration=5.0, speed=1.35, shot=1.25, ref=ORIG)
 sk("zantetsu_iron", "zantetsu", "awake", "Cortador de Ferro", "Iron Cutter", "evade", 13, "baki", duration=1.5, speed=1.6, immune=True, ref=ORIG)
 # ---- Otoya
 sk("otoya_infiltration", "otoya", "normal", "Infiltração Veloz", "High Speed Infiltration", "dash", 8, "shu", duration=1.8, speed=1.5)
-sk("otoya_offball", "otoya", "normal", "Movimento Sem Bola", "Off-the-Ball Movements", "evade", 9, "hyu", duration=1.4, speed=1.4, immune=True)
+sk("otoya_offball", "otoya", "normal", "Movimento Sem Bola", "Off-the-Ball Movements", "dribble", 9, "hyu", pattern="zigzag", duration=1.5, speed=1.5, amp=26, freq=2.2, brk=0.8)
 sk("otoya_taunt", "otoya", "normal", "Provocação", "Taunt", "mark", 11, "dododo", duration=3.0, radius=9.0, speed_debuff=0.8, power_debuff=0.75, ref=ORIG)
 sk("otoya_ninja", "otoya", "awake", "Ninja Total", "Ninja Stealth Walk", "dash", 14, "hyu", duration=5.0, speed=1.6, magnet=0.5)
 sk("otoya_blindspot", "otoya", "awake", "Ponto Cego Perfeito", "Perfect Blind Spot", "buff", 14, "kiin", duration=5.0, shot=1.3, speed=1.15, ref=ORIG)
 # ---- Bachira
-sk("bachira_elastic", "bachira", "normal", "Drible Elástico", "Elastic Dribbling", "evade", 7, "hyu", duration=1.2, speed=1.45, immune=True)
+sk("bachira_elastic", "bachira", "normal", "Drible Elástico", "Elastic Dribbling", "dribble", 7, "hyu", pattern="elastic", duration=1.3, speed=1.45, amp=58, freq=3.0, brk=1.4)
 sk("bachira_lift", "bachira", "normal", "Monster Lift", "Monster Lift", "shot", 8, "paan", power=0.55, loft=0.65, aim=0.7)
 sk("bachira_backspin", "bachira", "normal", "Passe Longo com Efeito", "Long-Range Backspin Pass", "pass", 9, "hyu", speed=1.25, loft=0.55)
 sk("bachira_monstrance", "bachira", "awake", "Monstrance", "Monstrance", "dash", 14, "gogogo", duration=4.0, speed=1.5, magnet=1.0)
-sk("bachira_triple", "bachira", "awake", "Triplo Túnel", "Triple Nutmeg", "evade", 12, "baki", duration=1.8, speed=1.55, immune=True)
+sk("bachira_triple", "bachira", "awake", "Triplo Túnel", "Triple Nutmeg", "dribble", 12, "baki", pattern="zigzag", duration=1.8, speed=1.6, amp=48, freq=2.8, brk=1.7)
 sk("bachira_egotistical", "bachira", "awake", "Estilo Egoísta", "Egotistical Style", "buff", 15, "zudon", duration=6.0, shot=1.3, speed=1.12, magnet=0.6)
 sk("bachira_nel_monster", "bachira", "nel", "Monstro Desperto", "Monster Awakening", "buff", 15, "gogogo", duration=7.0, speed=1.3, shot=1.25, magnet=0.9, ref="blog (não confiável); ideia do jogo")
-sk("bachira_nel_roulette", "bachira", "nel", "Roleta e Lift", "Roulette Lift", "evade", 10, "paan", duration=1.6, speed=1.6, immune=True, ref="cap. 296 (sec.)")
+sk("bachira_nel_roulette", "bachira", "nel", "Roleta e Lift", "Roulette Lift", "dribble", 10, "paan", pattern="roulette", duration=1.5, speed=1.7, amp=40, freq=2.0, brk=1.8, ref="cap. 296 (sec.)")
 sk("bachira_nel_cross", "bachira", "nel", "Cruzamento Veloz", "Quick Cross", "pass", 8, "hyu", speed=1.35, loft=0.3, curve=0.3, ref="cap. 296 (sec.)")
 # ---- Hiori
 sk("hiori_first_touch", "hiori", "normal", "Passe de Primeira", "First Touch Pass", "pass", 5, "hyu", speed=1.1, loft=0.03)
-sk("hiori_rabona", "hiori", "normal", "Cruzamento de Rabona", "Rabona Cross", "pass", 8, "paan", speed=1.05, loft=0.4, curve=0.5)
-sk("hiori_scissors", "hiori", "normal", "Tesoura Hipervelocidade", "Hyperspeed Scissors", "evade", 8, "shu", duration=1.2, speed=1.45, immune=True)
-sk("hiori_metavision", "hiori", "awake", "Metavisão", "Metavision", "vision", 12, "kiin", duration=6.0, assist=0.95, slow=0.7)
+sk("hiori_rabona", "hiori", "normal", "Cruzamento de Rabona", "Rabona Cross", "pass", 8, "paan", speed=1.05, loft=0.4, curve=1.0)
+sk("hiori_scissors", "hiori", "normal", "Tesoura Hipervelocidade", "Hyperspeed Scissors", "dribble", 8, "shu", pattern="stepover", duration=1.1, speed=1.5, amp=28, freq=4.0, brk=0.9)
+sk("hiori_metavision", "hiori", "awake", "Metavisão", "Metavision", "vision", 12, "kiin", duration=6.0, assist=0.95, slow=0.7, omni="hiori")
 sk("hiori_protagonism", "hiori", "awake", "Protagonismo", "Protagonism", "mark", 13, "gogogo", duration=5.0, radius=12.0, speed_debuff=0.8, power_debuff=0.7)
 sk("hiori_two_stage", "hiori", "awake", "Passe Falso em 2 Tempos", "2-Stage Fake Pass", "pass", 10, "baki", speed=1.4, loft=0.05, target_buff=1.3)
 # ---- Aiku
 sk("aiku_total_defense", "aiku", "normal", "Defesa Total", "Total Defense", "steal", 9, "kiin", radius=5.0, pull=1.0)
 sk("aiku_libero", "aiku", "normal", "Varredura de Líbero", "Libero Sweep", "block", 9, "zaa", duration=1.1, radius=3.0, ref=ORIG)
 sk("aiku_anticipation", "aiku", "normal", "Antecipação", "Reflex", "mark", 11, "kiin", duration=4.0, radius=10.0, speed_debuff=0.75, power_debuff=0.8)
-sk("aiku_flow", "aiku", "awake", "Estado de Flow", "Flow State", "vision", 14, "gogogo", duration=8.0, assist=0.7, slow=0.75)
+sk("aiku_flow", "aiku", "awake", "Estado de Flow", "Flow State", "vision", 14, "gogogo", duration=8.0, assist=0.7, slow=0.75, intercept=3.6, omni="aiku")
 sk("aiku_offensive_libero", "aiku", "awake", "Líbero Ofensivo", "Attacking Libero", "buff", 14, "don", duration=5.0, speed=1.25, shot=1.3, magnet=0.7, ref=ORIG)
 sk("aiku_fortress", "aiku", "awake", "Fortaleza", "Fortress", "zone", 15, "gong", radius=5.5, duration=4.0, slow=0.5, ref=ORIG)
-sk("aiku_nel_flow", "aiku", "nel", "Flow Total", "Total Flow", "vision", 12, "gogogo", duration=9.0, assist=0.95, slow=0.6, ref="Nel original (não existe no mangá)")
+sk("aiku_nel_flow", "aiku", "nel", "Metavisão da Serpente", "Serpent Metavision", "vision", 12, "gogogo", duration=9.0, assist=0.95, slow=0.6, intercept=5.0, omni="aiku_nel", ref="Nel original (não existe no mangá)")
 sk("aiku_nel_libero", "aiku", "nel", "Líbero Dourado", "Golden Libero", "buff", 13, "don", duration=6.0, speed=1.35, shot=1.4, magnet=0.8, ref="Nel original (não existe no mangá)")
 sk("aiku_nel_fortress", "aiku", "nel", "Fortaleza Eterna", "Eternal Fortress", "zone", 14, "gong", radius=6.5, duration=5.0, slow=0.6, ref="Nel original (não existe no mangá)")
 # ---- Kunigami
 sk("kunigami_left_shot", "kunigami", "normal", "Chute de Esquerda", "Left-Foot Shot", "shot", 6, "zudon", power=1.0, loft=0.07, aim=0.7)
-sk("kunigami_power_charge", "kunigami", "normal", "Investida de Ombro", "Power Charge", "shockwave", 9, "go", radius=2.6, knock=4.0, stun=0.4, ref=ORIG)
+sk("kunigami_power_charge", "kunigami", "normal", "Investida de Ombro", "Power Charge", "shockwave", 9, "go", radius=2.8, knock=4.0, stun=0.7, ref=ORIG)
 sk("kunigami_press", "kunigami", "normal", "Corrida de Pressão", "Press Run", "steal", 10, "dododo", radius=3.2, pull=0.8, speed=1.25, ref=ORIG)
 sk("kunigami_hero", "kunigami", "awake", "Modo Herói", "Hero Mode", "buff", 14, "gogogo", duration=6.0, shot=1.4, speed=1.12, ref=ORIG)
 sk("kunigami_hot_blood", "kunigami", "awake", "Empurrão de Sangue Quente", "Hot-Blood Push", "evade", 12, "go", duration=1.6, speed=1.5, immune=True, ref=ORIG)
 # ---- Karasu
 sk("karasu_arm_block", "karasu", "normal", "Bloqueio de Braço", "Expert Ball Control", "buff", 10, "go", duration=2.0, shield=True, magnet=0.8)
-sk("karasu_feint", "karasu", "normal", "Finta de Passe", "Feints", "evade", 8, "hyu", duration=1.2, speed=1.4, immune=True)
+sk("karasu_feint", "karasu", "normal", "Finta de Passe", "Feints", "dribble", 8, "hyu", pattern="feint", duration=1.1, speed=1.45, amp=50, freq=2.0, brk=1.1)
 sk("karasu_weak_link", "karasu", "normal", "Análise do Elo Fraco", "Sharp Analytical Ability", "mark", 11, "kiin", duration=5.0, radius=10.0, speed_debuff=0.8, power_debuff=0.8)
-sk("karasu_metavision", "karasu", "awake", "Metavisão", "Metavision", "vision", 12, "kiin", duration=6.0, assist=0.9, slow=0.7)
+sk("karasu_metavision", "karasu", "awake", "Metavisão", "Metavision", "vision", 12, "kiin", duration=6.0, assist=0.9, slow=0.7, intercept=3.8, omni="karasu")
 sk("karasu_crow_rule", "karasu", "awake", "Regra do Corvo", "Crow's Rule", "mark", 14, "gogogo", duration=5.0, radius=12.0, speed_debuff=0.7, power_debuff=0.6, silence=True, ref=ORIG)
 # ---- Reo
 sk("reo_precise_pass", "reo", "normal", "Passe Preciso", "Precise Pass", "pass", 5, "hyu", speed=1.15, loft=0.05)
@@ -184,11 +184,11 @@ sk("reo_copy_run", "reo", "normal", "Cópia de Corrida", "Run Copy", "dash", 9, 
 sk("reo_chameleon", "reo", "awake", "Camaleão", "The Chameleon", "copy", 16, "gogogo", fraction=0.75)
 sk("reo_organizer", "reo", "awake", "Organizador", "Organizer", "buff", 14, "kiin", duration=6.0, speed=1.12, shot=1.15, allies=8.0, ref=ORIG)
 sk("reo_nel_chameleon", "reo", "nel", "Camaleão Pleno", "The Chameleon (Nel)", "copy", 12, "gogogo", fraction=0.92, ref="cap. 297 (sec.)")
-sk("reo_nel_organizer", "reo", "nel", "Maestro do Manshine", "Manshine Conductor", "buff", 13, "kiin", duration=7.0, speed=1.2, shot=1.25, allies=10.0, ref=ORIG)
+sk("reo_nel_metavision", "reo", "nel", "Metavisão do Camaleão", "Chameleon Metavision", "vision", 13, "kiin", duration=7.0, assist=1.0, slow=0.65, omni="reo_nel", ref="ideia do jogo (Nel original)")
 sk("reo_nel_perfect_copy", "reo", "nel", "Cópia Perfeita", "Perfect Copy", "copy", 14, "zudon", fraction=1.0, ref=ORIG)
 # ---- Nagi
 sk("nagi_trap_shot", "nagi", "normal", "Chute com Domínio", "Trap Shot", "shot", 6, "paan", power=0.95, loft=0.07, aim=0.9, trap=True)
-sk("nagi_creative_trap", "nagi", "normal", "Domínio Criativo", "Creative Trap", "evade", 8, "hyu", duration=1.0, speed=1.3, immune=True, magnet=1.0)
+sk("nagi_creative_trap", "nagi", "normal", "Domínio Criativo", "Creative Trap", "dribble", 8, "hyu", pattern="nutmeg", duration=1.2, speed=1.4, amp=30, freq=2.0, brk=1.0)
 sk("nagi_black_hole", "nagi", "normal", "Domínio Buraco Negro", "Black Hole Trap", "steal", 9, "zaa", radius=4.2, pull=1.0)
 sk("nagi_two_stage", "nagi", "awake", "Voleio Falso em 2 Estágios", "2 Stage Fake Volley Shot", "shot", 11, "zudon", power=1.1, loft=0.2, curve=0.6, aim=1.0, air=True)
 sk("nagi_flow_trap", "nagi", "awake", "Domínio em Flow", "Flow Trap", "buff", 13, "gogogo", duration=6.0, magnet=1.0, speed=1.1, shot=1.1)
@@ -196,54 +196,54 @@ sk("nagi_nel_two_stage", "nagi", "nel", "Voleio Falso em 2 Estágios (Nel)", "2 
 sk("nagi_nel_revolver", "nagi", "nel", "Revólver de Cinco Tiros", "Five-Shot Revolver Fake Volley", "multishot", 14, "dododo", power=0.9, shots=3, ref="só o nome (Sportskeeda); efeito A CONFIRMAR")
 sk("nagi_nel_flow", "nagi", "nel", "Flow de Domínio Absoluto", "Absolute Trap Flow", "buff", 12, "gogogo", duration=7.0, magnet=1.0, speed=1.18, shot=1.2, ref=ORIG)
 # ---- Yukimiya
-sk("yukimiya_drag", "yukimiya", "normal", "Tesoura de Arrasto", "Drag Scissors", "evade", 7, "shu", duration=1.2, speed=1.5, immune=True)
-sk("yukimiya_gyro", "yukimiya", "normal", "Chute Giroscópico", "Gyro Shot", "shot", 7, "paan", power=0.95, loft=0.3, curve=0.7, aim=0.8)
-sk("yukimiya_sword_screw", "yukimiya", "normal", "Parafuso da Espada", "Sword Screw", "shot", 9, "kiin", power=0.9, loft=0.4, curve=-0.4, aim=0.9)
+sk("yukimiya_drag", "yukimiya", "normal", "Tesoura de Arrasto", "Drag Scissors", "dribble", 7, "shu", pattern="zigzag", duration=1.3, speed=1.55, amp=42, freq=2.6, brk=1.2)
+sk("yukimiya_gyro", "yukimiya", "normal", "Chute Giroscópico", "Gyro Shot", "shot", 7, "paan", power=0.95, loft=0.3, curve=1.0, aim=0.8)
+sk("yukimiya_sword_screw", "yukimiya", "normal", "Parafuso da Espada", "Sword Screw", "shot", 9, "kiin", power=0.9, loft=0.4, curve=-0.8, aim=0.9)
 sk("yukimiya_flow", "yukimiya", "awake", "Estado de Flow", "Flow State", "buff", 14, "gogogo", duration=6.0, speed=1.2, magnet=0.9, shot=1.15)
-sk("yukimiya_predator", "yukimiya", "awake", "Olhar de Predador", "Predator Eye", "vision", 12, "kiin", duration=5.0, assist=1.0, slow=0.8, ref="cap. 217 (confirmar)")
-sk("yukimiya_emperor", "yukimiya", "awake", "Estilo Imperador do 1x1", "1-on-1 Emperor Style", "evade", 13, "go", duration=2.0, speed=1.7, immune=True)
+sk("yukimiya_predator", "yukimiya", "awake", "Olhar de Predador", "Predator Eye", "vision", 12, "kiin", duration=5.0, assist=1.0, slow=0.8, omni="yukimiya", ref="cap. 217 (confirmar)")
+sk("yukimiya_emperor", "yukimiya", "awake", "Estilo Imperador do 1x1", "1-on-1 Emperor Style", "dribble", 13, "go", pattern="feint", duration=1.6, speed=1.8, amp=60, freq=2.2, brk=2.0)
 # ---- Charles
 sk("charles_risky_pass", "charles", "normal", "Passe Arriscado", "Passing Accuracy", "pass", 5, "hyu", speed=1.2, loft=0.04)
 sk("charles_sky_arch", "charles", "normal", "Passe Arco do Céu", "Sky Arch Pass", "pass", 8, "paan", speed=1.1, loft=0.6, curve=0.4)
-sk("charles_rabona", "charles", "normal", "Cruzamento de Rabona", "Rabona Cross", "pass", 8, "hyu", speed=1.1, loft=0.35, curve=0.5)
-sk("charles_metavision", "charles", "awake", "Metavisão", "Metavision", "vision", 12, "kiin", duration=6.0, assist=0.95, slow=0.7)
+sk("charles_rabona", "charles", "normal", "Cruzamento de Rabona", "Rabona Cross", "pass", 8, "hyu", speed=1.1, loft=0.35, curve=1.0)
+sk("charles_metavision", "charles", "awake", "Metavisão", "Metavision", "vision", 12, "kiin", duration=6.0, assist=0.95, slow=0.7, omni="charles")
 sk("charles_heart_pass", "charles", "awake", "Passe do Coração", "Heart of PXG Pass", "pass", 13, "gogogo", speed=1.4, loft=0.05, target_buff=1.4, ref=ORIG)
 # ---- Barou
 sk("barou_middle_shot", "barou", "normal", "Chute Médio", "Middle Shot", "shot", 6, "don", power=0.98, loft=0.1, aim=0.75)
-sk("barou_charging", "barou", "normal", "Habilidade de Investida", "Charging Skill", "shockwave", 9, "go", radius=2.8, knock=4.5, stun=0.5)
-sk("barou_chop", "barou", "normal", "Finta de Corte", "Chop Feint", "evade", 8, "ba", duration=1.2, speed=1.45, immune=True)
+sk("barou_charging", "barou", "normal", "Habilidade de Investida", "Charging Skill", "shockwave", 9, "go", radius=3.0, knock=4.5, stun=0.8)
+sk("barou_chop", "barou", "normal", "Finta de Corte", "Chop Feint", "dribble", 8, "ba", pattern="feint", duration=1.1, speed=1.5, amp=55, freq=2.0, brk=1.2)
 sk("barou_villain_flow", "barou", "awake", "Fluxo Vilão", "Villainous Soccer", "buff", 14, "gogogo", duration=6.0, speed=1.2, magnet=0.9, shot=1.2)
 sk("barou_lightning", "barou", "awake", "Drible Relâmpago", "Lightning Dribble", "dash", 11, "baki", duration=2.2, speed=1.4, magnet=1.0)
-sk("barou_nel_stealth", "barou", "nel", "Chute Assassino Furtivo", "Stealth Kill Shot", "shot", 11, "zudon", power=1.1, loft=0.15, curve=0.8, aim=1.0, ref="cap. 216")
-sk("barou_nel_predator", "barou", "nel", "Olhar de Predador", "Predator Eye", "vision", 12, "kiin", duration=6.0, assist=1.0, slow=0.8, ref="cap. 217")
+sk("barou_nel_stealth", "barou", "nel", "Chute Assassino Furtivo", "Stealth Kill Shot", "shot", 11, "zudon", power=1.1, loft=0.15, curve=1.2, aim=1.0, ref="cap. 216")
+sk("barou_nel_predator", "barou", "nel", "Olhar de Predador", "Predator Eye", "vision", 12, "kiin", duration=6.0, assist=1.0, slow=0.8, omni="barou", ref="cap. 217")
 sk("barou_nel_double", "barou", "nel", "Chute de Túnel Duplo", "Double Nutmeg Shot", "shot", 11, "dododo", power=1.2, loft=0.1, aim=1.0)
 # ---- Shidou
 sk("shidou_drive", "shidou", "normal", "Chute Drive", "Drive Shot", "shot", 6, "zudon", power=1.0, loft=0.08, aim=0.75)
-sk("shidou_aggressive", "shidou", "normal", "Drible Agressivo", "Aggressive Dribble", "evade", 8, "dododo", duration=1.3, speed=1.5, immune=True)
+sk("shidou_aggressive", "shidou", "normal", "Drible Agressivo", "Aggressive Dribble", "dribble", 8, "dododo", pattern="zigzag", duration=1.4, speed=1.7, amp=30, freq=1.8, brk=1.7)
 sk("shidou_bicycle", "shidou", "normal", "Bicicleta", "Bicycle Kick", "shot", 10, "baki", power=1.05, loft=0.35, aim=1.0, air=True)
 sk("shidou_dragon", "shidou", "awake", "Dragon Drive", "Dragon Drive", "dashshot", 13, "zudon", power=1.2, loft=0.12, aim=1.0, run=0.55, speed=1.6, ref="anime T2 ep. 10")
 sk("shidou_bigbang", "shidou", "awake", "Big Bang Drive", "Big Bang Drive", "shot", 14, "zudon", power=1.3, loft=0.3, aim=1.0, air=True)
-sk("shidou_instinct", "shidou", "awake", "Instinto de Gol", "Extreme Spatial Awareness", "vision", 12, "kiin", duration=5.0, assist=1.0, slow=0.8)
+sk("shidou_instinct", "shidou", "awake", "Instinto de Gol", "Extreme Spatial Awareness", "vision", 12, "kiin", duration=5.0, assist=1.0, slow=0.8, omni="shidou")
 sk("shidou_nel_dragon", "shidou", "nel", "Dragon Drive II", "Dragon Drive II", "dashshot", 11, "zudon", power=1.35, loft=0.12, aim=1.0, run=0.5, speed=1.8, ref="evolução do jogo (sem técnica Nel oficial)")
 sk("shidou_nel_bigbang", "shidou", "nel", "Big Bang Drive II", "Big Bang Drive II", "shot", 12, "zudon", power=1.45, loft=0.3, aim=1.0, air=True, ref="evolução do jogo")
 sk("shidou_nel_frenzy", "shidou", "nel", "Frenesi do Artilheiro", "Goal Poacher Frenzy", "buff", 15, "gogogo", duration=7.0, speed=1.25, shot=1.35, magnet=0.8, ref=ORIG)
 # ---- Rin
-sk("rin_trivela", "rin", "normal", "Chute de Trivela", "Trivela Shot", "shot", 6, "paan", power=0.95, loft=0.1, curve=0.8, aim=0.85)
-sk("rin_elastico", "rin", "normal", "Caneta Elástica", "Elastico Nutmeg", "evade", 8, "hyu", duration=1.3, speed=1.5, immune=True)
+sk("rin_trivela", "rin", "normal", "Chute Curvo", "Curve Shot", "shot", 6, "paan", power=0.95, loft=0.1, curve=2.0, aim=0.9, goal_aim=True)
+sk("rin_elastico", "rin", "normal", "Caneta Elástica", "Elastico Nutmeg", "dribble", 8, "hyu", pattern="elastic", duration=1.2, speed=1.55, amp=52, freq=3.2, brk=1.3)
 sk("rin_oppressive", "rin", "normal", "Passe Opressor", "Oppressive Pass", "pass", 7, "go", speed=1.45, loft=0.05)
 sk("rin_puppet", "rin", "awake", "Fluxo do Marionetista", "Puppet Flow", "mark", 13, "gogogo", duration=5.0, radius=12.0, speed_debuff=0.75, power_debuff=0.75)
 sk("rin_cog_burst", "rin", "awake", "Explosão do Centro de Gravidade", "Centre of Gravity Full Burst", "shockwave", 12, "dododo", radius=3.2, knock=5.0, stun=0.6)
 sk("rin_sync", "rin", "awake", "Sincronização", "Synchronization", "steal", 11, "kiin", radius=4.8, pull=1.0)
-sk("rin_nel_scissor", "rin", "nel", "Voleio Tesoura", "Scissor Kick Volley", "shot", 11, "zudon", power=1.25, loft=0.25, curve=0.5, aim=1.0, air=True, ref="cap. 275")
-sk("rin_nel_opposite", "rin", "nel", "Aceleração Oposta", "Opposite Acceleration", "evade", 10, "shu", duration=1.8, speed=1.8, immune=True, ref="Japan U-20 (confirmar)")
-sk("rin_nel_puppet", "rin", "nel", "Fluxo do Marionetista II", "Puppet Flow II", "vision", 12, "gogogo", duration=7.0, assist=1.0, slow=0.7, ref="cap. 269-270 (confirmar)")
+sk("rin_nel_destructive", "rin", "nel", "Chute Curvo Destrutivo", "Destructive Curve Shot", "shot", 10, "zudon", power=1.3, loft=0.14, curve=3.0, aim=1.0, goal_aim=True, comp=1.0, ref="evolução do Chute Curvo (ideia do jogo)")
+sk("rin_nel_opposite", "rin", "nel", "Aceleração Oposta", "Opposite Acceleration", "dribble", 10, "shu", pattern="feint", duration=1.4, speed=1.9, amp=62, freq=2.0, brk=1.8, ref="Japan U-20 (confirmar)")
+sk("rin_nel_puppet", "rin", "nel", "Fluxo do Marionetista II", "Puppet Flow II", "vision", 12, "gogogo", duration=7.0, assist=1.0, slow=0.7, omni="rin", ref="cap. 269-270 (confirmar)")
 # ---- Sae
 sk("sae_long_pass", "sae", "normal", "Passe Longo Cortante", "Long Driven Pass", "pass", 6, "hyu", speed=1.6, loft=0.28)
-sk("sae_trivela", "sae", "normal", "Passe de Trivela", "Trivela", "pass", 7, "paan", speed=1.25, loft=0.1, curve=0.6)
-sk("sae_counter", "sae", "normal", "Contra-Drible", "Counter Dribbling", "evade", 8, "kiin", duration=1.2, speed=1.4, immune=True)
-sk("sae_metavision", "sae", "awake", "Meta Visão", "Meta Vision", "vision", 12, "kiin", duration=6.0, assist=1.0, slow=0.5)
+sk("sae_trivela", "sae", "normal", "Passe de Trivela", "Trivela", "pass", 7, "paan", speed=1.25, loft=0.1, curve=1.0)
+sk("sae_counter", "sae", "normal", "Contra-Drible", "Counter Dribbling", "dribble", 8, "kiin", pattern="roulette", duration=1.2, speed=1.5, amp=40, freq=2.0, brk=1.2)
+sk("sae_metavision", "sae", "awake", "Meta Visão", "Meta Vision", "vision", 12, "kiin", duration=6.0, assist=1.0, slow=0.5, omni="sae")
 sk("sae_ultra_pass", "sae", "awake", "Passe Ultrarrápido", "Ultra-Fast Pass", "pass", 10, "zudon", speed=2.0, loft=0.02)
-sk("sae_nutmeg_combo", "sae", "awake", "Combo Elástico e Rabona", "Elastico/Rabona Nutmeg", "evade", 12, "baki", duration=1.8, speed=1.6, immune=True)
+sk("sae_nutmeg_combo", "sae", "awake", "Combo Elástico e Rabona", "Elastico/Rabona Nutmeg", "dribble", 12, "baki", pattern="nutmeg", duration=1.5, speed=1.65, amp=40, freq=2.4, brk=1.6)
 # ---- Don Lorenzo
 sk("lorenzo_manmark", "don_lorenzo", "normal", "Marcação Individual", "Manmarking", "mark", 10, "go", duration=5.0, radius=10.0, speed_debuff=0.75, power_debuff=0.85)
 sk("lorenzo_intercept", "don_lorenzo", "normal", "Interceptação Preditiva", "Predictive Interception", "steal", 8, "kiin", radius=4.6, pull=1.0, ref=ORIG)
@@ -255,7 +255,7 @@ sk("kaiser_impact", "kaiser", "normal", "Kaiser Impact", "Kaiser Impact", "shot"
 sk("kaiser_offball", "kaiser", "normal", "Movimento Sem Bola", "Off the Ball Movements", "evade", 8, "shu", duration=1.3, speed=1.4, immune=True)
 sk("kaiser_pressure", "kaiser", "normal", "Domínio Sob Pressão", "Pressure Control", "buff", 9, "go", duration=2.5, shield=True, magnet=0.9, ref=ORIG)
 sk("kaiser_impact_evo", "kaiser", "awake", "Kaiser Impact Evoluído", "Evolved Kaiser Impact", "shot", 12, "zudon", power=1.4, loft=0.06, aim=1.0, ref=TBC)
-sk("kaiser_metavision", "kaiser", "awake", "Metavisão", "Metavision", "vision", 12, "kiin", duration=6.0, assist=1.0, slow=0.6, ref="sec. (confirmar)")
+sk("kaiser_metavision", "kaiser", "awake", "Metavisão", "Metavision", "vision", 12, "kiin", duration=6.0, assist=1.0, slow=0.6, omni="kaiser", ref="sec. (confirmar)")
 
 # ------------------------------------------------------------------ missões Nel
 # (evento, quantidade) por skill Nel, na mesma ordem das skills "nel"/"goat" do dono.

@@ -38,6 +38,24 @@ var settings: Dictionary = {
 	"lang": "pt", "reduce_cutscenes": false, "quality": -1, "show_fps": false, "touch_scale": 1.0,
 }
 
+# Perfil e personalização (Multiplayer): bio, título, avatar, cores do uniforme/aura/cabelo.
+var profile: Dictionary = {"bio": "", "title": "rookie", "avatar": "", "banner": 0}
+var custom: Dictionary = {"kit": "", "shorts": "", "hair": "", "aura": ""}
+var career: Dictionary = {"matches": 0, "wins": 0, "draws": 0, "losses": 0, "goals": 0, "assists": 0, "steals": 0,
+	"skills": 0, "awakens": 0, "seconds": 0, "chars": {}}
+var history: Array = []   # últimas 30 partidas
+
+const TITLES: Array = [
+	{"id": "rookie", "pt": "Novato", "en": "Rookie", "need": "", "n": 0},
+	{"id": "striker", "pt": "Artilheiro", "en": "Striker", "need": "goals", "n": 10},
+	{"id": "ego", "pt": "Egoísta", "en": "Egoist", "need": "goals", "n": 40},
+	{"id": "playmaker", "pt": "Armador", "en": "Playmaker", "need": "assists", "n": 10},
+	{"id": "thief", "pt": "Ladrão de Bola", "en": "Ball Thief", "need": "steals", "n": 25},
+	{"id": "awakened", "pt": "Despertado", "en": "Awakened", "need": "awakens", "n": 5},
+	{"id": "champion", "pt": "Campeão", "en": "Champion", "need": "wins", "n": 10},
+	{"id": "legend", "pt": "Lenda do Blue Lock", "en": "Blue Lock Legend", "need": "wins", "n": 50},
+]
+
 var _skills: Dictionary = {}
 var _quests: Array = []
 var _order: Array = []
@@ -210,6 +228,69 @@ func quest_progress_of(q: Dictionary) -> int:
 	return mini(int(quest_progress.get(String(q["id"]), 0)), int(q.get("target", 1)))
 
 
+func title_unlocked(t: Dictionary) -> bool:
+	if String(t["need"]) == "":
+		return true
+	return int(career.get(String(t["need"]), 0)) >= int(t["n"])
+
+
+func title_name(id: String) -> String:
+	for t: Dictionary in TITLES:
+		if String(t["id"]) == id:
+			return String(t["pt"]) if String(settings.get("lang", "pt")) == "pt" else String(t["en"])
+	return ""
+
+
+## Registra o resultado de uma partida na carreira e no histórico.
+func record_match(res: Dictionary, char_id: String, seconds: float) -> void:
+	var st: Dictionary = res.get("stats", {})
+	career["matches"] = int(career["matches"]) + 1
+	if bool(res.get("won", false)):
+		career["wins"] = int(career["wins"]) + 1
+	elif bool(res.get("draw", false)):
+		career["draws"] = int(career["draws"]) + 1
+	else:
+		career["losses"] = int(career["losses"]) + 1
+	for k: String in ["goals", "assists", "steals", "skills", "awakens"]:
+		career[k] = int(career[k]) + int(st.get(k, 0))
+	career["seconds"] = int(career["seconds"]) + int(seconds)
+	var chars: Dictionary = career["chars"]
+	chars[char_id] = int(chars.get(char_id, 0)) + 1
+	var sc: Array = res.get("score", [0, 0])
+	history.push_front({"t": Time.get_unix_time_from_system(), "mode": String(res.get("mode", "")), "my": int(sc[0]), "other": int(sc[1]),
+		"won": bool(res.get("won", false)), "draw": bool(res.get("draw", false)), "char": char_id, "goals": int(st.get("goals", 0)), "assists": int(st.get("assists", 0))})
+	while history.size() > 30:
+		history.pop_back()
+
+
+func favorite_char() -> String:
+	var best: String = ""
+	var n: int = 0
+	for k: Variant in (career["chars"] as Dictionary):
+		if int((career["chars"] as Dictionary)[k]) > n:
+			n = int((career["chars"] as Dictionary)[k])
+			best = String(k)
+	return best
+
+
+## Aplica a personalização do jogador (cores) a uma ficha de personagem (cópia).
+func apply_custom(character: Dictionary) -> Dictionary:
+	var c: Dictionary = character.duplicate(true)
+	var v: Dictionary = c.get("visual", {})
+	var kit: Dictionary = v.get("kit", {})
+	if String(custom.get("kit", "")) != "":
+		kit["main"] = String(custom["kit"])
+	if String(custom.get("shorts", "")) != "":
+		kit["shorts"] = String(custom["shorts"])
+	if String(custom.get("hair", "")) != "":
+		v["hair_color"] = String(custom["hair"])
+	if String(custom.get("aura", "")) != "":
+		v["aura"] = String(custom["aura"])
+	v["kit"] = kit
+	c["visual"] = v
+	return c
+
+
 func level() -> int:
 	return 1 + int(sqrt(float(xp) / 100.0))
 
@@ -226,6 +307,10 @@ func save_game() -> void:
 	cf.set_value("p", "friends", friends)
 	cf.set_value("p", "selected", selected_char)
 	cf.set_value("p", "google", google_user)
+	cf.set_value("p", "profile", profile)
+	cf.set_value("p", "custom", custom)
+	cf.set_value("p", "career", career)
+	cf.set_value("p", "history", history)
 	cf.set_value("s", "settings", settings)
 	cf.save(SAVE_PATH)
 
@@ -243,6 +328,21 @@ func load_game() -> void:
 	friends = cf.get_value("p", "friends", [])
 	selected_char = String(cf.get_value("p", "selected", "isagi"))
 	google_user = cf.get_value("p", "google", {})
+	var pr: Variant = cf.get_value("p", "profile", {})
+	if pr is Dictionary:
+		for k: Variant in (pr as Dictionary):
+			profile[k] = (pr as Dictionary)[k]
+	var cu: Variant = cf.get_value("p", "custom", {})
+	if cu is Dictionary:
+		for k: Variant in (cu as Dictionary):
+			custom[k] = (cu as Dictionary)[k]
+	var ca: Variant = cf.get_value("p", "career", {})
+	if ca is Dictionary:
+		for k: Variant in (ca as Dictionary):
+			career[k] = (ca as Dictionary)[k]
+	var hi: Variant = cf.get_value("p", "history", [])
+	if hi is Array:
+		history = hi
 	var s: Variant = cf.get_value("s", "settings", {})
 	if s is Dictionary:
 		for k: Variant in (s as Dictionary):

@@ -331,6 +331,31 @@ func cinematic(target: Node3D, title: String, sub: String, ono_key: String, colo
 		rig.call("end_cinematic")
 
 
+const OMNI_PATH: String = "res://data/config/omni.json"
+const OmniScript = preload("res://scripts/gameplay/omni_dimension.gd")
+var _omni_cfg: Dictionary = {}
+
+
+## Dimensão Omnisférica (Metavisão) do personagem; `key` vem do param `omni` da skill.
+func omni_dimension(p: Node3D, key: String, duration: float) -> void:
+	if _omni_cfg.is_empty():
+		var f: FileAccess = FileAccess.open(OMNI_PATH, FileAccess.READ)
+		if f != null:
+			var parsed: Variant = JSON.parse_string(f.get_as_text())
+			if parsed is Dictionary:
+				_omni_cfg = parsed
+	if _omni_cfg.is_empty() or p.get_parent() == null:
+		return
+	var cfg: Dictionary = _omni_cfg.get(key, _omni_cfg.get("default", {}))
+	var node: Node3D = OmniScript.new()
+	node.call("setup", p, cfg, duration)
+	p.get_parent().add_child(node)
+	if bool(p.get("is_human")) and not bool(Game.settings.get("reduce_cutscenes", false)):
+		flash(Color(String(cfg.get("b", "#7FB8FF"))), 0.5, 0.4)
+		if rig != null:
+			rig.call("punch_fov", 10.0, 0.9)
+
+
 func clear_all() -> void:
 	if rig != null:
 		rig.call("end_cinematic")

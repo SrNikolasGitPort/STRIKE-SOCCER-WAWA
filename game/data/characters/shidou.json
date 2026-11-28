@@ -20,12 +20,12 @@
   "original": false,
   "visual": {
     "hair": "pompadour",
-    "hair_color": "#E0402A",
-    "hair_accent": "",
-    "eye_color": "#E8C14A",
+    "hair_color": "#F5D33B",
+    "hair_accent": "#FF6FB5",
+    "eye_color": "#FF6FB5",
     "eye_color2": "",
     "skin": "#F1C9A5",
-    "aura": "#FF5A1F",
+    "aura": "#FF5A9F",
     "glasses": false,
     "kit": {
       "id": "bluelock",

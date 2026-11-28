@@ -11,6 +11,7 @@ const FxScript = preload("res://scripts/gameplay/fx.gd")
 const CameraRigScript = preload("res://scripts/gameplay/camera_rig.gd")
 const HudScript = preload("res://scripts/ui/hud.gd")
 const TouchScript = preload("res://scripts/ui/touch_controls.gd")
+const PredictScript = preload("res://scripts/gameplay/ball_predict.gd")
 
 enum State { PLAYING, GOAL, FINISHED }
 
@@ -35,11 +36,12 @@ var sun: DirectionalLight3D
 var env: Environment
 var _goal_token: int = 0
 var _zones: Array = []
-var _stats: Dictionary = {"goals": 0, "assists": 0, "steals": 0}
+var _stats: Dictionary = {"goals": 0, "assists": 0, "steals": 0, "skills": 0, "awakens": 0}
 var _last_kick: Array = [{}, {}]
 var _paused_layer: CanvasLayer = null
 var _result_layer: CanvasLayer = null
 var _was_awake_human: bool = false
+var _pass_marker: MeshInstance3D = null
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
@@ -59,6 +61,9 @@ func _ready() -> void:
 	fx = FxScript.new()
 	fx.online = online
 	add_child(fx)
+	var predict: Node3D = PredictScript.new()
+	predict.set("arena", self)
+	add_child(predict)
 
 	hud = HudScript.new()
 	add_child(hud)
@@ -80,6 +85,7 @@ func _ready() -> void:
 	else:
 		_build_offline_teams()
 
+	_spawn_keepers()
 	if human == null and not is_client:
 		push_warning("Partida sem jogador humano")
 	_finalize_setup()
@@ -102,7 +108,7 @@ func _finalize_setup() -> void:
 
 
 # ------------------------------------------------------------- jogadores
-func spawn_player(char_id: String, team: int, index: int, kind: String) -> Node:
+func spawn_player(char_id: String, team: int, index: int, kind: String, override: Dictionary = {}) -> Node:
 	var p: PlayerScript = PlayerScript.new()
 	add_child(p)
 	p.ball = ball
@@ -112,7 +118,10 @@ func spawn_player(char_id: String, team: int, index: int, kind: String) -> Node:
 	var s: float = 1.0 if team == 0 else -1.0
 	p.attack_goal = Vector3(s * half_l, 0.0, 0.0)
 	p.own_goal = Vector3(-s * half_l, 0.0, 0.0)
-	p.setup(Game.character(char_id), team, kind == "human")
+	var cdata: Dictionary = override if not override.is_empty() else Game.character(char_id)
+	if kind == "human":
+		cdata = Game.apply_custom(cdata)
+	p.setup(cdata, team, kind == "human")
 	p.cam_side = s if kind == "human" else 1.0
 	match kind:
 		"human":
@@ -127,11 +136,37 @@ func spawn_player(char_id: String, team: int, index: int, kind: String) -> Node:
 			bot.role = p.role
 		"puppet":
 			p.puppet = true
+		"keeper":
+			var kb: BotScript = BotScript.new()
+			kb.p = p
+			kb.arena = self
+			kb.difficulty = 0.75
+			kb.role = "keeper"
+			p.add_child(kb)
+			p.role = "keeper"
 	p.ball_kicked.connect(_on_player_kick.bind(p))
 	p.stole_ball.connect(_on_stole)
 	p.skill_used.connect(_on_skill_used)
 	players.append(p)
 	return p
+
+
+func keeper_data(team: int) -> Dictionary:
+	var col: String = "#F2C94C" if team == 0 else "#B07CFF"
+	return {"id": "gk_%d" % team, "name": "GK", "rarity": "raro", "base_id": null,
+		"stats": {"chute": 50, "velocidade": 70, "aceleracao": 70, "drible": 40, "passe": 62, "defesa": 95, "fisico": 85, "visao": 80},
+		"skills": [], "awakening": [],
+		"visual": {"hair": "short", "hair_color": "#1A1A1A", "hair_accent": "", "eye_color": "#333333", "skin": "#EBC09A",
+			"aura": col, "kit": {"id": "gk", "main": col, "sec": "#FFFFFF", "shorts": "#111111", "pattern": "plain", "team": "GK"}}}
+
+
+## Um goleiro bot por time (depois do elenco, para manter os índices do online iguais).
+func _spawn_keepers() -> void:
+	for t: int in 2:
+		if Game.mode == "training" and t == 0:
+			continue
+		var kind: String = "puppet" if is_client else "keeper"
+		spawn_player("gk_%d" % t, t, 90 + t, kind, keeper_data(t))
 
 
 func _role_for(index: int) -> String:
@@ -187,9 +222,16 @@ func _pick(pool: Array, used: Array) -> String:
 func _kickoff_positions() -> void:
 	var counts: Array[int] = [0, 0]
 	for p: Node in players:
-		counts[int(p.get("team"))] += 1
+		if str(p.get("role")) != "keeper":
+			counts[int(p.get("team"))] += 1
 	for p: Node in players:
 		var t: int = int(p.get("team"))
+		if str(p.get("role")) == "keeper":
+			var sk: float = 1.0 if t == 0 else -1.0
+			(p as Node3D).global_position = Vector3(-sk * (Config.f("field.length") / 2.0 - 2.0), Config.f("player.body_height") / 2.0 + 0.05, 0.0)
+			p.set("velocity", Vector3.ZERO)
+			p.set("facing", Vector3(sk, 0.0, 0.0))
+			continue
 		var s: float = 1.0 if t == 0 else -1.0
 		var i: int = int(p.get("index"))
 		var x: float = -s * (Config.f("match.kickoff_player_x") * -1.0 + 4.0 * float(i))
@@ -356,10 +398,12 @@ func _build_stands() -> void:
 
 # ----------------------------------------------------------------- partida
 func _new_match() -> void:
+	_was_awake_human = false
+	Sfx.music("match_theme")
 	_goal_token += 1
 	Engine.time_scale = 1.0
 	score = [0, 0]
-	_stats = {"goals": 0, "assists": 0, "steals": 0}
+	_stats = {"goals": 0, "assists": 0, "steals": 0, "skills": 0, "awakens": 0}
 	match Game.mode:
 		"training":
 			time_left = 3600.0
@@ -390,6 +434,8 @@ func _process(delta: float) -> void:
 	if player != null:
 		hud.update_bars(player.stamina_ratio(), player.charge, player.charging)
 	_update_zones(delta)
+	_update_pass_marker(delta)
+	_update_music_state()
 
 	if Input.is_action_just_pressed("toggle_quality"):
 		var next: int = (Config.quality_level + 1) % 3
@@ -438,6 +484,7 @@ func _awaken(p: Node) -> void:
 	Sfx.play("awaken")
 	if is_human_p:
 		Game.report_event("awaken", String(p.get("char_id")))
+		_stats["awakens"] = int(_stats["awakens"]) + 1
 		hud.toast(Game.t("Você despertou!", "You awakened!"), Color(1.0, 0.85, 0.3))
 	else:
 		hud.toast(Game.t("%s despertou!" % String(p.get("display_name")), "%s awakened!" % String(p.get("display_name"))), col)
@@ -455,6 +502,7 @@ func on_flow_full(p: Node) -> void:
 func on_skill(p: Node, _sk: Dictionary) -> void:
 	if p == human:
 		rig.shake(0.1)
+		_stats["skills"] = int(_stats["skills"]) + 1
 
 
 # ------------------------------------------------------------------ zonas
@@ -500,28 +548,64 @@ func zone_factor(p: Node) -> float:
 
 
 # ----------------------------------------------------------------- passes
-func best_pass_mate(p: Node) -> Node:
-	var best: Node = null
-	var best_score: float = -1.0e9
-	var facing: Vector3 = p.get("facing")
+## Escolhe o parceiro do passe. Mirando (câmera/movimento) num parceiro, o passe vai nele;
+## sem mira, escolhe um parceiro aberto de forma ponderada (passe equilibrado).
+func choose_mate(p: Node) -> Dictionary:
 	var pos: Vector3 = (p as Node3D).global_position
 	var s: float = float(p.get("side"))
+	var aims: Array = []
+	var ia: Vector3 = p.get("in_aim")
+	var iw: Vector3 = p.get("in_wish")
+	if ia.length() > 0.1:
+		aims.append(ia.normalized())
+	if iw.length() > 0.3:
+		aims.append(iw.normalized())
+	if aims.is_empty():
+		aims.append((p.get("facing") as Vector3).normalized())
+	var aimed_best: Node = null
+	var aimed_score: float = -1.0e9
+	var pool: Array = []
+	var weights: Array = []
 	for n: Node in players:
-		if n == p or int(n.get("team")) != int(p.get("team")):
+		if n == p or int(n.get("team")) != int(p.get("team")) or str(n.get("role")) == "keeper":
 			continue
 		var d: Vector3 = (n as Node3D).global_position - pos
 		d.y = 0.0
 		var dist: float = d.length()
-		if dist < 2.0 or dist > 34.0:
+		if dist < 2.5 or dist > 38.0:
 			continue
-		var ang: float = rad_to_deg(facing.angle_to(d))
-		if ang > 55.0:
-			continue
-		var sc: float = -ang - dist * 0.4 + d.x * s * 0.3
-		if sc > best_score:
-			best_score = sc
-			best = n
-	return best
+		var best_ang: float = 180.0
+		for a: Variant in aims:
+			best_ang = minf(best_ang, rad_to_deg((a as Vector3).angle_to(d)))
+		if best_ang < 24.0:
+			var sc: float = -best_ang - dist * 0.05
+			if sc > aimed_score:
+				aimed_score = sc
+				aimed_best = n
+		var opp_d: float = 10.0
+		for o: Node in players:
+			if int(o.get("team")) != int(p.get("team")):
+				opp_d = minf(opp_d, (o as Node3D).global_position.distance_to((n as Node3D).global_position))
+		var w: float = clampf(opp_d, 1.5, 10.0) / 10.0 + (0.35 if d.x * s > 0.0 else 0.0) + (0.3 if dist < 22.0 else 0.0)
+		pool.append(n)
+		weights.append(w)
+	if aimed_best != null:
+		return {"mate": aimed_best, "aimed": true}
+	if pool.is_empty():
+		return {"mate": null, "aimed": false}
+	var total: float = 0.0
+	for w2: Variant in weights:
+		total += float(w2)
+	var r: float = _rng.randf() * total
+	for i: int in range(pool.size()):
+		r -= float(weights[i])
+		if r <= 0.0:
+			return {"mate": pool[i], "aimed": false}
+	return {"mate": pool[0], "aimed": false}
+
+
+func best_pass_mate(p: Node) -> Node:
+	return choose_mate(p).get("mate") as Node
 
 
 func best_pass_target(p: Node) -> Variant:
@@ -530,6 +614,44 @@ func best_pass_target(p: Node) -> Variant:
 		return null
 	var m3: Node3D = mate as Node3D
 	return m3.global_position + Vector3(m3.get("velocity")) * 0.45
+
+
+## Troca a música quando o jogador desperta (e volta ao fim do Despertar).
+func _update_music_state() -> void:
+	if human == null or state == State.FINISHED:
+		return
+	var aw: bool = bool(human.get("awakened"))
+	if aw != _was_awake_human:
+		_was_awake_human = aw
+		Sfx.music("awaken_theme" if aw else "match_theme")
+
+
+## Marcador sobre o parceiro mirado (só mostra quando há mira num parceiro).
+func _update_pass_marker(_delta: float) -> void:
+	if _pass_marker == null:
+		_pass_marker = MeshInstance3D.new()
+		var cm: CylinderMesh = CylinderMesh.new()
+		cm.top_radius = 0.3
+		cm.bottom_radius = 0.0
+		cm.height = 0.5
+		cm.radial_segments = 4
+		var mm: StandardMaterial3D = StandardMaterial3D.new()
+		mm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mm.albedo_color = Color(0.4, 0.95, 1.0)
+		mm.no_depth_test = true
+		_pass_marker.mesh = cm
+		_pass_marker.material_override = mm
+		_pass_marker.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		add_child(_pass_marker)
+	_pass_marker.visible = false
+	if human == null or state != State.PLAYING:
+		return
+	var info: Dictionary = choose_mate(human)
+	if bool(info.get("aimed", false)) and info.get("mate") != null:
+		var t3: Node3D = info["mate"] as Node3D
+		_pass_marker.visible = true
+		_pass_marker.global_position = t3.global_position + Vector3(0.0, 2.9 + sin(Time.get_ticks_msec() * 0.008) * 0.12, 0.0)
+		_pass_marker.rotation.y += 0.08
 
 
 # ------------------------------------------------------------ eventos
@@ -656,6 +778,9 @@ func _finish_match() -> void:
 	Game.xp += xp
 	Game.save_game()
 	Game.last_result = {"score": score.duplicate(), "won": won, "draw": draw, "coins": coins, "xp": xp, "stats": _stats.duplicate(), "mode": Game.mode}
+	if human != null and Game.mode != "training":
+		Game.record_match(Game.last_result, String(human.get("char_id")), float(Config.f("modes.match_4v4_s") if team_size >= 4 else Config.f("modes.match_2v2_s")) - maxf(time_left, 0.0))
+		Game.save_game()
 	hud.show_message(Game.t("FIM DE JOGO  %d x %d", "FULL TIME  %d x %d") % [score[0], score[1]], Color(1.0, 0.9, 0.4), 0.0)
 	if net != null:
 		net.call("send_event", {"t": "end", "score": score})
@@ -665,6 +790,7 @@ func _finish_match() -> void:
 func _show_results() -> void:
 	if _result_layer != null:
 		return
+	Sfx.music("victory_theme" if bool(Game.last_result.get("won", false)) else "menu_theme")
 	_result_layer = (load("res://scripts/ui/results_overlay.gd") as GDScript).new()
 	add_child(_result_layer)
 	_result_layer.call("show_result", self)

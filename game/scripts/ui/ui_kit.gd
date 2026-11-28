@@ -52,6 +52,43 @@ static func full(c: Control) -> void:
 	c.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 
+## Tela cheia respeitando as margens seguras (notch/cantos).
+static func safe_full(c: Control) -> void:
+	c.set_anchors_preset(Control.PRESET_FULL_RECT)
+	apply_safe(c)
+
+
+## Entrada animada: cada filho aparece deslizando/escalando com atraso escalonado.
+static func animate_in(container: Node, step: float = 0.06) -> void:
+	var i: int = 0
+	for ch: Node in container.get_children():
+		if ch is Control:
+			var c: Control = ch
+			c.modulate.a = 0.0
+			var tw: Tween = c.create_tween()
+			tw.tween_interval(step * float(i))
+			tw.tween_property(c, "modulate:a", 1.0, 0.25)
+			i += 1
+
+
+## Pulso suave em loop (logo, destaques).
+static func float_loop(c: Control, amp: float = 6.0, period: float = 2.4) -> void:
+	var tw: Tween = c.create_tween().set_loops()
+	tw.tween_property(c, "position:y", c.position.y - amp, period * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tw.tween_property(c, "position:y", c.position.y + amp, period * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+static func hover_scale(b: Control, k: float = 1.05) -> void:
+	b.mouse_entered.connect(_hover.bind(b, k))
+	b.mouse_exited.connect(_hover.bind(b, 1.0))
+
+
+static func _hover(b: Control, k: float) -> void:
+	b.pivot_offset = b.size / 2.0
+	var tw: Tween = b.create_tween()
+	tw.tween_property(b, "scale", Vector2(k, k), 0.12).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
 static func background(parent: Control) -> void:
 	var bg: TextureRect = TextureRect.new()
 	full(bg)
@@ -61,11 +98,20 @@ static func background(parent: Control) -> void:
 		bg.texture = load(BG_PATH)
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(bg)
+	# fundo vivo: zoom lento em vai-e-vem
+	bg.resized.connect(_center_pivot.bind(bg))
+	var zoom: Tween = bg.create_tween().set_loops()
+	zoom.tween_property(bg, "scale", Vector2(1.07, 1.07), 9.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	zoom.tween_property(bg, "scale", Vector2.ONE, 9.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	var shade: ColorRect = ColorRect.new()
 	full(shade)
 	shade.color = Color(0.0, 0.02, 0.08, 0.45)
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(shade)
+
+
+static func _center_pivot(c: Control) -> void:
+	c.pivot_offset = c.size / 2.0
 
 
 static func label(text: String, size: int = 22, color: Color = Color.WHITE, align: int = HORIZONTAL_ALIGNMENT_LEFT) -> Label:
@@ -86,6 +132,7 @@ static func button(text: String, callback: Callable, min_size: Vector2 = Vector2
 	b.pressed.connect(callback)
 	b.pressed.connect(func() -> void: Sfx.play("ui_click", -4.0, 0.02))
 	b.mouse_entered.connect(func() -> void: Sfx.play("ui_hover", -14.0, 0.02))
+	hover_scale(b)
 	return b
 
 
@@ -119,3 +166,32 @@ static func portrait(id: String) -> Texture2D:
 		elif ResourceLoader.exists(path):
 			return load(path)
 	return texture("res://assets/textures/portraits/%s.png" % id)
+
+
+## Margens seguras (notch, cantos arredondados, barra de gestos) em unidades do viewport:
+## x = esquerda, y = topo, z = direita, w = baixo. No desktop volta zero.
+static func safe_inset(vp: Viewport) -> Vector4:
+	if not (OS.has_feature("mobile") or DisplayServer.is_touchscreen_available()):
+		return Vector4.ZERO
+	var win: Vector2 = Vector2(DisplayServer.window_get_size())
+	if win.x < 1.0 or win.y < 1.0:
+		return Vector4(14, 8, 14, 10)
+	var safe: Rect2i = DisplayServer.get_display_safe_area()
+	var screen: Vector2 = Vector2(DisplayServer.screen_get_size())
+	var vs: Vector2 = vp.get_visible_rect().size
+	var sx: float = vs.x / win.x
+	var sy: float = vs.y / win.y
+	var l: float = maxf(float(safe.position.x) * sx, 0.0)
+	var t: float = maxf(float(safe.position.y) * sy, 0.0)
+	var r: float = maxf((screen.x - float(safe.end.x)) * sx, 0.0)
+	var b: float = maxf((screen.y - float(safe.end.y)) * sy, 0.0)
+	return Vector4(maxf(l, 14.0), maxf(t, 8.0), maxf(r, 14.0), maxf(b, 10.0))
+
+
+## Aplica a margem segura a um Control de tela cheia.
+static func apply_safe(c: Control, extra: float = 0.0) -> void:
+	var v: Vector4 = safe_inset(c.get_viewport())
+	c.offset_left = v.x + extra
+	c.offset_top = v.y + extra
+	c.offset_right = -(v.z + extra)
+	c.offset_bottom = -(v.w + extra)

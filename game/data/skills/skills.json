@@ -42,20 +42,21 @@
   "name_en": "Off-the-Ball Movement",
   "jp": "",
   "effect": "dash",
-  "cooldown": 9.0,
+  "cooldown": 8.0,
   "ono": "shu",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 2.0,
-   "speed": 1.3
+   "duration": 1.8,
+   "speed": 1.35,
+   "magnet": 0.4
   }
  },
  "isagi_spatial": {
   "id": "isagi_spatial",
   "owner": "isagi",
   "cat": "awake",
-  "name_pt": "Consciência Espacial",
-  "name_en": "Spatial Awareness",
+  "name_pt": "Metavisão: Espaço",
+  "name_en": "Meta-Vision: Space",
   "jp": "",
   "effect": "vision",
   "cooldown": 12.0,
@@ -63,7 +64,8 @@
   "ref": "A CONFIRMAR",
   "params": {
    "duration": 6.0,
-   "assist": 0.9
+   "assist": 0.9,
+   "omni": "isagi"
   }
  },
  "isagi_flow": {
@@ -98,7 +100,8 @@
   "params": {
    "duration": 6.0,
    "assist": 1.0,
-   "slow": 0.6
+   "slow": 0.6,
+   "omni": "isagi"
   }
  },
  "isagi_nel_metaburst": {
@@ -291,14 +294,17 @@
   "name_pt": "Drible Sem Parar",
   "name_en": "No-Break Dribble",
   "jp": "",
-  "effect": "dash",
+  "effect": "dribble",
   "cooldown": 8.0,
   "ono": "zaa",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 2.2,
-   "speed": 1.35,
-   "magnet": 0.9
+   "pattern": "zigzag",
+   "duration": 2.0,
+   "speed": 1.5,
+   "amp": 24,
+   "freq": 1.7,
+   "brk": 1.0
   }
  },
  "chigiri_pressure": {
@@ -434,8 +440,9 @@
   "params": {
    "power": 0.9,
    "loft": 0.08,
-   "curve": -0.5,
-   "aim": 0.8
+   "curve": -0.9,
+   "aim": 0.8,
+   "goal_aim": true
   }
  },
  "zantetsu_cross": {
@@ -512,14 +519,17 @@
   "name_pt": "Movimento Sem Bola",
   "name_en": "Off-the-Ball Movements",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 9.0,
   "ono": "hyu",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 1.4,
-   "speed": 1.4,
-   "immune": true
+   "pattern": "zigzag",
+   "duration": 1.5,
+   "speed": 1.5,
+   "amp": 26,
+   "freq": 2.2,
+   "brk": 0.8
   }
  },
  "otoya_taunt": {
@@ -581,14 +591,17 @@
   "name_pt": "Drible Elástico",
   "name_en": "Elastic Dribbling",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 7.0,
   "ono": "hyu",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 1.2,
+   "pattern": "elastic",
+   "duration": 1.3,
    "speed": 1.45,
-   "immune": true
+   "amp": 58,
+   "freq": 3.0,
+   "brk": 1.4
   }
  },
  "bachira_lift": {
@@ -648,14 +661,17 @@
   "name_pt": "Triplo Túnel",
   "name_en": "Triple Nutmeg",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 12.0,
   "ono": "baki",
   "ref": "A CONFIRMAR",
   "params": {
+   "pattern": "zigzag",
    "duration": 1.8,
-   "speed": 1.55,
-   "immune": true
+   "speed": 1.6,
+   "amp": 48,
+   "freq": 2.8,
+   "brk": 1.7
   }
  },
  "bachira_egotistical": {
@@ -701,14 +717,17 @@
   "name_pt": "Roleta e Lift",
   "name_en": "Roulette Lift",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 10.0,
   "ono": "paan",
   "ref": "cap. 296 (sec.)",
   "params": {
-   "duration": 1.6,
-   "speed": 1.6,
-   "immune": true
+   "pattern": "roulette",
+   "duration": 1.5,
+   "speed": 1.7,
+   "amp": 40,
+   "freq": 2.0,
+   "brk": 1.8
   }
  },
  "bachira_nel_cross": {
@@ -758,7 +777,7 @@
   "params": {
    "speed": 1.05,
    "loft": 0.4,
-   "curve": 0.5
+   "curve": 1.0
   }
  },
  "hiori_scissors": {
@@ -768,14 +787,17 @@
   "name_pt": "Tesoura Hipervelocidade",
   "name_en": "Hyperspeed Scissors",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 8.0,
   "ono": "shu",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 1.2,
-   "speed": 1.45,
-   "immune": true
+   "pattern": "stepover",
+   "duration": 1.1,
+   "speed": 1.5,
+   "amp": 28,
+   "freq": 4.0,
+   "brk": 0.9
   }
  },
  "hiori_metavision": {
@@ -792,7 +814,8 @@
   "params": {
    "duration": 6.0,
    "assist": 0.95,
-   "slow": 0.7
+   "slow": 0.7,
+   "omni": "hiori"
   }
  },
  "hiori_protagonism": {
@@ -894,7 +917,9 @@
   "params": {
    "duration": 6.0,
    "assist": 0.7,
-   "slow": 0.75
+   "slow": 0.75,
+   "intercept": 3.6,
+   "omni": "aiku"
   }
  },
  "aiku_offensive_libero": {
@@ -936,8 +961,8 @@
   "id": "aiku_nel_flow",
   "owner": "aiku",
   "cat": "nel",
-  "name_pt": "Flow Total",
-  "name_en": "Total Flow",
+  "name_pt": "Metavisão da Serpente",
+  "name_en": "Serpent Metavision",
   "jp": "",
   "effect": "vision",
   "cooldown": 12.0,
@@ -946,7 +971,9 @@
   "params": {
    "duration": 6.0,
    "assist": 0.95,
-   "slow": 0.6
+   "slow": 0.6,
+   "intercept": 5.0,
+   "omni": "aiku_nel"
   }
  },
  "aiku_nel_libero": {
@@ -1013,9 +1040,9 @@
   "ono": "go",
   "ref": "ideia do jogo",
   "params": {
-   "radius": 2.6,
+   "radius": 2.8,
    "knock": 4.0,
-   "stun": 0.4
+   "stun": 0.7
   }
  },
  "kunigami_press": {
@@ -1093,14 +1120,17 @@
   "name_pt": "Finta de Passe",
   "name_en": "Feints",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 8.0,
   "ono": "hyu",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 1.2,
-   "speed": 1.4,
-   "immune": true
+   "pattern": "feint",
+   "duration": 1.1,
+   "speed": 1.45,
+   "amp": 50,
+   "freq": 2.0,
+   "brk": 1.1
   }
  },
  "karasu_weak_link": {
@@ -1135,7 +1165,9 @@
   "params": {
    "duration": 6.0,
    "assist": 0.9,
-   "slow": 0.7
+   "slow": 0.7,
+   "intercept": 3.8,
+   "omni": "karasu"
   }
  },
  "karasu_crow_rule": {
@@ -1254,22 +1286,22 @@
    "fraction": 0.92
   }
  },
- "reo_nel_organizer": {
-  "id": "reo_nel_organizer",
+ "reo_nel_metavision": {
+  "id": "reo_nel_metavision",
   "owner": "reo",
   "cat": "nel",
-  "name_pt": "Maestro do Manshine",
-  "name_en": "Manshine Conductor",
+  "name_pt": "Metavisão do Camaleão",
+  "name_en": "Chameleon Metavision",
   "jp": "",
-  "effect": "buff",
+  "effect": "vision",
   "cooldown": 13.0,
   "ono": "kiin",
-  "ref": "ideia do jogo",
+  "ref": "ideia do jogo (Nel original)",
   "params": {
    "duration": 6.0,
-   "speed": 1.2,
-   "shot": 1.25,
-   "allies": 10.0
+   "assist": 1.0,
+   "slow": 0.65,
+   "omni": "reo_nel"
   }
  },
  "reo_nel_perfect_copy": {
@@ -1312,15 +1344,17 @@
   "name_pt": "Domínio Criativo",
   "name_en": "Creative Trap",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 8.0,
   "ono": "hyu",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 1.0,
-   "speed": 1.3,
-   "immune": true,
-   "magnet": 1.0
+   "pattern": "nutmeg",
+   "duration": 1.2,
+   "speed": 1.4,
+   "amp": 30,
+   "freq": 2.0,
+   "brk": 1.0
   }
  },
  "nagi_black_hole": {
@@ -1436,14 +1470,17 @@
   "name_pt": "Tesoura de Arrasto",
   "name_en": "Drag Scissors",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 7.0,
   "ono": "shu",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 1.2,
-   "speed": 1.5,
-   "immune": true
+   "pattern": "zigzag",
+   "duration": 1.3,
+   "speed": 1.55,
+   "amp": 42,
+   "freq": 2.6,
+   "brk": 1.2
   }
  },
  "yukimiya_gyro": {
@@ -1460,7 +1497,7 @@
   "params": {
    "power": 0.95,
    "loft": 0.3,
-   "curve": 0.7,
+   "curve": 1.0,
    "aim": 0.8
   }
  },
@@ -1478,7 +1515,7 @@
   "params": {
    "power": 0.9,
    "loft": 0.4,
-   "curve": -0.4,
+   "curve": -0.8,
    "aim": 0.9
   }
  },
@@ -1514,7 +1551,8 @@
   "params": {
    "duration": 5.0,
    "assist": 1.0,
-   "slow": 0.8
+   "slow": 0.8,
+   "omni": "yukimiya"
   }
  },
  "yukimiya_emperor": {
@@ -1524,14 +1562,17 @@
   "name_pt": "Estilo Imperador do 1x1",
   "name_en": "1-on-1 Emperor Style",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 13.0,
   "ono": "go",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 2.0,
-   "speed": 1.7,
-   "immune": true
+   "pattern": "feint",
+   "duration": 1.6,
+   "speed": 1.8,
+   "amp": 60,
+   "freq": 2.2,
+   "brk": 2.0
   }
  },
  "charles_risky_pass": {
@@ -1581,7 +1622,7 @@
   "params": {
    "speed": 1.1,
    "loft": 0.35,
-   "curve": 0.5
+   "curve": 1.0
   }
  },
  "charles_metavision": {
@@ -1598,7 +1639,8 @@
   "params": {
    "duration": 6.0,
    "assist": 0.95,
-   "slow": 0.7
+   "slow": 0.7,
+   "omni": "charles"
   }
  },
  "charles_heart_pass": {
@@ -1647,9 +1689,9 @@
   "ono": "go",
   "ref": "A CONFIRMAR",
   "params": {
-   "radius": 2.8,
+   "radius": 3.0,
    "knock": 4.5,
-   "stun": 0.5
+   "stun": 0.8
   }
  },
  "barou_chop": {
@@ -1659,14 +1701,17 @@
   "name_pt": "Finta de Corte",
   "name_en": "Chop Feint",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 8.0,
   "ono": "ba",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 1.2,
-   "speed": 1.45,
-   "immune": true
+   "pattern": "feint",
+   "duration": 1.1,
+   "speed": 1.5,
+   "amp": 55,
+   "freq": 2.0,
+   "brk": 1.2
   }
  },
  "barou_villain_flow": {
@@ -1718,7 +1763,7 @@
   "params": {
    "power": 1.1,
    "loft": 0.15,
-   "curve": 0.8,
+   "curve": 1.2,
    "aim": 1.0
   }
  },
@@ -1736,7 +1781,8 @@
   "params": {
    "duration": 6.0,
    "assist": 1.0,
-   "slow": 0.8
+   "slow": 0.8,
+   "omni": "barou"
   }
  },
  "barou_nel_double": {
@@ -1780,14 +1826,17 @@
   "name_pt": "Drible Agressivo",
   "name_en": "Aggressive Dribble",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 8.0,
   "ono": "dododo",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 1.3,
-   "speed": 1.5,
-   "immune": true
+   "pattern": "zigzag",
+   "duration": 1.4,
+   "speed": 1.7,
+   "amp": 30,
+   "freq": 1.8,
+   "brk": 1.7
   }
  },
  "shidou_bicycle": {
@@ -1859,7 +1908,8 @@
   "params": {
    "duration": 5.0,
    "assist": 1.0,
-   "slow": 0.8
+   "slow": 0.8,
+   "omni": "shidou"
   }
  },
  "shidou_nel_dragon": {
@@ -1921,8 +1971,8 @@
   "id": "rin_trivela",
   "owner": "rin",
   "cat": "normal",
-  "name_pt": "Chute de Trivela",
-  "name_en": "Trivela Shot",
+  "name_pt": "Chute Curvo",
+  "name_en": "Curve Shot",
   "jp": "",
   "effect": "shot",
   "cooldown": 6.0,
@@ -1931,8 +1981,9 @@
   "params": {
    "power": 0.95,
    "loft": 0.1,
-   "curve": 0.8,
-   "aim": 0.85
+   "curve": 2.0,
+   "aim": 0.9,
+   "goal_aim": true
   }
  },
  "rin_elastico": {
@@ -1942,14 +1993,17 @@
   "name_pt": "Caneta Elástica",
   "name_en": "Elastico Nutmeg",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 8.0,
   "ono": "hyu",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 1.3,
-   "speed": 1.5,
-   "immune": true
+   "pattern": "elastic",
+   "duration": 1.2,
+   "speed": 1.55,
+   "amp": 52,
+   "freq": 3.2,
+   "brk": 1.3
   }
  },
  "rin_oppressive": {
@@ -2019,23 +2073,24 @@
    "pull": 1.0
   }
  },
- "rin_nel_scissor": {
-  "id": "rin_nel_scissor",
+ "rin_nel_destructive": {
+  "id": "rin_nel_destructive",
   "owner": "rin",
   "cat": "nel",
-  "name_pt": "Voleio Tesoura",
-  "name_en": "Scissor Kick Volley",
+  "name_pt": "Chute Curvo Destrutivo",
+  "name_en": "Destructive Curve Shot",
   "jp": "",
   "effect": "shot",
-  "cooldown": 11.0,
+  "cooldown": 10.0,
   "ono": "zudon",
-  "ref": "cap. 275",
+  "ref": "evolução do Chute Curvo (ideia do jogo)",
   "params": {
-   "power": 1.25,
-   "loft": 0.25,
-   "curve": 0.5,
+   "power": 1.3,
+   "loft": 0.14,
+   "curve": 3.0,
    "aim": 1.0,
-   "air": true
+   "goal_aim": true,
+   "comp": 1.0
   }
  },
  "rin_nel_opposite": {
@@ -2045,14 +2100,17 @@
   "name_pt": "Aceleração Oposta",
   "name_en": "Opposite Acceleration",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 10.0,
   "ono": "shu",
   "ref": "Japan U-20 (confirmar)",
   "params": {
-   "duration": 1.8,
+   "pattern": "feint",
+   "duration": 1.4,
    "speed": 1.8,
-   "immune": true
+   "amp": 62,
+   "freq": 2.0,
+   "brk": 1.8
   }
  },
  "rin_nel_puppet": {
@@ -2069,7 +2127,8 @@
   "params": {
    "duration": 6.0,
    "assist": 1.0,
-   "slow": 0.7
+   "slow": 0.7,
+   "omni": "rin"
   }
  },
  "sae_long_pass": {
@@ -2102,7 +2161,7 @@
   "params": {
    "speed": 1.25,
    "loft": 0.1,
-   "curve": 0.6
+   "curve": 1.0
   }
  },
  "sae_counter": {
@@ -2112,14 +2171,17 @@
   "name_pt": "Contra-Drible",
   "name_en": "Counter Dribbling",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 8.0,
   "ono": "kiin",
   "ref": "A CONFIRMAR",
   "params": {
+   "pattern": "roulette",
    "duration": 1.2,
-   "speed": 1.4,
-   "immune": true
+   "speed": 1.5,
+   "amp": 40,
+   "freq": 2.0,
+   "brk": 1.2
   }
  },
  "sae_metavision": {
@@ -2136,7 +2198,8 @@
   "params": {
    "duration": 6.0,
    "assist": 1.0,
-   "slow": 0.6
+   "slow": 0.6,
+   "omni": "sae"
   }
  },
  "sae_ultra_pass": {
@@ -2162,14 +2225,17 @@
   "name_pt": "Combo Elástico e Rabona",
   "name_en": "Elastico/Rabona Nutmeg",
   "jp": "",
-  "effect": "evade",
+  "effect": "dribble",
   "cooldown": 12.0,
   "ono": "baki",
   "ref": "A CONFIRMAR",
   "params": {
-   "duration": 1.8,
-   "speed": 1.6,
-   "immune": true
+   "pattern": "nutmeg",
+   "duration": 1.5,
+   "speed": 1.65,
+   "amp": 40,
+   "freq": 2.4,
+   "brk": 1.6
   }
  },
  "lorenzo_manmark": {
@@ -2340,7 +2406,8 @@
   "params": {
    "duration": 6.0,
    "assist": 1.0,
-   "slow": 0.6
+   "slow": 0.6,
+   "omni": "kaiser"
   }
  }
 }

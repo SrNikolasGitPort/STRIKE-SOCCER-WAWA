@@ -16,7 +16,7 @@ func show_result(m: Node) -> void:
 	shade.color = Color(0, 0, 0, 0.65)
 	root.add_child(shade)
 	var center: CenterContainer = CenterContainer.new()
-	Kit.full(center)
+	Kit.safe_full(center)
 	root.add_child(center)
 	var panel: PanelContainer = PanelContainer.new()
 	center.add_child(panel)

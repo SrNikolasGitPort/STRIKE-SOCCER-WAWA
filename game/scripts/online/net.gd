@@ -431,7 +431,7 @@ func _read_buttons_edges() -> int:
 	var b: int = 0
 	if Input.is_action_just_pressed("pass"):
 		b |= 4
-	if Input.is_action_just_pressed("lob"):
+	if Input.is_action_just_pressed("jump"):
 		b |= 8
 	for i: int in range(6):
 		if Input.is_action_just_pressed("skill_%d" % (i + 1)):
@@ -459,11 +459,16 @@ func _send_input() -> void:
 		bits |= 1
 	if Input.is_action_pressed("shoot"):
 		bits |= 2
-	rpc_id(1, "rpc_input", wish.x, wish.z, aim.x, aim.z, bits)
+	if bool(rig.get("locked")):
+		bits |= 8192
+	var elev: float = float(me.get("in_elev"))
+	elev = clampf(elev + Input.get_axis("aim_down", "aim_up") * 1.5 * (1.0 / INPUT_HZ), 0.0, 1.0)
+	me.set("in_elev", elev)
+	rpc_id(1, "rpc_input", wish.x, wish.z, aim.x, aim.z, bits, elev)
 
 
 @rpc("any_peer", "call_remote", "unreliable_ordered")
-func rpc_input(wx: float, wz: float, ax: float, az: float, bits: int) -> void:
+func rpc_input(wx: float, wz: float, ax: float, az: float, bits: int, elev: float = 0.0) -> void:
 	if role != "host" or m == null:
 		return
 	var id: int = multiplayer.get_remote_sender_id()
@@ -489,7 +494,9 @@ func rpc_input(wx: float, wz: float, ax: float, az: float, bits: int) -> void:
 			if bits & 4 != 0:
 				p.set("in_pass", true)
 			if bits & 8 != 0:
-				p.set("in_lob", true)
+				p.set("in_jump", true)
+			p.set("aim_lock", bits & 8192 != 0)
+			p.set("in_elev", clampf(elev, 0.0, 1.0))
 			var arr: Array[bool] = p.get("in_skill")
 			for s: int in range(6):
 				if bits & (16 << s) != 0:

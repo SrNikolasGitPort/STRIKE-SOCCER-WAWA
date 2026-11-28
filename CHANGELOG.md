@@ -2,6 +2,19 @@
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## 1.0.0-beta (tag única)
+- Controles: pulo, mira vertical (chutar para cima, F/Z ou arrastar o botão de chute), trava de mira (Tab), botão de bola alta removido.
+- Ball Predict (trajetória do chute) e versão avançada na Metavisão.
+- Passe direto no parceiro mirado; sem mira vai para um parceiro aberto (balanceado).
+- Carrinho de desarme (rouba e derruba), drible com pedaladas e Angle Breaker, skills de drible (zigzag, elástico, roleta, finta, caneta).
+- Goleiro bot por time.
+- Metavisão: buff mínimo de velocidade, Ball Predict avançada e Dimensão Omnisférica própria de cada personagem (cúpula quadriculada 3D + motivos); hitbox/interceptação para Aiku e Karasu.
+- Rin: Chute Curvo (bem mais curvo) e Chute Curvo Destrutivo (Nel).
+- Sae (cabelo rosa, olhos verdes) e Shidou (cabelo amarelo com mechas rosas, olhos rosas) corrigidos.
+- Perfil: apelido, bio, título, avatar, status da carreira, histórico e personalização de cores.
+- Interface mobile com margens seguras, menus animados, músicas novas (menu, partida, despertar, vitória).
+- Skills retrabalhadas e rebalanceadas.
+
 ## 1.0.0-rc2 (em andamento)
 - Balanceamento: médias por raridade normalizadas (raro 64, épico 70, lendário 75, mítico 80, World Class 86, Nel 88, GOAT 82) e limites nos parâmetros de skill.
 - TEMPORÁRIO: `dev.unlock_all` em gameplay.json libera todos os personagens, Nel e GOAT (e todas as skills de Despertar) para testes.

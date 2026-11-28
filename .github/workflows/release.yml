@@ -9,9 +9,9 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag da Release (ex.: v1.0.0-rc1). Será criada se não existir."
+        description: "Tag ÚNICA da Release. Releases/tags antigas são removidas e esta é recriada no commit atual."
         required: true
-        default: "v1.0.0-rc1"
+        default: "v1.0.0-beta"
 
 permissions:
   contents: write
@@ -31,6 +31,19 @@ jobs:
         with:
           name: strike-soccer-wawa-builds
           path: dist
+
+      - name: Manter uma tag só (remove outras releases/tags e recria a atual)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.inputs.tag || github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          for t in $(gh release list --repo "$REPO" --limit 100 --json tagName -q '.[].tagName'); do
+            gh release delete "$t" --repo "$REPO" --cleanup-tag --yes || true
+          done
+          git ls-remote --tags "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" | awk '{print $2}' | sed 's#refs/tags/##' | grep -v '\^{}' | while read -r t; do
+            if [ "$t" != "$TAG" ]; then gh api -X DELETE "repos/${REPO}/git/refs/tags/$t" || true; fi
+          done
 
       - name: Publicar Release
         uses: softprops/action-gh-release@v2

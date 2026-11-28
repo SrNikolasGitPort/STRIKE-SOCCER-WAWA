@@ -114,7 +114,7 @@
  {
   "id": "q_reo_2",
   "char": "reo",
-  "unlock": "reo_nel_organizer",
+  "unlock": "reo_nel_metavision",
   "event": "skill_use:reo_precise_pass",
   "target": 12
  },
@@ -191,7 +191,7 @@
  {
   "id": "q_rin_1",
   "char": "rin",
-  "unlock": "rin_nel_scissor",
+  "unlock": "rin_nel_destructive",
   "event": "skill_goal:rin_trivela",
   "target": 5
  },

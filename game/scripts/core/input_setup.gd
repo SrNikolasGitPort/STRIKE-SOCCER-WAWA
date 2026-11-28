@@ -5,7 +5,7 @@ extends Node
 
 const ACTIONS: PackedStringArray = [
 	"move_left", "move_right", "move_forward", "move_back",
-	"sprint", "shoot", "pass", "lob", "reset_ball", "toggle_quality", "pause", "awaken_test",
+	"sprint", "shoot", "pass", "jump", "aim_up", "aim_down", "lock", "reset_ball", "toggle_quality", "pause", "awaken_test",
 	"dribble", "tackle", "awaken", "cam_left", "cam_right", "cam_up", "cam_down",
 	"skill_1", "skill_2", "skill_3", "skill_4", "skill_5", "skill_6",
 ]
@@ -20,10 +20,13 @@ func _ready() -> void:
 	_key("move_forward", KEY_W)
 	_key("move_back", KEY_S)
 	_key("sprint", KEY_SHIFT)
-	_key("shoot", KEY_SPACE)
+	_key("jump", KEY_SPACE)
 	_key("shoot", KEY_X)
+	_mouse("shoot", MOUSE_BUTTON_LEFT)
 	_key("pass", KEY_E)
-	_key("lob", KEY_F)
+	_key("aim_up", KEY_F)
+	_key("aim_down", KEY_Z)
+	_key("lock", KEY_TAB)
 	_key("dribble", KEY_Q)
 	_key("tackle", KEY_C)
 	_key("tackle", KEY_CTRL)
@@ -59,7 +62,9 @@ func _ready() -> void:
 	_axis("cam_up", JOY_AXIS_RIGHT_Y, -1.0)
 	_axis("cam_down", JOY_AXIS_RIGHT_Y, 1.0)
 	_button("pass", JOY_BUTTON_A)
-	_button("lob", JOY_BUTTON_Y)
+	_button("jump", JOY_BUTTON_Y)
+	_button("aim_up", JOY_BUTTON_DPAD_LEFT)
+	_button("aim_down", JOY_BUTTON_DPAD_RIGHT)
 	_button("pause", JOY_BUTTON_START)
 	_button("skill_1", JOY_BUTTON_B)
 	_button("skill_2", JOY_BUTTON_RIGHT_SHOULDER)

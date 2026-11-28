@@ -201,6 +201,15 @@ def check_content(loaded: dict[Path, object]) -> None:
     for name in sorted(sfx):
         if not ((GAME / "assets" / "audio" / "sfx" / f"{name}.wav").exists() or (GAME / "assets" / "audio" / "music" / f"{name}.wav").exists()):
             err(f"Sfx '{name}' usado nos scripts, mas o arquivo de áudio não existe")
+    omni_path = GAME / "data" / "config" / "omni.json"
+    omni = json.loads(omni_path.read_text(encoding="utf-8")) if omni_path.exists() else {}
+    for sid, sk in skills.items():
+        key = sk["params"].get("omni")
+        if key is not None and key not in omni:
+            err(f"skill {sid}: omni '{key}' não existe em omni.json")
+    for key, cfgv in omni.items():
+        if not (GAME / "assets" / "textures" / "vfx" / f"omni_{cfgv['motif']}.png").exists():
+            err(f"omni '{key}': motivo {cfgv['motif']} sem textura")
     quests = loaded.get(DATA / "quests" / "quests.json", [])
     for q in quests:
         if q["unlock"] not in skills:

@@ -264,7 +264,7 @@ def gen_frames() -> None:
 def gen_icons() -> None:
     cols = {"shot": "#FF9F43", "pass": "#4DA3FF", "dash": "#6BE675", "evade": "#B79CFF", "steal": "#FF5C7A", "shockwave": "#FFD166",
             "buff": "#F2C94C", "zone": "#5CC8FF", "block": "#9AA7C0", "vision": "#2AE0C9", "mark": "#EB5757", "rest": "#7CFFB0",
-            "copy": "#C792EA", "dashshot": "#FF7A3D", "multishot": "#FFB347"}
+            "copy": "#C792EA", "dribble": "#7DF9FF", "dashshot": "#FF7A3D", "multishot": "#FFB347"}
     for name, col in cols.items():
         S = 128
         img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
@@ -311,6 +311,11 @@ def gen_icons() -> None:
             d.line([(m, 14), (m, 114)], fill=c, width=6); d.line([(14, m), (114, m)], fill=c, width=6)
         elif name == "rest":
             d.rectangle([54, 28, 74, 100], fill=w); d.rectangle([28, 54, 100, 74], fill=c)
+        elif name == "dribble":
+            pts = [(30, 98), (48, 40), (70, 90), (94, 32)]
+            d.line(pts, fill=w, width=8, joint="curve")
+            d.polygon([(94, 22), (108, 46), (82, 44)], fill=c)
+            d.ellipse([22, 94, 40, 112], fill=c)
         elif name == "copy":
             d.rectangle([28, 28, 80, 80], outline=w, width=6); d.rectangle([48, 48, 100, 100], fill=c, outline=w, width=4)
         save(img, f"icons/skill_{name}.png")
@@ -424,6 +429,107 @@ def gen_vfx() -> None:
 
 
 # -------------------------------------------------------------- onomatopeias
+def _glow(img: Image.Image, radius: float = 6.0, boost: float = 1.0) -> Image.Image:
+    """Soma um halo borrado ao desenho (visual de brilho para blend aditivo)."""
+    base = img.copy()
+    halo = img.filter(ImageFilter.GaussianBlur(radius))
+    a = np.asarray(halo, dtype=np.float32)
+    b = np.asarray(base, dtype=np.float32)
+    out = np.clip(a * 0.9 * boost + b, 0, 255).astype(np.uint8)
+    return Image.fromarray(out, "RGBA")
+
+
+def gen_omni() -> None:
+    """Motivos da Dimensão Omnisférica (Metavisão): quebra-cabeça, gelo, cobra, corvo, rosa com espinhos,
+    círculo dourado e losango (quadriculado). Brancos com halo; a cor vem do material."""
+    S = 256
+    W = (255, 255, 255, 255)
+
+    def canvas():
+        im = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+        return im, ImageDraw.Draw(im)
+
+    # quebra-cabeça (peça com 4 encaixes)
+    im, d = canvas()
+    d.rectangle((78, 78, 178, 178), outline=W, width=7)
+    for cx, cy, dx, dy in ((128, 78, 0, -1), (128, 178, 0, 1), (78, 128, -1, 0), (178, 128, 1, 0)):
+        ox, oy = cx + dx * 16, cy + dy * 16
+        d.ellipse((ox - 17, oy - 17, ox + 17, oy + 17), outline=W, width=7)
+    save(_glow(im), "vfx/omni_puzzle.png")
+
+    # gelo (floco de seis braços com ramos)
+    im, d = canvas()
+    for k in range(6):
+        a = math.radians(60 * k)
+        ex, ey = 128 + math.cos(a) * 100, 128 + math.sin(a) * 100
+        d.line((128, 128, ex, ey), fill=W, width=7)
+        for t in (0.45, 0.72):
+            bx, by = 128 + math.cos(a) * 100 * t, 128 + math.sin(a) * 100 * t
+            for sgn in (-1, 1):
+                b = a + sgn * math.radians(50)
+                d.line((bx, by, bx + math.cos(b) * 28, by + math.sin(b) * 28), fill=W, width=5)
+    d.polygon([(128 + math.cos(math.radians(60 * k + 30)) * 14, 128 + math.sin(math.radians(60 * k + 30)) * 14) for k in range(6)], fill=W)
+    save(_glow(im), "vfx/omni_ice.png")
+
+    # cobra (S grosso com cabeça e olhos)
+    im, d = canvas()
+    pts = []
+    for i in range(0, 61):
+        t = i / 60.0
+        x = 40 + t * 176
+        y = 128 + math.sin(t * math.pi * 2.6) * 48
+        pts.append((x, y))
+    for i in range(len(pts) - 1):
+        w = int(6 + 12 * (i / 60.0))
+        d.line((pts[i], pts[i + 1]), fill=W, width=w)
+    hx, hy = pts[-1]
+    d.ellipse((hx - 16, hy - 14, hx + 22, hy + 14), fill=W)
+    d.polygon([(hx + 20, hy), (hx + 40, hy - 6), (hx + 40, hy + 6)], fill=W)
+    d.ellipse((hx + 2, hy - 8, hx + 9, hy - 1), fill=(0, 0, 0, 0))
+    save(_glow(im), "vfx/omni_snake.png")
+
+    # corvo (silhueta em voo)
+    im, d = canvas()
+    d.polygon([(128, 120), (40, 70), (84, 128), (60, 150), (120, 140)], fill=W)       # asa esquerda
+    d.polygon([(128, 120), (216, 70), (172, 128), (196, 150), (136, 140)], fill=W)    # asa direita
+    d.ellipse((108, 108, 148, 168), fill=W)                                          # corpo
+    d.ellipse((112, 88, 144, 120), fill=W)                                           # cabeça
+    d.polygon([(122, 98), (134, 98), (128, 76)], fill=W)                             # bico
+    d.polygon([(118, 160), (138, 160), (128, 206)], fill=W)                          # cauda
+    d.ellipse((121, 98, 126, 103), fill=(0, 0, 0, 0))
+    save(_glow(im), "vfx/omni_raven.png")
+
+    # rosa com espinhos
+    im, d = canvas()
+    d.line((128, 118, 128, 232), fill=W, width=9)
+    for y, sgn in ((150, -1), (180, 1), (208, -1)):
+        d.polygon([(128, y), (128 + sgn * 30, y - 16), (128, y - 12)], fill=W)       # espinhos
+    d.line((128, 190, 168, 170), fill=W, width=6)
+    d.ellipse((160, 150, 194, 176), outline=W, width=5)                              # folha
+    for r, wdt in ((52, 7), (38, 7), (24, 7), (11, 7)):
+        d.ellipse((128 - r, 76 - r, 128 + r, 76 + r), outline=W, width=wdt)
+    for k in range(5):
+        a = math.radians(72 * k - 90)
+        d.arc((128 - 56 + math.cos(a) * 6, 76 - 56 + math.sin(a) * 6, 128 + 56 + math.cos(a) * 6, 76 + 56 + math.sin(a) * 6),
+              math.degrees(a) - 30, math.degrees(a) + 30, fill=W, width=8)
+    save(_glow(im), "vfx/omni_rose.png")
+
+    # círculo dourado (anéis + raios)
+    im, d = canvas()
+    for r, wdt in ((100, 7), (72, 5), (44, 7), (16, 14)):
+        d.ellipse((128 - r, 128 - r, 128 + r, 128 + r), outline=W, width=wdt)
+    for k in range(12):
+        a = math.radians(30 * k)
+        d.line((128 + math.cos(a) * 50, 128 + math.sin(a) * 50, 128 + math.cos(a) * 98, 128 + math.sin(a) * 98), fill=W, width=3)
+    save(_glow(im), "vfx/omni_circle.png")
+
+    # losango / quadrado girado (quadriculado)
+    im, d = canvas()
+    d.polygon([(128, 36), (220, 128), (128, 220), (36, 128)], outline=W, width=8)
+    d.polygon([(128, 78), (178, 128), (128, 178), (78, 128)], fill=W)
+    save(_glow(im), "vfx/omni_diamond.png")
+
+
 def gen_ono() -> None:
     kana = {"don": "ドン", "go": "ゴッ", "ba": "バッ", "zudon": "ズドン", "shu": "シュッ", "dododo": "ドドド", "kiin": "キィン",
             "gogogo": "ゴゴゴ", "baki": "バキッ", "paan": "パァン", "hyu": "ヒュッ", "zaa": "ザァ"}
@@ -479,7 +585,7 @@ def main() -> int:
         v = c["visual"]
         flat.append(dict(id=c["id"], rarity=c["rarity"], hair=v["hair"], hc=v["hair_color"], hc2=v["hair_accent"], eyes=v["eye_color"],
                          eyes2=v["eye_color2"], skin=v["skin"], aura=v["aura"], glasses=v["glasses"], kit=v["kit"], num=c["number"]))
-    gen_field(); gen_kits(); gen_faces(flat); gen_portraits(flat); gen_frames(); gen_icons(); gen_ui(); gen_vfx(); gen_ono(); gen_app_icons()
+    gen_field(); gen_kits(); gen_faces(flat); gen_portraits(flat); gen_frames(); gen_icons(); gen_ui(); gen_vfx(); gen_omni(); gen_ono(); gen_app_icons()
     FONT_DIR.mkdir(parents=True, exist_ok=True)
     if INTER.exists():
         shutil.copy(INTER, FONT_DIR / "Inter-ExtraBold.otf")

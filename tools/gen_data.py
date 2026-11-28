@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "game" / "data"
 RANGES = {"raro": (58, 74), "epico": (66, 80), "lendario": (70, 86), "mitico": (76, 92), "world_class": (70, 99)}
 EFFECTS = {"shot", "pass", "dash", "evade", "steal", "shockwave", "buff", "zone", "block", "vision", "mark",
-           "rest", "copy", "dashshot", "multishot"}
+           "rest", "copy", "dashshot", "multishot", "dribble"}
 errors: list[str] = []
 
 

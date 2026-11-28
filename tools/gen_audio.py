@@ -309,11 +309,81 @@ def song(bpm: int, bars: int, prog: list[int], minor_key: int, lead_pattern: lis
     return tr.render()
 
 
+def song2(bpm: int, bars: int, prog: list[int], key: int, motif: list[tuple[float, int, float]], *, drums: int = 2,
+          arp: float = 0.5, sections: bool = True, swing: float = 0.0, lead_kind: str = "saw", sub: bool = True) -> np.ndarray:
+    """Música com seções (intro / corpo / quebra), arpejo, baixo sub, melodia com variação a cada 4 compassos,
+    bateria com fills. motif = [(tempo_em_beats, grau, duração_beats)] dentro de 1 compasso."""
+    beat = 60.0 / bpm
+    tr = Track(bars * 4 * beat)
+    scale = [0, 2, 3, 5, 7, 8, 10]
+    chord = (0, 3, 7, 12)
+    for bar in range(bars):
+        root = key + prog[(bar // 2) % len(prog)]
+        t0 = bar * 4 * beat
+        sec = "body"
+        if sections:
+            sec = "intro" if bar < 4 else ("break" if bar >= bars - 4 else "body")
+        # pad
+        for iv in chord[:3]:
+            tr.add(t0, tone(midi(root + iv), 4 * beat, "saw", a=0.25, r=0.5, sustain=0.9), 0.07 if sec != "break" else 0.1)
+        # sub + baixo
+        if sec != "break":
+            for b in range(8):
+                if sub and b % 2 == 0:
+                    tr.add(t0 + b * beat * 0.5, tone(midi(root - 24), beat * 0.45, "sine", r=0.05) * 0.9, 0.6)
+                if drums >= 2 and sec == "body" and b % 4 in (1, 3):
+                    tr.add(t0 + b * beat * 0.5, tone(midi(root - 12 + (7 if b % 4 == 3 else 0)), beat * 0.4, "square", r=0.05), 0.28)
+        # arpejo
+        if arp > 0 and sec != "intro" or (arp > 0 and bar % 2 == 1):
+            steps = int(4 / arp)
+            for i in range(steps):
+                iv = chord[(i * 2 + (i // 4)) % 4] + (12 if (i % 8) >= 4 else 0)
+                tr.add(t0 + i * beat * arp, tone(midi(root + 12 + iv), beat * arp * 0.8, "square", a=0.004, r=0.04), 0.07)
+        # melodia (variação por frase: 0 base, 1 oitava acima, 2 inversão rítmica, 3 resposta)
+        if sec == "body" or (sec == "break" and bar % 2 == 0):
+            phrase = (bar // 4) % 4
+            for (bt, deg, du) in motif:
+                dg = deg + (2 if phrase == 3 else 0)
+                note = root + 12 + scale[dg % 7] + 12 * (dg // 7) + (12 if phrase == 1 else 0)
+                off = swing * beat * 0.5 if (int(bt * 2) % 2 == 1) else 0.0
+                tr.add(t0 + bt * beat + off, tone(midi(note), du * beat * 0.95, lead_kind, a=0.01, r=0.08, sustain=0.75), 0.12)
+        # bateria
+        if drums and sec != "intro":
+            for b in range(4):
+                if sec != "break" or bar % 2 == 1:
+                    tr.add(t0 + b * beat, kick_m(), 0.95 if b % 2 == 0 else 0.0)
+                    tr.add(t0 + (b + 0.5) * beat, hat_m(b % 2 == 1), 0.3)
+                    if b % 2 == 1:
+                        tr.add(t0 + b * beat, snare_m(), 0.75)
+            if drums >= 2:
+                tr.add(t0 + 1.75 * beat, kick_m(), 0.5)
+                tr.add(t0 + 2.5 * beat, kick_m(), 0.45)
+                for k in range(8):
+                    tr.add(t0 + k * beat * 0.5 + beat * 0.25, hat_m(), 0.18)
+            if bar % 4 == 3:  # fill de caixa
+                for k in range(8):
+                    tr.add(t0 + 3 * beat + k * beat * 0.125, snare_m(), 0.25 + 0.06 * k)
+        if sec == "break" and bar == bars - 1:  # riser para o loop
+            n = int(MSR * 4 * beat)
+            t = np.arange(n) / MSR
+            riser = lp(rng.uniform(-1, 1, n) * (t / t[-1]) ** 2, 5000, 2, MSR)
+            tr.add(t0, riser, 0.25)
+    return tr.render()
+
+
 def gen_music() -> None:
-    menu = song(100, 8, [0, 8, 3, 10], 57, [0, 2, 4, 2, 0, 4, 2, 1], False, False)
-    save("menu_theme", lp(menu, 6000, 2, MSR), "music", MSR, 0.8)
-    match = song(152, 16, [0, 8, 3, 10], 52, [0, 2, 4, 5, 4, 2, 0, 2, 4, 7, 5, 4, 2, 4, 5, 4], True, True)
-    save("match_theme", lp(match, 7000, 2, MSR), "music", MSR, 0.8)
+    # menu: épico calmo, arpejo suave e melodia lírica
+    menu = song2(96, 16, [0, 8, 3, 10], 57, [(0, 4, 1.5), (1.5, 2, 0.5), (2, 4, 1.0), (3, 5, 1.0)], drums=0, arp=0.5, sections=True, lead_kind="sine")
+    save("menu_theme", lp(menu, 7000, 2, MSR), "music", MSR, 0.8)
+    # partida: batida acelerada, melodia em saw
+    match = song2(156, 24, [0, 8, 3, 10], 52, [(0, 4, 0.5), (0.5, 5, 0.5), (1, 7, 1.0), (2, 5, 0.5), (2.5, 4, 0.5), (3, 2, 1.0)], drums=2, arp=0.25, sections=True, lead_kind="saw")
+    save("match_theme", lp(match, 8000, 2, MSR), "music", MSR, 0.8)
+    # despertar: mais rápido, grave pesado, melodia aguda
+    awake = song2(172, 16, [0, 3, 8, 10], 50, [(0, 7, 0.5), (0.5, 9, 0.5), (1, 11, 0.5), (1.5, 9, 0.5), (2, 7, 1.0), (3, 8, 1.0)], drums=2, arp=0.25, sections=False, lead_kind="saw")
+    save("awaken_theme", lp(awake, 9000, 2, MSR), "music", MSR, 0.85)
+    # vitória: maior, brilhante
+    vic = song2(120, 8, [0, 5, 7, 5], 60, [(0, 4, 0.5), (0.5, 6, 0.5), (1, 7, 1.0), (2, 6, 0.5), (2.5, 7, 0.5), (3, 9, 1.0)], drums=1, arp=0.5, sections=False, lead_kind="square")
+    save("victory_theme", lp(vic, 8000, 2, MSR), "music", MSR, 0.8)
 
 
 def main() -> int:
