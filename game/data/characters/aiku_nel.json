@@ -5,14 +5,14 @@
   "rarity": "world_class",
   "position": "Zagueiro",
   "stats": {
-    "chute": 88,
-    "velocidade": 98,
-    "aceleracao": 94,
-    "drible": 82,
-    "passe": 98,
-    "defesa": 99,
-    "fisico": 99,
-    "visao": 99
+    "chute": 82,
+    "velocidade": 91,
+    "aceleracao": 87,
+    "drible": 77,
+    "passe": 91,
+    "defesa": 92,
+    "fisico": 92,
+    "visao": 92
   },
   "number": 5,
   "base_id": "aiku",
@@ -49,5 +49,5 @@
     "aiku_nel_fortress"
   ],
   "evolved_normals": true,
-  "average": 94.6
+  "average": 88.0
 }

@@ -6,14 +6,14 @@
   "position": "Zagueiro",
   "bio": "Capitão da Japan U-20 e líbero de leitura total. Ex-atacante que decidiu ser o melhor zagueiro.",
   "stats": {
-    "chute": 66,
-    "velocidade": 76,
-    "aceleracao": 72,
+    "chute": 65,
+    "velocidade": 74,
+    "aceleracao": 70,
     "drible": 60,
-    "passe": 76,
-    "defesa": 92,
-    "fisico": 88,
-    "visao": 92
+    "passe": 74,
+    "defesa": 87,
+    "fisico": 84,
+    "visao": 87
   },
   "number": 5,
   "base_id": null,
@@ -47,5 +47,5 @@
     "aiku_fortress"
   ],
   "evolution": "aiku_nel",
-  "average": 77.8
+  "average": 75.1
 }

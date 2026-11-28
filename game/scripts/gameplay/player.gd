@@ -195,6 +195,20 @@ func awaken(duration: float) -> void:
 			_aura_node = fx.call("attach_aura", self, _aura_color())
 
 
+## Pose de despertar/cutscene: o modelo levita, inclina o peito para trás e gira.
+func pose(duration: float) -> void:
+	if _model == null:
+		return
+	var base_y: float = _model.position.y
+	var tw: Tween = _model.create_tween().set_parallel(true)
+	tw.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tw.tween_property(_model, "position:y", base_y + 0.35, duration * 0.4).set_ease(Tween.EASE_OUT)
+	tw.tween_property(_model, "rotation:x", -0.35, duration * 0.4).set_ease(Tween.EASE_OUT)
+	tw.chain().tween_interval(duration * 0.3)
+	tw.chain().tween_property(_model, "position:y", base_y, duration * 0.3).set_ease(Tween.EASE_IN)
+	tw.parallel().tween_property(_model, "rotation:x", 0.0, duration * 0.3)
+
+
 func end_awakening() -> void:
 	awakened = false
 	awake_left = 0.0

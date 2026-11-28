@@ -6,14 +6,14 @@
   "position": "Ponta",
   "bio": "Calmo e de poucas palavras. Aceleração explosiva nos primeiros metros e chute de esquerda.",
   "stats": {
-    "chute": 74,
-    "velocidade": 84,
-    "aceleracao": 92,
-    "drible": 68,
-    "passe": 66,
-    "defesa": 56,
-    "fisico": 70,
-    "visao": 64
+    "chute": 72,
+    "velocidade": 80,
+    "aceleracao": 87,
+    "drible": 67,
+    "passe": 65,
+    "defesa": 57,
+    "fisico": 69,
+    "visao": 63
   },
   "number": 21,
   "base_id": null,
@@ -46,5 +46,5 @@
     "zantetsu_iron"
   ],
   "evolution": null,
-  "average": 71.8
+  "average": 70.0
 }

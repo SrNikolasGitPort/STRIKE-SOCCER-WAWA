@@ -25,8 +25,57 @@ def err(msg: str) -> None:
     print("ERRO:", msg)
 
 
+TARGET_MEAN = {"raro": 64.0, "epico": 70.0, "lendario": 75.0, "mitico": 80.0, "world_class": 86.0}
+NEL_MEAN = 88.0
+GOAT_MEAN = 82.0
+CAPS = {  # limites de balanceamento por parâmetro (todas as categorias)
+    "power": 1.3, "speed": 1.8, "duration": 6.0, "knock": 5.0, "stun": 1.5, "radius": 7.0,
+}
+BUFF_CAPS = {"shot": 1.3, "speed": 1.25, "magnet": 1.0}
+
+
+def balance_stats(c: dict) -> None:
+    """Mantém a identidade (pontos fortes/fracos) mas ajusta a média da carta ao alvo da raridade."""
+    if c["base_id"] is None:
+        target = TARGET_MEAN[c["rarity"]]
+    else:
+        target = GOAT_MEAN if c["id"].endswith("_goat") else NEL_MEAN
+    keys = list(c["stats"].keys())
+    vals = [float(c["stats"][k]) for k in keys]
+    for _ in range(12):
+        mean = sum(vals) / len(vals)
+        # escala os desvios (20% mais comprimidos) e recentra
+        vals = [min(99.0, max(35.0, target + (v - mean) * 0.85)) for v in vals]
+        if abs(sum(vals) / len(vals) - target) < 0.4:
+            break
+    c["stats"] = {k: int(round(v)) for k, v in zip(keys, vals)}
+
+
+def balance_skill(s: dict) -> None:
+    p = s["params"]
+    for k, cap in CAPS.items():
+        if k in p and isinstance(p[k], (int, float)) and not (k == "speed" and s["effect"] in ("buff", "steal", "pass")):
+            p[k] = min(p[k], cap)
+    if s["effect"] == "buff":
+        for k, cap in BUFF_CAPS.items():
+            if k in p:
+                p[k] = min(p[k], cap)
+    if s["effect"] in ("steal",) and "speed" in p:
+        p["speed"] = min(p["speed"], 1.3)
+    if s["effect"] == "vision" and "slow" in p:
+        p["slow"] = max(p["slow"], 0.6)
+    if s["effect"] == "zone" and "slow" in p:
+        p["slow"] = max(p["slow"], 0.5)
+    if s["effect"] == "pass" and "speed" in p:
+        p["speed"] = min(p["speed"], 1.8)
+
+
 def main() -> int:
     chars, skills, quests = roster.build_all()
+    for s in skills:
+        balance_skill(s)
+    for c in chars:
+        balance_stats(c)
     ids = [s["id"] for s in skills]
     if len(ids) != len(set(ids)):
         err("ids de skill duplicados")

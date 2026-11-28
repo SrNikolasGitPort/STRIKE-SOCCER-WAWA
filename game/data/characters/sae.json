@@ -6,14 +6,14 @@
   "position": "Meia",
   "bio": "O maestro do Real Madrid Youth. Passes longos perfeitos e visão de jogo absurda.",
   "stats": {
-    "chute": 92,
+    "chute": 90,
     "velocidade": 84,
     "aceleracao": 84,
-    "drible": 94,
-    "passe": 99,
-    "defesa": 66,
+    "drible": 92,
+    "passe": 96,
+    "defesa": 68,
     "fisico": 78,
-    "visao": 98
+    "visao": 95
   },
   "number": 10,
   "base_id": null,
@@ -47,5 +47,5 @@
     "sae_nutmeg_combo"
   ],
   "evolution": null,
-  "average": 86.9
+  "average": 85.9
 }

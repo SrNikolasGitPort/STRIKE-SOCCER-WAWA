@@ -104,6 +104,9 @@
     "deadzone": 0.12,
     "opacity": 0.55
   },
+  "dev": {
+    "unlock_all": 1
+  },
   "awakening": {
     "duration_s": 30.0,
     "speed_mult": 1.08,

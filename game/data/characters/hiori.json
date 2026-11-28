@@ -7,13 +7,13 @@
   "bio": "Armador calmo e observador, de passes precisos. (Raridade provisória: aguardando confirmação.)",
   "stats": {
     "chute": 60,
-    "velocidade": 66,
+    "velocidade": 65,
     "aceleracao": 64,
-    "drible": 76,
-    "passe": 92,
+    "drible": 74,
+    "passe": 87,
     "defesa": 62,
     "fisico": 60,
-    "visao": 92
+    "visao": 87
   },
   "number": 23,
   "base_id": null,
@@ -47,5 +47,5 @@
     "hiori_two_stage"
   ],
   "evolution": null,
-  "average": 71.5
+  "average": 69.9
 }

@@ -5,14 +5,14 @@
   "rarity": "world_class",
   "position": "Ponta",
   "stats": {
-    "chute": 92,
-    "velocidade": 99,
-    "aceleracao": 99,
-    "drible": 99,
-    "passe": 99,
-    "defesa": 62,
+    "chute": 89,
+    "velocidade": 95,
+    "aceleracao": 95,
+    "drible": 95,
+    "passe": 95,
+    "defesa": 64,
     "fisico": 74,
-    "visao": 99
+    "visao": 95
   },
   "number": 8,
   "base_id": "bachira",
@@ -49,5 +49,5 @@
     "bachira_nel_cross"
   ],
   "evolved_normals": true,
-  "average": 90.4
+  "average": 87.8
 }

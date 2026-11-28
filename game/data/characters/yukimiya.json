@@ -6,14 +6,14 @@
   "position": "Atacante",
   "bio": "Atacante móvel craque do 1 contra 1. Dribles em velocidade e chutes giratórios.",
   "stats": {
-    "chute": 82,
-    "velocidade": 92,
-    "aceleracao": 92,
-    "drible": 94,
-    "passe": 72,
-    "defesa": 56,
-    "fisico": 72,
-    "visao": 86
+    "chute": 81,
+    "velocidade": 90,
+    "aceleracao": 90,
+    "drible": 91,
+    "passe": 73,
+    "defesa": 59,
+    "fisico": 73,
+    "visao": 84
   },
   "number": 14,
   "base_id": null,
@@ -47,5 +47,5 @@
     "yukimiya_emperor"
   ],
   "evolution": null,
-  "average": 80.8
+  "average": 80.1
 }

@@ -5,14 +5,14 @@
   "rarity": "world_class",
   "position": "Atacante",
   "stats": {
-    "chute": 99,
-    "velocidade": 99,
-    "aceleracao": 99,
-    "drible": 99,
-    "passe": 74,
-    "defesa": 74,
-    "fisico": 99,
-    "visao": 99
+    "chute": 93,
+    "velocidade": 93,
+    "aceleracao": 93,
+    "drible": 93,
+    "passe": 72,
+    "defesa": 72,
+    "fisico": 93,
+    "visao": 93
   },
   "number": 9,
   "base_id": "shidou",
@@ -49,5 +49,5 @@
     "shidou_nel_frenzy"
   ],
   "evolved_normals": true,
-  "average": 92.8
+  "average": 87.8
 }

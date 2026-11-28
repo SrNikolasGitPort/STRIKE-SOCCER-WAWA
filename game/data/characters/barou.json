@@ -6,14 +6,14 @@
   "position": "Atacante",
   "bio": "O 'Rei' arrogante que devora o jogo. Físico dominante e finalização fria.",
   "stats": {
-    "chute": 94,
-    "velocidade": 78,
-    "aceleracao": 76,
+    "chute": 93,
+    "velocidade": 79,
+    "aceleracao": 77,
     "drible": 86,
-    "passe": 58,
-    "defesa": 64,
-    "fisico": 96,
-    "visao": 80
+    "passe": 62,
+    "defesa": 67,
+    "fisico": 94,
+    "visao": 81
   },
   "number": 13,
   "base_id": null,
@@ -46,5 +46,5 @@
     "barou_lightning"
   ],
   "evolution": "barou_nel",
-  "average": 79.0
+  "average": 79.9
 }

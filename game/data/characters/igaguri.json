@@ -6,14 +6,14 @@
   "position": "Zagueiro",
   "bio": "Filho de monges, joga para fugir do templo. Persistente, mergulha em chutes e provoca faltas.",
   "stats": {
-    "chute": 46,
-    "velocidade": 60,
-    "aceleracao": 60,
-    "drible": 64,
-    "passe": 60,
-    "defesa": 72,
-    "fisico": 66,
-    "visao": 58
+    "chute": 51,
+    "velocidade": 63,
+    "aceleracao": 63,
+    "drible": 67,
+    "passe": 63,
+    "defesa": 74,
+    "fisico": 68,
+    "visao": 62
   },
   "number": 13,
   "base_id": null,
@@ -46,5 +46,5 @@
     "igaguri_heroic_dive"
   ],
   "evolution": "igaguri_goat",
-  "average": 60.8
+  "average": 63.9
 }

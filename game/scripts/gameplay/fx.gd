@@ -295,7 +295,45 @@ func cutscene(title: String, ono_key: String, color: Color, big: bool) -> void:
 		speedlines(false)
 
 
+## Cutscene cinemática completa (câmera orbitando o alvo, letterbox, linhas de
+## velocidade, flash, kana). kind: "awaken" (2.4 s, pose de despertar) ou "skill" (1.3 s).
+## Só é chamada para o jogador humano; no online o tempo global nunca é alterado.
+func cinematic(target: Node3D, title: String, sub: String, ono_key: String, color: Color, kind: String) -> void:
+	var reduce: bool = bool(Game.settings.get("reduce_cutscenes", false))
+	var awaken: bool = kind == "awaken"
+	var dur: float = 2.4 if awaken else 1.3
+	banner(title + ("\n" + sub if sub != "" else ""), color, dur - 0.3)
+	ono(ono_key, Vector2.ZERO, color.lerp(Color.WHITE, 0.4))
+	if reduce or rig == null or target == null:
+		return
+	_cut_token += 1
+	var token: int = _cut_token
+	letterbox(true)
+	speedlines(true, color)
+	flash(color, 0.5, 0.6)
+	rig.call("cinematic", target, dur, 150.0 if awaken else 70.0, 46.0 if awaken else 55.0, 3.4 if awaken else 4.2, 0.9 if awaken else 1.5)
+	if target.has_method("pose"):
+		target.call("pose", dur)
+	if awaken:
+		for i: int in 3:
+			ring(target.get_parent(), target.global_position + Vector3(0, 0.1 + i * 0.5, 0), color, 3.0 + i * 1.6, 0.9 + i * 0.25)
+	if not online:
+		Engine.time_scale = 0.25 if awaken else 0.4
+		await get_tree().create_timer(0.35 if awaken else 0.25, true, false, true).timeout
+		if token == _cut_token:
+			Engine.time_scale = 1.0
+	await get_tree().create_timer(dur - 0.35, true, false, true).timeout
+	if token == _cut_token:
+		flash(Color.WHITE, 0.6, 0.35)
+		rig.call("shake", 0.6 if awaken else 0.3)
+		letterbox(false)
+		speedlines(false)
+		rig.call("end_cinematic")
+
+
 func clear_all() -> void:
+	if rig != null:
+		rig.call("end_cinematic")
 	_cut_token += 1
 	Engine.time_scale = 1.0
 	letterbox(false)

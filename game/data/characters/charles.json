@@ -6,14 +6,14 @@
   "position": "Meia",
   "bio": "O 'coração' do Paris X Gen. Passes de risco e visão máxima.",
   "stats": {
-    "chute": 64,
-    "velocidade": 82,
-    "aceleracao": 80,
-    "drible": 84,
-    "passe": 98,
-    "defesa": 56,
-    "fisico": 66,
-    "visao": 96
+    "chute": 68,
+    "velocidade": 83,
+    "aceleracao": 81,
+    "drible": 85,
+    "passe": 97,
+    "defesa": 61,
+    "fisico": 70,
+    "visao": 95
   },
   "number": 8,
   "base_id": null,
@@ -46,5 +46,5 @@
     "charles_heart_pass"
   ],
   "evolution": null,
-  "average": 78.2
+  "average": 80.0
 }

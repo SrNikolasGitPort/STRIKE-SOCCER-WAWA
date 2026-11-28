@@ -6,14 +6,14 @@
   "position": "Meia",
   "bio": "Herdeiro carismático que copia as habilidades dos especialistas (Chameleon).",
   "stats": {
-    "chute": 80,
-    "velocidade": 80,
-    "aceleracao": 80,
-    "drible": 84,
-    "passe": 90,
-    "defesa": 78,
-    "fisico": 84,
-    "visao": 86
+    "chute": 73,
+    "velocidade": 73,
+    "aceleracao": 73,
+    "drible": 76,
+    "passe": 81,
+    "defesa": 71,
+    "fisico": 76,
+    "visao": 78
   },
   "number": 10,
   "base_id": null,
@@ -46,5 +46,5 @@
     "reo_organizer"
   ],
   "evolution": "reo_nel",
-  "average": 82.8
+  "average": 75.1
 }

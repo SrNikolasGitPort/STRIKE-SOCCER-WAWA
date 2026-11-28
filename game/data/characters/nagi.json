@@ -6,13 +6,13 @@
   "position": "Meia",
   "bio": "Talento natural com domínio de bola perfeito. Mata a bola e chuta entre os defensores.",
   "stats": {
-    "chute": 84,
-    "velocidade": 70,
-    "aceleracao": 66,
+    "chute": 85,
+    "velocidade": 73,
+    "aceleracao": 69,
     "drible": 86,
-    "passe": 72,
-    "defesa": 50,
-    "fisico": 66,
+    "passe": 74,
+    "defesa": 56,
+    "fisico": 69,
     "visao": 88
   },
   "number": 7,
@@ -46,5 +46,5 @@
     "nagi_flow_trap"
   ],
   "evolution": "nagi_nel",
-  "average": 72.8
+  "average": 75.0
 }

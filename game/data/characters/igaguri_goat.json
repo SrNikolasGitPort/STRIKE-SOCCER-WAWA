@@ -5,14 +5,14 @@
   "rarity": "world_class",
   "position": "Zagueiro",
   "stats": {
-    "chute": 60,
-    "velocidade": 80,
-    "aceleracao": 76,
-    "drible": 86,
-    "passe": 64,
-    "defesa": 92,
-    "fisico": 88,
-    "visao": 62
+    "chute": 68,
+    "velocidade": 85,
+    "aceleracao": 82,
+    "drible": 90,
+    "passe": 72,
+    "defesa": 96,
+    "fisico": 92,
+    "visao": 70
   },
   "number": 13,
   "base_id": "igaguri",
@@ -49,5 +49,5 @@
     "goat_sermon"
   ],
   "evolved_normals": true,
-  "average": 76.0
+  "average": 81.9
 }

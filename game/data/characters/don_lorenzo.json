@@ -6,14 +6,14 @@
   "position": "Zagueiro",
   "bio": "Líbero do Ubers que come o craque rival. Alcance longo e leitura preditiva.",
   "stats": {
-    "chute": 64,
-    "velocidade": 88,
-    "aceleracao": 86,
+    "chute": 66,
+    "velocidade": 87,
+    "aceleracao": 85,
     "drible": 78,
-    "passe": 88,
-    "defesa": 99,
-    "fisico": 94,
-    "visao": 99
+    "passe": 87,
+    "defesa": 96,
+    "fisico": 92,
+    "visao": 96
   },
   "number": 3,
   "base_id": null,
@@ -46,5 +46,5 @@
     "lorenzo_libero_zone"
   ],
   "evolution": null,
-  "average": 87.0
+  "average": 85.9
 }

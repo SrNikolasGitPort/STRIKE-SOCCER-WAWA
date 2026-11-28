@@ -6,14 +6,14 @@
   "position": "Atacante",
   "bio": "Instinto de gol selvagem. O jogador mais forte fisicamente e explosivo.",
   "stats": {
-    "chute": 94,
-    "velocidade": 90,
-    "aceleracao": 88,
-    "drible": 86,
-    "passe": 52,
-    "defesa": 52,
-    "fisico": 98,
-    "visao": 84
+    "chute": 91,
+    "velocidade": 88,
+    "aceleracao": 86,
+    "drible": 85,
+    "passe": 56,
+    "defesa": 56,
+    "fisico": 95,
+    "visao": 83
   },
   "number": 9,
   "base_id": null,
@@ -47,5 +47,5 @@
     "shidou_instinct"
   ],
   "evolution": "shidou_nel",
-  "average": 80.5
+  "average": 80.0
 }

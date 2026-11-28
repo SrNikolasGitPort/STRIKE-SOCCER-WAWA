@@ -6,14 +6,14 @@
   "position": "Atacante",
   "bio": "Frio e obcecado. Joga como um marionetista, lendo e manipulando os rivais.",
   "stats": {
-    "chute": 94,
-    "velocidade": 86,
-    "aceleracao": 84,
-    "drible": 90,
-    "passe": 88,
-    "defesa": 62,
-    "fisico": 82,
-    "visao": 90
+    "chute": 88,
+    "velocidade": 81,
+    "aceleracao": 80,
+    "drible": 85,
+    "passe": 83,
+    "defesa": 61,
+    "fisico": 78,
+    "visao": 85
   },
   "number": 10,
   "base_id": null,
@@ -47,5 +47,5 @@
     "rin_sync"
   ],
   "evolution": "rin_nel",
-  "average": 84.5
+  "average": 80.1
 }

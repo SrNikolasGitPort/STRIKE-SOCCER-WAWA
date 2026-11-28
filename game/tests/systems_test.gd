@@ -38,7 +38,11 @@ func _run() -> void:
 			if G.skill(String(sid)).is_empty():
 				bad += 1
 	_check(bad == 0, "todas as skills dos personagens existem")
-	_check(G.is_unlocked("isagi") and not G.is_unlocked("isagi_nel"), "Nel começa bloqueado")
+	_check(G.is_unlocked("isagi_nel") and G.is_unlocked("kaiser"), "dev.unlock_all libera tudo (temporário)")
+	var cfg: Node = root.get_node("Config")
+	var dev: Dictionary = (cfg.get("_gameplay") as Dictionary)["dev"]
+	dev["unlock_all"] = 0
+	_check(G.is_unlocked("isagi") and not G.is_unlocked("isagi_nel"), "Nel começa bloqueado (sem flag dev)")
 
 	print("[2] Missões Nel")
 	var qs: Array = G.quests_for("isagi")
@@ -48,6 +52,8 @@ func _run() -> void:
 	_check(G.quest_done.has(String(first["id"])), "missão concluída pelo evento")
 	_check(G.is_unlocked("isagi_nel"), "Nel liberado após 1ª missão")
 	_check(G.awakening_skills("isagi_nel").size() == 1, "1 skill de Despertar Nel liberada")
+	dev["unlock_all"] = 1
+	_check(G.awakening_skills("isagi_nel").size() == (G.character("isagi_nel").get("awakening", []) as Array).size(), "flag dev libera todas as skills Nel")
 
 	print("[3] Códigos de sala")
 	var code: String = N.encode_room("192.168.1.23", 24565)

@@ -6,14 +6,14 @@
   "position": "Atacante",
   "bio": "Atacante que lê o jogo (Meta-Visão) e evolui copiando os rivais. Quer ser o melhor do mundo.",
   "stats": {
-    "chute": 72,
-    "velocidade": 64,
-    "aceleracao": 66,
-    "drible": 62,
-    "passe": 66,
-    "defesa": 48,
+    "chute": 70,
+    "velocidade": 63,
+    "aceleracao": 65,
+    "drible": 61,
+    "passe": 65,
+    "defesa": 49,
     "fisico": 60,
-    "visao": 84
+    "visao": 80
   },
   "number": 11,
   "base_id": null,
@@ -46,5 +46,5 @@
     "isagi_flow"
   ],
   "evolution": "isagi_nel",
-  "average": 65.2
+  "average": 64.1
 }

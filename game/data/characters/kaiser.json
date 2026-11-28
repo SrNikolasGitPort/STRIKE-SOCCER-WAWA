@@ -6,14 +6,14 @@
   "position": "Atacante",
   "bio": "O 'Imperador' do Bastard München. O chute de primeira mais rápido do mundo.",
   "stats": {
-    "chute": 99,
-    "velocidade": 88,
-    "aceleracao": 88,
-    "drible": 90,
+    "chute": 97,
+    "velocidade": 87,
+    "aceleracao": 87,
+    "drible": 89,
     "passe": 84,
-    "defesa": 60,
+    "defesa": 64,
     "fisico": 86,
-    "visao": 96
+    "visao": 94
   },
   "number": 9,
   "base_id": null,
@@ -46,5 +46,5 @@
     "kaiser_metavision"
   ],
   "evolution": null,
-  "average": 86.4
+  "average": 86.0
 }

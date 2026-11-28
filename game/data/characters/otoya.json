@@ -7,13 +7,13 @@
   "bio": "Descontraído e provocador. Infiltra por pontos cegos com velocidade e sem fazer barulho.",
   "stats": {
     "chute": 68,
-    "velocidade": 86,
-    "aceleracao": 84,
-    "drible": 76,
+    "velocidade": 83,
+    "aceleracao": 82,
+    "drible": 75,
     "passe": 66,
-    "defesa": 48,
-    "fisico": 60,
-    "visao": 74
+    "defesa": 51,
+    "fisico": 61,
+    "visao": 73
   },
   "number": 17,
   "base_id": null,
@@ -46,5 +46,5 @@
     "otoya_blindspot"
   ],
   "evolution": null,
-  "average": 70.2
+  "average": 69.9
 }

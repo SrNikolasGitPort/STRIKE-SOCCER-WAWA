@@ -2,6 +2,13 @@
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## 1.0.0-rc2 (em andamento)
+- Balanceamento: médias por raridade normalizadas (raro 64, épico 70, lendário 75, mítico 80, World Class 86, Nel 88, GOAT 82) e limites nos parâmetros de skill.
+- TEMPORÁRIO: `dev.unlock_all` em gameplay.json libera todos os personagens, Nel e GOAT (e todas as skills de Despertar) para testes.
+- Cutscene de despertar: câmera cinemática orbitando o jogador, pose, anéis, letterbox, câmera lenta local (só offline).
+- Skills de Despertar do jogador têm cutscene cinemática própria.
+- Parâmetro `immune` das skills de esquiva agora é respeitado.
+
 ## [1.0.0-rc1] - 2026-11-27
 
 ### Adicionado

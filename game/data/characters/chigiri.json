@@ -6,14 +6,14 @@
   "position": "Ponta",
   "bio": "O mais veloz do Blue Lock. Superou uma lesão no joelho para voltar a correr.",
   "stats": {
-    "chute": 66,
-    "velocidade": 94,
-    "aceleracao": 92,
-    "drible": 78,
-    "passe": 62,
+    "chute": 62,
+    "velocidade": 85,
+    "aceleracao": 84,
+    "drible": 72,
+    "passe": 58,
     "defesa": 40,
-    "fisico": 52,
-    "visao": 66
+    "fisico": 50,
+    "visao": 62
   },
   "number": 10,
   "base_id": null,
@@ -46,5 +46,5 @@
     "chigiri_sprint_through"
   ],
   "evolution": "chigiri_nel",
-  "average": 68.8
+  "average": 64.1
 }

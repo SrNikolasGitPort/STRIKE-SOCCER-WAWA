@@ -5,14 +5,14 @@
   "rarity": "world_class",
   "position": "Ponta",
   "stats": {
-    "chute": 88,
+    "chute": 89,
     "velocidade": 99,
     "aceleracao": 99,
     "drible": 99,
-    "passe": 84,
-    "defesa": 62,
-    "fisico": 74,
-    "visao": 88
+    "passe": 86,
+    "defesa": 67,
+    "fisico": 77,
+    "visao": 89
   },
   "number": 10,
   "base_id": "chigiri",
@@ -49,5 +49,5 @@
     "chigiri_nel_burst"
   ],
   "evolved_normals": true,
-  "average": 86.6
+  "average": 88.1
 }

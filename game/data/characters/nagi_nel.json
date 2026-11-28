@@ -5,14 +5,14 @@
   "rarity": "world_class",
   "position": "Meia",
   "stats": {
-    "chute": 99,
-    "velocidade": 92,
-    "aceleracao": 88,
-    "drible": 99,
-    "passe": 94,
+    "chute": 94,
+    "velocidade": 89,
+    "aceleracao": 85,
+    "drible": 94,
+    "passe": 90,
     "defesa": 72,
-    "fisico": 88,
-    "visao": 99
+    "fisico": 85,
+    "visao": 94
   },
   "number": 7,
   "base_id": "nagi",
@@ -49,5 +49,5 @@
     "nagi_nel_flow"
   ],
   "evolved_normals": true,
-  "average": 91.4
+  "average": 87.9
 }

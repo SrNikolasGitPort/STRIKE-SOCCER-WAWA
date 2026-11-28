@@ -7,13 +7,13 @@
   "bio": "Atacante de sangue quente com um chute poderoso de perna esquerda. Sonha ser o herói do futebol.",
   "stats": {
     "chute": 92,
-    "velocidade": 76,
-    "aceleracao": 72,
-    "drible": 66,
-    "passe": 58,
-    "defesa": 58,
+    "velocidade": 78,
+    "aceleracao": 75,
+    "drible": 70,
+    "passe": 63,
+    "defesa": 63,
     "fisico": 88,
-    "visao": 68
+    "visao": 71
   },
   "number": 9,
   "base_id": null,
@@ -46,5 +46,5 @@
     "kunigami_hot_blood"
   ],
   "evolution": null,
-  "average": 72.2
+  "average": 75.0
 }

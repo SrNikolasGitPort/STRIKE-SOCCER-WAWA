@@ -134,7 +134,14 @@ func is_evolution(cid: String) -> bool:
 	return character(cid).get("base_id") != null
 
 
+## TEMPORÁRIO (testes): "dev.unlock_all" em gameplay.json libera todos os personagens e Nel/GOAT.
+func dev_unlock_all() -> bool:
+	return Config.f("dev.unlock_all") > 0.5
+
+
 func is_unlocked(cid: String) -> bool:
+	if dev_unlock_all():
+		return true
 	if is_evolution(cid):
 		for q: Variant in quests_for(String(character(cid).get("base_id", ""))):
 			if quest_done.has(String((q as Dictionary)["id"])):
@@ -166,7 +173,7 @@ func add_coins(n: int) -> void:
 func awakening_skills(cid: String) -> Array:
 	var c: Dictionary = character(cid)
 	var all: Array = c.get("awakening", [])
-	if not is_evolution(cid):
+	if not is_evolution(cid) or dev_unlock_all():
 		return all
 	var out: Array = []
 	for sid: Variant in all:

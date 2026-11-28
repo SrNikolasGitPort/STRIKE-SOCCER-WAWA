@@ -6,12 +6,12 @@
   "position": "Atacante",
   "stats": {
     "chute": 94,
-    "velocidade": 86,
-    "aceleracao": 88,
-    "drible": 84,
-    "passe": 88,
-    "defesa": 70,
-    "fisico": 82,
+    "velocidade": 88,
+    "aceleracao": 89,
+    "drible": 86,
+    "passe": 89,
+    "defesa": 74,
+    "fisico": 84,
     "visao": 99
   },
   "number": 11,
@@ -49,5 +49,5 @@
     "isagi_nel_twogun"
   ],
   "evolved_normals": true,
-  "average": 86.4
+  "average": 87.9
 }

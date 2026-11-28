@@ -83,7 +83,9 @@ static func _cutscene(p: Node, sk: Dictionary, arena: Node) -> void:
 		name_txt += "\n" + jp
 	var col: Color = _color(p)
 	# Só o jogador humano (e skills de Despertar de qualquer um) ganham a cutscene completa.
-	if human or big:
+	if human and big:
+		fx.call("cinematic", p, String(p.get("display_name")).to_upper() + " — " + Game.skill_name(String(sk.get("id", ""))), jp, String(sk.get("ono", "don")), col, "skill")
+	elif human or big:
 		fx.call("cutscene", String(p.get("display_name")).to_upper() + " — " + name_txt, String(sk.get("ono", "don")), col, big and human)
 	else:
 		fx.call("ono", String(sk.get("ono", "don")), Vector2.ZERO, col)
@@ -191,7 +193,8 @@ static func _evade(p: Node, params: Dictionary) -> void:
 	var dir: Vector3 = wish if wish.length() > 0.2 else p.get("facing")
 	var dur: float = float(params.get("duration", 1.2))
 	p.call("start_dash", dir, float(params.get("speed", 1.4)), dur)
-	p.set("immune_t", dur + 0.2)
+	if bool(params.get("immune", true)):
+		p.set("immune_t", dur + 0.2)
 	p.call("add_buff", "magnet", float(params.get("magnet", 0.6)), dur + 0.4)
 	Sfx.play("whoosh", -2.0)
 

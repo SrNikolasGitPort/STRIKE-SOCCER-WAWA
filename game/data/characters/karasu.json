@@ -6,14 +6,14 @@
   "position": "Meia",
   "bio": "Meio-campista analítico e de língua afiada. Desmonta defesas achando o elo mais fraco.",
   "stats": {
-    "chute": 58,
-    "velocidade": 70,
-    "aceleracao": 70,
+    "chute": 61,
+    "velocidade": 71,
+    "aceleracao": 71,
     "drible": 78,
-    "passe": 88,
+    "passe": 86,
     "defesa": 76,
-    "fisico": 66,
-    "visao": 94
+    "fisico": 67,
+    "visao": 91
   },
   "number": 69,
   "base_id": null,
@@ -46,5 +46,5 @@
     "karasu_crow_rule"
   ],
   "evolution": null,
-  "average": 75.0
+  "average": 75.1
 }

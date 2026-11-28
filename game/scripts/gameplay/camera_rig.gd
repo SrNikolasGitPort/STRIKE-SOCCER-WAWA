@@ -18,6 +18,15 @@ var _shake: float = 0.0
 var _fov_kick: float = 0.0
 var _fov_tween: Tween
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+# Modo cinemático (cutscenes de Despertar / skills): órbita ao redor de um alvo.
+var _cin_target: Node3D = null
+var _cin_t: float = 0.0
+var _cin_dur: float = 0.0
+var _cin_orbit: float = 0.0
+var _cin_dist: float = 3.0
+var _cin_h: float = 1.4
+var _cin_fov: float = 50.0
+var _cin_a0: float = 0.0
 
 
 func _ready() -> void:
@@ -36,6 +45,28 @@ func snap() -> void:
 	if player != null:
 		_focus = _target_focus()
 		_apply(0.0)
+
+
+## Câmera cinemática: gira `orbit_deg` graus ao redor do alvo durante `duration` s.
+func cinematic(target: Node3D, duration: float, orbit_deg: float, fov: float, dist: float, height: float) -> void:
+	if target == null:
+		return
+	_cin_target = target
+	_cin_t = 0.0
+	_cin_dur = duration
+	_cin_orbit = deg_to_rad(orbit_deg)
+	_cin_fov = fov
+	_cin_dist = dist
+	_cin_h = height
+	_cin_a0 = yaw + PI * 0.5 + deg_to_rad(25.0)
+
+
+func end_cinematic() -> void:
+	_cin_target = null
+
+
+func is_cinematic() -> bool:
+	return _cin_target != null
 
 
 func shake(amount: float) -> void:
@@ -96,6 +127,23 @@ func _target_focus() -> Vector3:
 func _process(delta: float) -> void:
 	if player == null:
 		return
+	if _cin_target != null:
+		if not is_instance_valid(_cin_target):
+			_cin_target = null
+		else:
+			# usa delta real (a cutscene pode rodar em câmera lenta)
+			_cin_t += delta / maxf(Engine.time_scale, 0.05)
+			var k: float = clampf(_cin_t / _cin_dur, 0.0, 1.0)
+			var e: float = 1.0 - pow(1.0 - k, 2.0)
+			var a: float = _cin_a0 + _cin_orbit * e
+			var d: float = lerpf(_cin_dist * 1.25, _cin_dist, e)
+			var c: Vector3 = _cin_target.global_position + Vector3(0.0, 1.0, 0.0)
+			var cpos: Vector3 = c + Vector3(cos(a) * d, _cin_h * lerpf(0.5, 1.0, e), sin(a) * d)
+			_cam.fov = lerpf(_cin_fov + 14.0, _cin_fov, e) + _fov_kick
+			_cam.look_at_from_position(cpos, c + Vector3(0.0, 0.2, 0.0), Vector3.UP)
+			if _cin_t >= _cin_dur:
+				_cin_target = null
+			return
 	var stick: Vector2 = Input.get_vector("cam_left", "cam_right", "cam_up", "cam_down")
 	if stick.length() > 0.05:
 		_rotate(stick.x * 520.0 * delta, stick.y * 380.0 * delta)

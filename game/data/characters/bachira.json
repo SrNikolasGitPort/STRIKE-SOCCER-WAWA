@@ -6,14 +6,14 @@
   "position": "Ponta",
   "bio": "Dribles imprevisíveis guiados por um 'monstro' imaginário. Só passa para quem o empolga.",
   "stats": {
-    "chute": 70,
-    "velocidade": 86,
-    "aceleracao": 88,
-    "drible": 96,
-    "passe": 84,
-    "defesa": 40,
-    "fisico": 52,
-    "visao": 80
+    "chute": 66,
+    "velocidade": 80,
+    "aceleracao": 81,
+    "drible": 88,
+    "passe": 78,
+    "defesa": 41,
+    "fisico": 51,
+    "visao": 75
   },
   "number": 8,
   "base_id": null,
@@ -47,5 +47,5 @@
     "bachira_egotistical"
   ],
   "evolution": "bachira_nel",
-  "average": 74.5
+  "average": 70.0
 }

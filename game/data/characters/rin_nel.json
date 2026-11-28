@@ -5,14 +5,14 @@
   "rarity": "world_class",
   "position": "Atacante",
   "stats": {
-    "chute": 99,
-    "velocidade": 99,
-    "aceleracao": 99,
-    "drible": 99,
-    "passe": 99,
-    "defesa": 84,
-    "fisico": 99,
-    "visao": 99
+    "chute": 90,
+    "velocidade": 90,
+    "aceleracao": 90,
+    "drible": 90,
+    "passe": 90,
+    "defesa": 77,
+    "fisico": 90,
+    "visao": 90
   },
   "number": 10,
   "base_id": "rin",
@@ -49,5 +49,5 @@
     "rin_nel_puppet"
   ],
   "evolved_normals": true,
-  "average": 97.1
+  "average": 88.4
 }

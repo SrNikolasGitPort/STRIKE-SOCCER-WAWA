@@ -429,7 +429,11 @@ func _awaken(p: Node) -> void:
 	p.call("awaken", Config.f("awakening.duration_s"))
 	var col: Color = p.call("_aura_color")
 	var is_human_p: bool = p == human
-	fx.call("cutscene", "%s — %s" % [String(p.get("display_name")).to_upper(), Game.t("DESPERTAR!", "AWAKENING!")], "gogogo", col, is_human_p or Game.mode != "training")
+	var title: String = "%s — %s" % [String(p.get("display_name")).to_upper(), Game.t("DESPERTAR!", "AWAKENING!")]
+	if is_human_p:
+		fx.call("cinematic", p, title, Game.t("Metavisão total", "Total awakening"), "gogogo", col, "awaken")
+	else:
+		fx.call("cutscene", title, "gogogo", col, true)
 	fx.call("shockwave", self, (p as Node3D).global_position, col, 6.0)
 	Sfx.play("awaken")
 	if is_human_p:
