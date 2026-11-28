@@ -6,6 +6,12 @@ name: Release
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag da Release (ex.: v1.0.0-rc1). Será criada se não existir."
+        required: true
+        default: "v1.0.0-rc1"
 
 permissions:
   contents: write
@@ -29,11 +35,13 @@ jobs:
       - name: Publicar Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
+          target_commitish: ${{ github.sha }}
           files: |
             dist/*.zip
             dist/android/*.apk
           generate_release_notes: true
-          prerelease: ${{ contains(github.ref_name, '-') }}
+          prerelease: ${{ contains(github.event.inputs.tag || github.ref_name, '-') }}
           body: |
             Build automática do **Strike Soccer WAWA** (fan game, sem fins lucrativos).
             - Windows: baixe o .zip e execute o .exe
