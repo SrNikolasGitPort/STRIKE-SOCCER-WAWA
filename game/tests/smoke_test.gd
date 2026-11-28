@@ -93,9 +93,15 @@ func _run() -> void:
 
 	print("[5] Passe")
 	await _frames(240)
+	var _guard: int = 0
+	while not _player().controls_enabled and _guard < 900:
+		await _frames(10)
+		_guard += 10
+	await _frames(40)
 	p = _player().global_position
-	_ball().reset_to(Vector3(p.x + 1.0, 0.4, p.z))
+	_ball().reset_to(Vector3(p.x + 0.8, 0.4, p.z))
 	await _frames(5)
+	print("  debug passe: ctrl=%s stun=%.2f ir=%s" % [_player().controls_enabled, _player().stun_t, _player().ball_in_range()])
 	Input.action_press("pass")
 	await _frames(3)
 	Input.action_release("pass")
