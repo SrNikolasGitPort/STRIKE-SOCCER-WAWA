@@ -41,6 +41,11 @@ func _run() -> void:
 	_match = packed.instantiate()
 	root.add_child(_match)
 	await _frames(90)
+	# os testes de gol precisam do gol livre: remove os goleiros bot (testados no systems_test)
+	for kp: Node in (_match.players as Array).duplicate():
+		if str(kp.get("role")) == "keeper":
+			(_match.players as Array).erase(kp)
+			kp.queue_free()
 
 	var half_l: float = _match.field.length / 2.0
 	var half_w: float = _match.field.width / 2.0
